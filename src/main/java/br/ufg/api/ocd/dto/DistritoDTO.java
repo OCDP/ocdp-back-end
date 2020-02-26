@@ -1,14 +1,12 @@
 package br.ufg.api.ocd.dto;
 
-import br.ufg.api.ocd.model.Bairro;
 import lombok.Data;
 
-import java.util.List;
+import javax.validation.constraints.NotEmpty;
 
 @Data
 public class DistritoDTO {
     private String id;
+    @NotEmpty(message = "Forneça o nome do distrito")
     private String nome;
-    private Bairro bairro;
-    private List<LocalAtendimentoDTO> locaisDeAtendimento;
 }

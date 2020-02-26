@@ -7,11 +7,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "localAtendimento")
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class LocalAtendimento {
     @Id
     private String id;
     private String nome;
     private Distrito distrito;
     private TipoLocalAtendimento tipoLocalAtendimento;
+    private String emailResponsavel;
+    private String nomeResponsavel;
 }

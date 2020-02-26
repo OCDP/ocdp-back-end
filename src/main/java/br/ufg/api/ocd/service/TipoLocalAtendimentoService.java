@@ -2,6 +2,7 @@ package br.ufg.api.ocd.service;
 
 import br.ufg.api.ocd.model.TipoLocalAtendimento;
 import br.ufg.api.ocd.repository.TipoLocalAtendimentoRepository;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +14,31 @@ public class TipoLocalAtendimentoService {
     @Autowired
     private TipoLocalAtendimentoRepository repository;
 
+    @Autowired
+    private  NextSequenceService nextSequenceService;
+
     public List<TipoLocalAtendimento> getAll() {
         return repository.findAll();
     }
 
-    public List<TipoLocalAtendimento> geByNome(String nome) {
-        return repository.findByNome(nome);
+    public TipoLocalAtendimento salvar(TipoLocalAtendimento tipo) {
+        tipo.setId(nextSequenceService.getNextSequence("tipoLocalAtendimento"));
+        return repository.save(tipo);
+    }
+
+    public TipoLocalAtendimento atualizar(TipoLocalAtendimento tipo) throws Exception {
+        TipoLocalAtendimento tipoDB = repository.findById(tipo.getId()).get();
+        if(tipoDB == null){
+            throw new Exception("TipoLocalAtendimento não existe com esse id: "+tipo.getId());
+        }
+        return repository.save(tipo);
+    }
+
+    public TipoLocalAtendimento findById(@NonNull String id) {
+        return repository.findById(id).get();
+    }
+
+    public void deleteAll(){
+        repository.deleteAll();
     }
 }

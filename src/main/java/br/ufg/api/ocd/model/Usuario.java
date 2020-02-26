@@ -17,16 +17,17 @@
 
 package br.ufg.api.ocd.model;
 
+import br.ufg.api.ocd.enums.NivelAtencao;
+import br.ufg.api.ocd.enums.StatusUsuario;
+import br.ufg.api.ocd.enums.TipoUsuario;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.IndexDirection;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "usuario")
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class Usuario {
     @Id
     private String id;
@@ -34,11 +35,11 @@ public class Usuario {
     private String cpf;
     private String nome;
     private String senha;
-    private String status;
+    private StatusUsuario status;
     private String email;
     private String telefone;
-    private TipoAtencao tipoAtencao;
-    private LocalAtendimento localAtendimento;
+    private NivelAtencao nivelAtencao;
+    private TipoUsuario tipoUsuario;
    // private Role role;
 
 }

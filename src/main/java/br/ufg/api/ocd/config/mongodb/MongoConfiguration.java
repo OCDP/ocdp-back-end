@@ -16,7 +16,7 @@ import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
         MongoDataAutoConfiguration.class, DataSourceAutoConfiguration.class})
 public class MongoConfiguration {
 
-    private String mongoUri = "mongodb://localhost/ocd-DB";
+    private String mongoUri = "mongodb+srv://admin:123@cluster0-tei6u.mongodb.net/ocd-DB?retryWrites=true";
 
     @Bean
     public MongoDbFactory mongoDbFactory() throws Exception {

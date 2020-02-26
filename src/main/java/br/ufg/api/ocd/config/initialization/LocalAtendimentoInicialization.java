@@ -3,24 +3,24 @@ package br.ufg.api.ocd.config.initialization;
 import br.ufg.api.ocd.model.Distrito;
 import br.ufg.api.ocd.model.LocalAtendimento;
 import br.ufg.api.ocd.model.TipoLocalAtendimento;
-import br.ufg.api.ocd.repository.DistritoRepository;
-import br.ufg.api.ocd.repository.LocalAtendimentoRepository;
-import br.ufg.api.ocd.repository.TipoLocalAtendimentoRepository;
+import br.ufg.api.ocd.service.DistritoService;
+import br.ufg.api.ocd.service.LocalAtendimentoService;
+import br.ufg.api.ocd.service.TipoLocalAtendimentoService;
 
 import java.util.List;
 
 public class LocalAtendimentoInicialization {
 
-    private static LocalAtendimentoRepository localAtendimentoRepository;
-    private static DistritoRepository distritoRepository;
-    private static TipoLocalAtendimentoRepository tipoLocalAtendimentoRepository;
+    private static LocalAtendimentoService localAtendimentoService;
+    private static DistritoService distritoService;
+    private static TipoLocalAtendimentoService tipoLocalAtendimentoService;
     private static List<Distrito> distritos;
     private static List<TipoLocalAtendimento> tipos;
 
-    public static void criaLocalAtendimento(LocalAtendimentoRepository repository, DistritoRepository dRepository, TipoLocalAtendimentoRepository tRepository) {
-        localAtendimentoRepository = repository;
-        distritoRepository = dRepository;
-        tipoLocalAtendimentoRepository = tRepository;
+    public static void criaLocalAtendimento(LocalAtendimentoService repository, DistritoService dService, TipoLocalAtendimentoService tService) {
+        localAtendimentoService = repository;
+        distritoService = dService;
+        tipoLocalAtendimentoService = tService;
         repository.deleteAll();
 
         salvaLocalAtendimento(LocalAtendimento.builder().nome("Amendoeiras").distrito(retornaDistrito("Leste")).tipoLocalAtendimento(retornaTipoLocalAtendimento("CAIS")).build());
@@ -168,12 +168,12 @@ public class LocalAtendimentoInicialization {
     }
 
     private static void salvaLocalAtendimento(LocalAtendimento localAtendimento) {
-        localAtendimentoRepository.save(localAtendimento);
+        localAtendimentoService.salvar(localAtendimento);
     }
 
     private static Distrito retornaDistrito(String nome) {
         if (distritos == null) {
-            distritos = distritoRepository.findAll();
+            distritos = distritoService.getAll();
         }
         for (Distrito item : distritos) {
             if (item.getNome().equals(nome)) return item;
@@ -183,7 +183,7 @@ public class LocalAtendimentoInicialization {
 
     private static TipoLocalAtendimento retornaTipoLocalAtendimento(String nome) {
         if (tipos == null) {
-            tipos = tipoLocalAtendimentoRepository.findAll();
+            tipos = tipoLocalAtendimentoService.getAll();
         }
         for (TipoLocalAtendimento item : tipos) {
             if (item.getNome().equals(nome)) return item;

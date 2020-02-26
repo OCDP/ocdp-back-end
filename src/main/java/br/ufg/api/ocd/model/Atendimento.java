@@ -1,37 +1,35 @@
 package br.ufg.api.ocd.model;
 
+import br.ufg.api.ocd.enums.TipoAtendimento;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import java.util.Date;
-import java.util.List;
 
 @Document(collection = "atendimento")
 @Data
+@Builder
 public class Atendimento {
+
+    @Transient
+    public static final String SEQUENCE_NAME = "atendimento_sequence";
+
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private Date dataAtendimento;
-    private String descricao;
     private Usuario usuario;
     private Paciente paciente;
     private TipoAtendimento tipoAtendimento;
     private LocalAtendimento localAtendimento;
-
-    @DBRef(lazy = true)
-    private List<AvaliacaoClinica> avaliacaoClinicas;
-
-    @DBRef(lazy = true)
-    private List<Diagnostico> diagnosticos;
-
-    @DBRef(lazy = true)
-    private List<Encaminhamento> encaminhamentos;
-
+    private Date dataSugeridaAcompanhamento;
+    private Date dataSugeridaTratamento;
+    private String hipoteseDiagnostico;
+    private Boolean confirmaRastreamento;
+    private String observacao;
+    private String diagnosticoFinal;
 }

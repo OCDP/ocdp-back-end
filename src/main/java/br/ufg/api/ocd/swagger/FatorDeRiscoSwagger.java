@@ -1,6 +1,6 @@
 package br.ufg.api.ocd.swagger;
 
-import br.ufg.api.ocd.dto.FatoresDeRiscoDTO;
+import br.ufg.api.ocd.dto.FatorRiscoDTO;
 import br.ufg.api.ocd.model.FatorRisco;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,5 +22,5 @@ public interface FatorDeRiscoSwagger {
             @ApiResponse(code = 403, message = "Acessando o recurso que você estava tentando acessar é proibido"),
             @ApiResponse(code = 404, message = "O recurso que você estava tentando acessar não foi encontrado")
     })
-    List<FatoresDeRiscoDTO> getAll();
+    List<FatorRiscoDTO> getAll();
 }

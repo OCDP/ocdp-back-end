@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Document(collection = "versaoBanco")
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class VersaoBanco {
     @Id
     private String id;

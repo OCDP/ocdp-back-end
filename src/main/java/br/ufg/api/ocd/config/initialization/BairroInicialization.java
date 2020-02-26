@@ -2,14 +2,14 @@ package br.ufg.api.ocd.config.initialization;
 
 import br.ufg.api.ocd.model.Bairro;
 import br.ufg.api.ocd.model.Cidade;
-import br.ufg.api.ocd.repository.BairroRepository;
+import br.ufg.api.ocd.service.BairroService;
 
 public class BairroInicialization {
 
-    private static BairroRepository bairroRepository;
+    private static BairroService bairroService;
 
-    public static void criarBairros(BairroRepository repository, Cidade cidade) {
-        bairroRepository = repository;
+    public static void criarBairros(BairroService repository, Cidade cidade) {
+        bairroService = repository;
         repository.deleteAll();
 
         salvaBairro(Bairro.builder().nome("ANDREIA CRISTINA").cidade(cidade).build());
@@ -95,6 +95,6 @@ public class BairroInicialization {
 
 
     private static void salvaBairro(Bairro bairro) {
-        bairroRepository.save(bairro);
+        bairroService.salvar(bairro);
     }
 }

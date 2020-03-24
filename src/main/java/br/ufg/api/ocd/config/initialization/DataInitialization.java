@@ -4,9 +4,11 @@ package br.ufg.api.ocd.config.initialization;
 import br.ufg.api.ocd.enums.NivelAtencao;
 import br.ufg.api.ocd.enums.StatusUsuario;
 import br.ufg.api.ocd.model.*;
-import br.ufg.api.ocd.repository.CustomSequencesRepository;
+import br.ufg.api.ocd.repository.*;
 import br.ufg.api.ocd.service.*;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -20,7 +22,7 @@ import static br.ufg.api.ocd.config.initialization.RegiaoBocaInicialization.cria
 
 
 @Component
-public class DataInitialization {//implements ApplicationListener<ContextRefreshedEvent> {
+public class DataInitialization implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
     private VersaoBancoService versaoBancoService;
@@ -64,9 +66,48 @@ public class DataInitialization {//implements ApplicationListener<ContextRefresh
     @Autowired
     private CustomSequencesRepository customSequencesRepository;
 
-   // @Override
+    @Autowired
+    private AtendimentoService atendimentoService;
+
+    @Autowired
+    private AtendimentoRepository atendimentoRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private BairroRepository bairroRepository;
+
+    @Autowired
+    private LocalAtendimentoRepository localAtendimentoRepository;
+
+    @Autowired
+    private FatorRiscoRepository fatorRiscoRepository;
+
+    @Autowired
+    private RegiaoBocaRepository regiaoBocaRepository;
+
+    @Autowired
+    private LesaoRepository lesaoRepository;
+
+    @Autowired
+    private ProcedimentosResultadosRepository procedimentosResultadosRepository;
+
+    @Autowired
+    private FatorRiscoAtendimentoRepository fatorRiscoAtendimentoRepository;
+
+    @Autowired
+    private RegioesLesoesRepository regioesLesoesRepository;
+
+    @Autowired
+    private PacienteRepository pacienteRepository;
+
+    @Override
     public void onApplicationEvent(ContextRefreshedEvent arg0) {
-        customSequencesRepository.deleteAll();
+   /*     customSequencesRepository.deleteAll();
         criarCidade();
         criarBairro();
         criarDistrito();
@@ -79,6 +120,7 @@ public class DataInitialization {//implements ApplicationListener<ContextRefresh
         criarLesao();
         criarVersaoBanco();
         criarUsuario();
+        criaMassaDeTeste();*/
     }
 
     private void criarVersaoBanco() {
@@ -198,6 +240,16 @@ public class DataInitialization {//implements ApplicationListener<ContextRefresh
             }
         }
 
+    }
+
+    private void criaMassaDeTeste(){
+        atendimentoRepository.deleteAll();
+        procedimentosResultadosRepository.deleteAll();
+        fatorRiscoAtendimentoRepository.deleteAll();
+        regioesLesoesRepository.deleteAll();
+        pacienteRepository.deleteAll();
+
+        MassaDeTeste.criaAtendimentos(atendimentoService, modelMapper, usuarioRepository, bairroRepository, localAtendimentoRepository, fatorRiscoRepository, regiaoBocaRepository, lesaoRepository);
     }
 
     private void criarUsuario() {

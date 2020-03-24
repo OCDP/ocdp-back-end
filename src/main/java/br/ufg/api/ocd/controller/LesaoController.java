@@ -48,12 +48,12 @@ public class LesaoController {
     }
 
     @GetMapping(value = "/byId/{id}")
-    public LesaoDTO getById(@RequestParam String id) {
+    public LesaoDTO getById(@PathVariable String id) {
         return modelMapper.map(service.findById(id), LesaoDTO.class);
     }
 
-    @GetMapping(value = "/byTiṕoLesao/{tipo}")
-    public LesaoDTO getByTipoLesao(@RequestParam String tipo) {
+    @GetMapping(value = "/byTipo/{tipo}")
+    public LesaoDTO getByTipoLesao(@PathVariable String tipo) {
         return modelMapper.map(service.findById(tipo), LesaoDTO.class);
     }
 

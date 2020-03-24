@@ -15,7 +15,7 @@ import javax.mail.MessagingException;
 import java.util.List;
 
 @Component
-@EnableScheduling
+//@EnableScheduling
 public class SchedulerAlertaRetorno {
 
     @Autowired
@@ -33,7 +33,7 @@ public class SchedulerAlertaRetorno {
     @Autowired
     private SmsComponent smsComponent;
 
-    @Scheduled(cron = "0 0 12")
+    //@Scheduled(cron = "0 0 12")
     public void enviarNotificacoes() {
         buscaLocalAtendimento().forEach(localAtendimento -> {
             try {

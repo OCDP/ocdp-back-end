@@ -46,7 +46,7 @@ public class AdminController {
     }
 
     @GetMapping(value = "versaoBanco/byId/{id}")
-    public VersaoBancoDTO getByIdVersaoBanco(@RequestParam String id) {
+    public VersaoBancoDTO getByIdVersaoBanco(@PathVariable String id) {
         return modelMapper.map(versaoBancoService.findById(id), VersaoBancoDTO.class);
     }
 
@@ -71,7 +71,7 @@ public class AdminController {
     }
 
     @GetMapping(value = "/byId/{id}")
-    public ParametrosSchedulerDTO getByIdParametrosScheduler(@RequestParam String id) {
+    public ParametrosSchedulerDTO getByIdParametrosScheduler(@PathVariable String id) {
         return modelMapper.map(parametrosService.findById(id), ParametrosSchedulerDTO.class);
     }
 

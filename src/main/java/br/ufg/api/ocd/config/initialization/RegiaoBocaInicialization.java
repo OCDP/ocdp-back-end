@@ -13,10 +13,12 @@ public class RegiaoBocaInicialization {
     private static SiglaRegiaoBocaService siglaRegiaoBocaService;
     private static List<SiglaRegiaoBoca> tipoRegioes;
 
-    public static void criaRegiaoBoca(RegiaoBocaService repository, SiglaRegiaoBocaService tRService) {
-        regiaoBocaService = repository;
+    public static void criaRegiaoBoca(RegiaoBocaService service, SiglaRegiaoBocaService tRService) {
+
+        regiaoBocaService = service;
         siglaRegiaoBocaService = tRService;
         regiaoBocaService.deleteAll();
+
         salvarRegiaoBoca(RegiaoBoca.builder().nome("Comissura labial esquerda").siglaRegiaoBoca(retornaTipoRegiao("Região A")).build());
         salvarRegiaoBoca(RegiaoBoca.builder().nome("Comissura labial direita").siglaRegiaoBoca(retornaTipoRegiao("Região A")).build());
         salvarRegiaoBoca(RegiaoBoca.builder().nome("Lábio inferior (lado esquerdo)").siglaRegiaoBoca(retornaTipoRegiao("Região A")).build());

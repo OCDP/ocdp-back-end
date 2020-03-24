@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface FatorRiscoRepository extends MongoRepository<FatorRisco, String> {
-    public List<FatorRisco> findByNome(String nome);
+    public FatorRisco findByNome(String nome);
 }

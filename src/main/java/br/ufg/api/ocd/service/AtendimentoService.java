@@ -42,6 +42,9 @@ public class AtendimentoService {
     private BuscarAcompanhamento buscarAcompanhamento;
 
     @Autowired
+    private PacienteService pacienteService;
+
+    @Autowired
     private LogAtendimentosService logService;
 
     @Autowired
@@ -120,9 +123,10 @@ public class AtendimentoService {
     }
 
     private Atendimento salvaAcompanhamentoDTO(AcompanhamentoDTO acompanhamentoDTO) {
+
         return salvaAtendimento( Atendimento.builder()
                 .dataAtendimento(new Date())
-                .paciente(modelMapper.map(acompanhamentoDTO.getAtendimento().getPaciente(), Paciente.class))
+                .paciente(pacienteService.salvarPacienteDTO(acompanhamentoDTO.getAtendimento().getPaciente()))
                 .localAtendimento(modelMapper.map(acompanhamentoDTO.getAtendimento().getLocalAtendimento(), LocalAtendimento.class))
                 .tipoAtendimento(acompanhamentoDTO.getAtendimento().getTipoAtendimento())
                 .usuario(modelMapper.map(acompanhamentoDTO.getAtendimento().getUsuario(), Usuario.class))
@@ -133,18 +137,19 @@ public class AtendimentoService {
     private Atendimento salvaIntervencaoDTO(IntervencaoDTO intervencaoDTO) {
         return salvaAtendimento( Atendimento.builder()
                  .dataAtendimento(new Date())
-                 .paciente(modelMapper.map(intervencaoDTO.getAtendimento().getPaciente(), Paciente.class))
+                 .paciente(pacienteService.salvarPacienteDTO(intervencaoDTO.getAtendimento().getPaciente()))
                  .localAtendimento(modelMapper.map(intervencaoDTO.getAtendimento().getLocalAtendimento(), LocalAtendimento.class))
                  .tipoAtendimento(intervencaoDTO.getAtendimento().getTipoAtendimento())
                  .usuario(modelMapper.map(intervencaoDTO.getAtendimento().getUsuario(), Usuario.class))
                  .hipoteseDiagnostico(intervencaoDTO.getHipoteseDiagnostico())
+                 .confirmaRastreamento(intervencaoDTO.getConfirmaRastreamento())
                  .observacao(intervencaoDTO.getObservacao()).build());
     }
 
     private Atendimento salvaResultadosDTO(ResultadosDTO resultadosDTO) {
         return salvaAtendimento( Atendimento.builder()
                 .dataAtendimento(new Date())
-                .paciente(modelMapper.map(resultadosDTO.getAtendimento().getPaciente(), Paciente.class))
+                .paciente(pacienteService.salvarPacienteDTO(resultadosDTO.getAtendimento().getPaciente()))
                 .localAtendimento(modelMapper.map(resultadosDTO.getAtendimento().getLocalAtendimento(), LocalAtendimento.class))
                 .tipoAtendimento(resultadosDTO.getAtendimento().getTipoAtendimento())
                 .usuario(modelMapper.map(resultadosDTO.getAtendimento().getUsuario(), Usuario.class))
@@ -176,4 +181,6 @@ public class AtendimentoService {
         logService.salvarLog(save);
         return save;
     }
+
+
 }

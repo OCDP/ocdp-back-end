@@ -48,7 +48,7 @@ public class DistritoController {
     }
 
     @GetMapping(value = "/byId/{id}")
-    public DistritoDTO getById(@RequestParam String id) {
+    public DistritoDTO getById(@PathVariable String id) {
         return modelMapper.map(service.findById(id), DistritoDTO.class);
     }
 

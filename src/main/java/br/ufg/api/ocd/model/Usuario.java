@@ -20,14 +20,18 @@ package br.ufg.api.ocd.model;
 import br.ufg.api.ocd.enums.NivelAtencao;
 import br.ufg.api.ocd.enums.StatusUsuario;
 import br.ufg.api.ocd.enums.TipoUsuario;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "usuario")
 @Data
-@Builder(toBuilder = true)
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Usuario {
     @Id
     private String id;

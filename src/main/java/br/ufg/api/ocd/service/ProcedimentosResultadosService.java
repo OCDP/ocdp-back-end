@@ -36,8 +36,11 @@ public class ProcedimentosResultadosService {
 
     public void salvaResultadosProcedimentos(Atendimento atendimento, List<ProcedimentosResultadosDTO> procedimentos) {
         procedimentos.forEach(procedimento -> {
-            ProcedimentosResultados procedimentoR = modelMapper.map(procedimento, ProcedimentosResultados.class);
+            ProcedimentosResultados procedimentoR = new ProcedimentosResultados();
+            procedimentoR.setNome(procedimento.getNome());
             procedimentoR.setAtendimento(atendimento);
+            procedimentoR.setAnexo(procedimento.getAnexo());
+            procedimentoR.setId(nextSequenceService.getNextSequence("procedimento"));
             repository.save(procedimentoR);
         });
     }

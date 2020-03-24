@@ -49,13 +49,13 @@ public class LocalAtendimentoController {
     }
 
     @GetMapping(value = "/byId/{id}")
-    public LocalAtendimentoDTO getById(@RequestParam String id) {
+    public LocalAtendimentoDTO getById(@PathVariable String id) {
         return modelMapper.map(service.findById(id), LocalAtendimentoDTO.class);
     }
 
     @GetMapping(value = "/byTipo/{tipo}")
     public List<LocalAtendimentoDTO> getByTipoLocalDeAtendimento(
-            @RequestParam("tipo") String tipo) {
+            @PathVariable("tipo") String tipo) {
         return service.getByTipoLocalAtendimento(tipo).stream()
                 .map(post -> modelMapper.map(post, LocalAtendimentoDTO.class))
                 .collect(Collectors.toList());
@@ -63,7 +63,7 @@ public class LocalAtendimentoController {
 
     @GetMapping(value = "/byNome/{nome}")
     public List<LocalAtendimentoDTO> getByNome(
-            @RequestParam("nome") String nome) {
+            @PathVariable("nome") String nome) {
         return service.getByNome(nome).stream()
                 .map(post -> modelMapper.map(post, LocalAtendimentoDTO.class))
                 .collect(Collectors.toList());
@@ -71,7 +71,7 @@ public class LocalAtendimentoController {
 
     @GetMapping(value = "/byDitrito/{distrito}")
     public List<LocalAtendimentoDTO> getByDistrito(
-            @RequestParam("distrito") String distrito) {
+            @PathVariable("distrito") String distrito) {
         return service.getByDistrito(distrito).stream()
                 .map(post -> modelMapper.map(post, LocalAtendimentoDTO.class))
                 .collect(Collectors.toList());

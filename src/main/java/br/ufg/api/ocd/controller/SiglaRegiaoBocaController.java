@@ -48,7 +48,7 @@ public class SiglaRegiaoBocaController {
     }
 
     @GetMapping(value = "/byId/{id}")
-    public SiglaRegiaoBocaDTO getById(@RequestParam String id) {
+    public SiglaRegiaoBocaDTO getById(@PathVariable String id) {
         return modelMapper.map(service.findById(id), SiglaRegiaoBocaDTO.class);
     }
 

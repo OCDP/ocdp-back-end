@@ -18,6 +18,8 @@ public class IntervencaoDTO {
 
     private String observacao;
 
+    private Boolean confirmaRastreamento;
+
     @NotNull(message = "Forneça os procedimentos da intervenção")
     @Size(min=1, message = "Forneça ao menos 1 procedimento")
     private List<ProcedimentosIntervencaoDTO> procedimentos;

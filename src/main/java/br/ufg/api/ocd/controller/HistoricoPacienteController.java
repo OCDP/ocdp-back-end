@@ -8,10 +8,7 @@ import br.ufg.api.ocd.service.AtendimentoService;
 import br.ufg.api.ocd.service.PacienteService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,14 +29,14 @@ public class HistoricoPacienteController {
 
     @GetMapping(value = "/pacientes/{nome}")
     public List<PacienteDTO> getPacientesByNome(
-            @RequestParam("nome") String nome) {
+            @PathVariable("nome") String nome) {
         return pacienteService.geByNome(nome).stream()
                 .map(post -> modelMapper.map(post, PacienteDTO.class))
                 .collect(Collectors.toList());
     }
 
     @GetMapping(value = "/atendimentos/{nomePaciente}")
-    public List<HistoricoAtendimentoDTO> getAtendimentosByNomePaciente(@RequestParam("nomePaciente") String nomePaciente) {
+    public List<HistoricoAtendimentoDTO> getAtendimentosByNomePaciente(@PathVariable("nomePaciente") String nomePaciente) {
         return atendimentoService.getHistoricoPaciente(nomePaciente);
     }
 
@@ -49,7 +46,7 @@ public class HistoricoPacienteController {
     }
 
     @GetMapping(value = "/atendimento/{id}")
-    public AtendimentoBuscarDTO getAtendimentosById(@RequestParam("id") String id) {
+    public AtendimentoBuscarDTO getAtendimentosById(@PathVariable("id") String id) {
         return atendimentoService.getAtendimentosById(id);
     }
 

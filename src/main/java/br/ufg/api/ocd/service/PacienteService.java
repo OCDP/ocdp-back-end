@@ -1,8 +1,10 @@
 package br.ufg.api.ocd.service;
 
+import br.ufg.api.ocd.dto.PacienteDTO;
 import br.ufg.api.ocd.model.Paciente;
 import br.ufg.api.ocd.repository.PacienteRepository;
 import lombok.NonNull;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,17 @@ public class PacienteService {
 
     @Autowired
     private  NextSequenceService nextSequenceService;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    public Paciente salvarPacienteDTO(PacienteDTO pacienteDTO){
+        Paciente paciente = repository.findByTelefoneCelular(pacienteDTO.getEmail());
+        if(paciente == null){
+            paciente = salvar(modelMapper.map(pacienteDTO, Paciente.class));
+        }
+        return paciente;
+    }
 
     public List<Paciente> geByNome(@NonNull String nome) {
         return repository.findByNome(nome);

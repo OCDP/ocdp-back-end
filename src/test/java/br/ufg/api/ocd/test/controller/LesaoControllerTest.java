@@ -37,9 +37,7 @@ public class LesaoControllerTest extends SalvaEhAtualizaTest{
 
     @Before
     public void before() {
-
         this.commonPathChecker = new CommonPathChecker(mvc);
-
     }
 
     @Override
@@ -79,7 +77,7 @@ public class LesaoControllerTest extends SalvaEhAtualizaTest{
     @Test
     public void getByTipoLesao_OK() throws Exception {
         mvc.perform(
-                get(this.PATH_REST+"/byTipoLesao/xxx")
+                get(this.PATH_REST+"/byTipo/Maligna")
         ).andExpect(status().isOk());
     }
 

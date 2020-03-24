@@ -15,6 +15,4 @@ public class Lesao {
     private String nome;
     private TipoLesao tipoLesao;
 
-
-
 }

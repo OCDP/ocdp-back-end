@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface LesaoRepository extends MongoRepository<Lesao, String> {
-
+    public Lesao findByNome(String nome);
     public List<Lesao> findByTipoLesao_Nome(String tipo);
 
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static br.ufg.api.ocd.util.ValidacoesDtoUtil.createErrorString;
 
@@ -26,7 +27,7 @@ public class UsuarioController {
 
     @Autowired
     UsuarioService service;
-    
+
     @Autowired
     private ModelMapper modelMapper;
 
@@ -53,13 +54,39 @@ public class UsuarioController {
     }
 
     @GetMapping(value = "/byId/{id}")
-    public UsuarioDTO getById(@RequestParam String id) {
+    public UsuarioDTO getById(@PathVariable String id) {
         return modelMapper.map(service.findById(id), UsuarioDTO.class);
     }
 
+    @GetMapping(value = "/byNome/{nome}")
+    public UsuarioDTO getByName(@PathVariable String nome) {
+        return modelMapper.map(service.findByNome(nome), UsuarioDTO.class);
+    }
+
     @GetMapping(value = "/byCpf/{cpf}")
-    public UsuarioDTO getByCpf(@RequestParam String cpf) {
+    public UsuarioDTO getByCpf(@PathVariable String cpf) {
         return modelMapper.map(service.findByCpf(cpf), UsuarioDTO.class);
+    }
+
+    @GetMapping(value = "/byTipoAndStatus/{tipo}/{status}")
+    public List<UsuarioDTO> getByTipoAndStatus(@PathVariable String tipo,@PathVariable String status) {
+        return service.findByTipoStatus(tipo,status).stream()
+                .map(post -> modelMapper.map(post, UsuarioDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping(value = "/byStatus/{status}")
+    public List<UsuarioDTO> getByStatus(@PathVariable String status) {
+        return service.findByStatus(status).stream()
+                .map(post -> modelMapper.map(post, UsuarioDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping(value = "/byTipo/{tipo}")
+    public List<UsuarioDTO> getByTipo(@PathVariable String tipo) {
+        return service.findByTipo(tipo).stream()
+                .map(post -> modelMapper.map(post, UsuarioDTO.class))
+                .collect(Collectors.toList());
     }
 
     @GetMapping(path = "/basicauth")
@@ -81,5 +108,6 @@ public class UsuarioController {
     public List<TipoUsuario> getTipoUsuario() {
         return Arrays.asList(TipoUsuario.values());
     }
+
 }
 

@@ -8,7 +8,8 @@ import java.util.List;
 
 @Repository
 public interface LocalAtendimentoRepository extends MongoRepository<LocalAtendimento, String> {
-    public List<LocalAtendimento> findByNome(String nome);
+
+    public LocalAtendimento findByNome(String nome);
 
     public List<LocalAtendimento> findByDistrito_Nome(String nome);
 

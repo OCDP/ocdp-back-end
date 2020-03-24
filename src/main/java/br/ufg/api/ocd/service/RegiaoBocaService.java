@@ -1,5 +1,6 @@
 package br.ufg.api.ocd.service;
 
+import br.ufg.api.ocd.model.FatorRisco;
 import br.ufg.api.ocd.model.RegiaoBoca;
 import br.ufg.api.ocd.repository.RegiaoBocaRepository;
 import lombok.NonNull;
@@ -31,6 +32,10 @@ public class RegiaoBocaService {
 
     public RegiaoBoca findById(@NonNull String id) {
         return repository.findById(id).get();
+    }
+
+    public RegiaoBoca findByNome(@NonNull String nome) {
+        return repository.findByNome(nome);
     }
 
     public RegiaoBoca atualizar(RegiaoBoca regiaoBoca) throws Exception {

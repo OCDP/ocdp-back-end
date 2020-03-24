@@ -52,6 +52,11 @@ public class LesaoController {
         return modelMapper.map(service.findById(id), LesaoDTO.class);
     }
 
+    @GetMapping(value = "/byNome/{nome}")
+    public LesaoDTO getByName(@PathVariable String nome) {
+        return modelMapper.map(service.findByNome(nome), LesaoDTO.class);
+    }
+
     @GetMapping(value = "/byTiṕoLesao/{tipo}")
     public LesaoDTO getByTipoLesao(@RequestParam String tipo) {
         return modelMapper.map(service.findById(tipo), LesaoDTO.class);

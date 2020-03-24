@@ -1,6 +1,7 @@
 package br.ufg.api.ocd.service;
 
 import br.ufg.api.ocd.model.Lesao;
+import br.ufg.api.ocd.model.LocalAtendimento;
 import br.ufg.api.ocd.repository.LesaoRepository;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,10 @@ public class LesaoService {
 
     public Lesao findById(@NonNull String id) {
         return repository.findById(id).get();
+    }
+
+    public Lesao findByNome(@NonNull String nome) {
+        return repository.findByNome(nome);
     }
 
     public List<Lesao> findByTipo(@NonNull String tipoLesao) {

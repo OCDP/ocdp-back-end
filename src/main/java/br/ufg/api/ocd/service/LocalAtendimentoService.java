@@ -1,6 +1,7 @@
 package br.ufg.api.ocd.service;
 
 import br.ufg.api.ocd.model.LocalAtendimento;
+import br.ufg.api.ocd.model.RegiaoBoca;
 import br.ufg.api.ocd.repository.LocalAtendimentoRepository;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,17 +31,15 @@ public class LocalAtendimentoService {
         return repository.save(localAtendimento);
     }
 
+    public List<LocalAtendimento> findAll() {
+        return repository.findAll();
+    }
+
     public LocalAtendimento findById(@NonNull String id) {
         return repository.findById(id).get();
     }
 
-    public List<LocalAtendimento> getAll() {
-
-        return repository.findAll();
-    }
-
-    public List<LocalAtendimento> getByNome(@NonNull String nome) {
-
+    public LocalAtendimento findByNome(@NonNull String nome) {
         return repository.findByNome(nome);
     }
 

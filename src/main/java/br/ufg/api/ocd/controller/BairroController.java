@@ -1,6 +1,7 @@
 package br.ufg.api.ocd.controller;
 
 import br.ufg.api.ocd.dto.BairroDTO;
+import br.ufg.api.ocd.dto.UsuarioDTO;
 import br.ufg.api.ocd.model.Bairro;
 import br.ufg.api.ocd.service.BairroService;
 import org.modelmapper.ModelMapper;
@@ -52,6 +53,12 @@ public class BairroController {
     public BairroDTO getById(@PathVariable String id) {
         return modelMapper.map(service.findById(id), BairroDTO.class);
     }
+
+    @GetMapping(value = "/byNome/{nome}")
+    public BairroDTO getByName(@PathVariable String nome) {
+        return modelMapper.map(service.findByNome(nome), BairroDTO.class);
+    }
+
 
     @GetMapping(value = "/byCidade/{nomeCidade}")
     public List<BairroDTO> getByNomeCidade(@PathVariable String nomeCidade) {

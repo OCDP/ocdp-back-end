@@ -1,5 +1,6 @@
 package br.ufg.api.ocd.controller;
 
+import br.ufg.api.ocd.dto.CidadeDTO;
 import br.ufg.api.ocd.dto.DistritoDTO;
 import br.ufg.api.ocd.model.Distrito;
 import br.ufg.api.ocd.service.DistritoService;
@@ -51,6 +52,12 @@ public class DistritoController {
     public DistritoDTO getById(@RequestParam String id) {
         return modelMapper.map(service.findById(id), DistritoDTO.class);
     }
+
+    @GetMapping(value = "/byNome/{nome}")
+    public DistritoDTO getByName(@PathVariable String nome) {
+        return modelMapper.map(service.findByNome(nome), DistritoDTO.class);
+    }
+
 
 
     @GetMapping

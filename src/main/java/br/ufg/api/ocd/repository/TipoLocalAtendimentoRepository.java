@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface TipoLocalAtendimentoRepository extends MongoRepository<TipoLocalAtendimento, String> {
 
-    public List<TipoLocalAtendimento> findByNome(String nome);
+    public TipoLocalAtendimento findByNome(String nome);
 
 }

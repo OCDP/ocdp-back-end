@@ -1,6 +1,7 @@
 package br.ufg.api.ocd.service;
 
 import br.ufg.api.ocd.model.Bairro;
+import br.ufg.api.ocd.model.Usuario;
 import br.ufg.api.ocd.repository.BairroRepository;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,10 @@ public class BairroService {
 
     public Bairro findById(@NonNull String id) {
         return repository.findById(id).get();
+    }
+
+    public Bairro findByNome(@NonNull String nome) {
+        return repository.findByNome(nome);
     }
 
     public List<Bairro> geByNomeCidade(String nomeCidade) {

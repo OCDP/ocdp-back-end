@@ -1,6 +1,7 @@
 package br.ufg.api.ocd.controller;
 
 import br.ufg.api.ocd.dto.LocalAtendimentoDTO;
+import br.ufg.api.ocd.dto.RegiaoBocaDTO;
 import br.ufg.api.ocd.model.LocalAtendimento;
 import br.ufg.api.ocd.service.LocalAtendimentoService;
 import org.modelmapper.ModelMapper;
@@ -53,18 +54,15 @@ public class LocalAtendimentoController {
         return modelMapper.map(service.findById(id), LocalAtendimentoDTO.class);
     }
 
+    @GetMapping(value = "/byNome/{nome}")
+    public LocalAtendimentoDTO getByName(@PathVariable String nome) {
+        return modelMapper.map(service.findByNome(nome), LocalAtendimentoDTO.class);
+    }
+
     @GetMapping(value = "/byTipo/{tipo}")
     public List<LocalAtendimentoDTO> getByTipoLocalDeAtendimento(
             @RequestParam("tipo") String tipo) {
         return service.getByTipoLocalAtendimento(tipo).stream()
-                .map(post -> modelMapper.map(post, LocalAtendimentoDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    @GetMapping(value = "/byNome/{nome}")
-    public List<LocalAtendimentoDTO> getByNome(
-            @RequestParam("nome") String nome) {
-        return service.getByNome(nome).stream()
                 .map(post -> modelMapper.map(post, LocalAtendimentoDTO.class))
                 .collect(Collectors.toList());
     }

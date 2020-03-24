@@ -1,5 +1,6 @@
 package br.ufg.api.ocd.service;
 
+import br.ufg.api.ocd.model.LocalAtendimento;
 import br.ufg.api.ocd.model.TipoLocalAtendimento;
 import br.ufg.api.ocd.repository.TipoLocalAtendimentoRepository;
 import lombok.NonNull;
@@ -36,6 +37,10 @@ public class TipoLocalAtendimentoService {
 
     public TipoLocalAtendimento findById(@NonNull String id) {
         return repository.findById(id).get();
+    }
+
+    public TipoLocalAtendimento findByNome(@NonNull String nome) {
+        return repository.findByNome(nome);
     }
 
     public void deleteAll(){

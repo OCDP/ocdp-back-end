@@ -1,5 +1,6 @@
 package br.ufg.api.ocd.controller;
 
+import br.ufg.api.ocd.dto.FatorRiscoDTO;
 import br.ufg.api.ocd.dto.RegiaoBocaDTO;
 import br.ufg.api.ocd.model.RegiaoBoca;
 import br.ufg.api.ocd.service.RegiaoBocaService;
@@ -51,6 +52,12 @@ public class RegiaoBocaController {
     public RegiaoBocaDTO getById(@RequestParam String id) {
         return modelMapper.map(service.findById(id), RegiaoBocaDTO.class);
     }
+
+    @GetMapping(value = "/byNome/{nome}")
+    public RegiaoBocaDTO getByName(@PathVariable String nome) {
+        return modelMapper.map(service.findByNome(nome), RegiaoBocaDTO.class);
+    }
+
 
     @GetMapping(value = "/bySiglaRegiao/{sigla}")
     public List<RegiaoBocaDTO> getBySiglaRegiao(String sigla) {

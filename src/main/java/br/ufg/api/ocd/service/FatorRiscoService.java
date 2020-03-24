@@ -1,5 +1,6 @@
 package br.ufg.api.ocd.service;
 
+import br.ufg.api.ocd.model.Distrito;
 import br.ufg.api.ocd.model.FatorRisco;
 import br.ufg.api.ocd.repository.FatorRiscoRepository;
 import lombok.NonNull;
@@ -32,6 +33,10 @@ public class FatorRiscoService {
 
     public FatorRisco findById(@NonNull String id) {
         return repository.findById(id).get();
+    }
+
+    public FatorRisco findByNome(@NonNull String nome) {
+        return repository.findByNome(nome);
     }
 
     public List<FatorRisco> getAll() {

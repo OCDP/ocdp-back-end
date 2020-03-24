@@ -7,6 +7,7 @@ import br.ufg.api.ocd.model.*;
 import br.ufg.api.ocd.repository.CustomSequencesRepository;
 import br.ufg.api.ocd.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -20,7 +21,7 @@ import static br.ufg.api.ocd.config.initialization.RegiaoBocaInicialization.cria
 
 
 @Component
-public class DataInitialization {//implements ApplicationListener<ContextRefreshedEvent> {
+public class DataInitialization { //implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
     private VersaoBancoService versaoBancoService;

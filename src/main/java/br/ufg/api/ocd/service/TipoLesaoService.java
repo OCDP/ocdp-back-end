@@ -35,6 +35,10 @@ public class TipoLesaoService {
         return repository.findById(id).get();
     }
 
+    public TipoLesao findByNome(@NonNull String nome) {
+        return repository.findByNome(nome);
+    }
+
     public List<TipoLesao> getAll() {
         return repository.findAll();
     }

@@ -1,5 +1,6 @@
 package br.ufg.api.ocd.service;
 
+import br.ufg.api.ocd.model.Bairro;
 import br.ufg.api.ocd.model.Distrito;
 import br.ufg.api.ocd.repository.DistritoRepository;
 import lombok.NonNull;
@@ -27,6 +28,10 @@ public class DistritoService {
 
     public Distrito findById(@NonNull String id) {
         return repository.findById(id).get();
+    }
+
+    public Distrito findByNome(@NonNull String nome) {
+        return repository.findByNome(nome);
     }
 
     public Distrito atualizar(Distrito distrito) throws Exception {

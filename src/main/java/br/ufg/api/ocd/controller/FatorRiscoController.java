@@ -1,5 +1,6 @@
 package br.ufg.api.ocd.controller;
 
+import br.ufg.api.ocd.dto.DistritoDTO;
 import br.ufg.api.ocd.dto.FatorRiscoDTO;
 import br.ufg.api.ocd.model.FatorRisco;
 import br.ufg.api.ocd.service.FatorRiscoService;
@@ -46,6 +47,11 @@ public class FatorRiscoController {
             return new ResponseEntity<>(e.getCause(), HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/byNome/{nome}")
+    public FatorRiscoDTO getByName(@PathVariable String nome) {
+        return modelMapper.map(service.findByNome(nome), FatorRiscoDTO.class);
     }
 
     @GetMapping

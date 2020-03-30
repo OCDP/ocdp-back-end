@@ -128,6 +128,7 @@ public class AtendimentoService {
                 .dataAtendimento(new Date())
                 .paciente(pacienteService.salvarPacienteDTO(acompanhamentoDTO.getAtendimento().getPaciente()))
                 .localAtendimento(modelMapper.map(acompanhamentoDTO.getAtendimento().getLocalAtendimento(), LocalAtendimento.class))
+                .localEncaminhado(modelMapper.map(acompanhamentoDTO.getAtendimento().getLocalEncaminhado(), LocalAtendimento.class))
                 .tipoAtendimento(acompanhamentoDTO.getAtendimento().getTipoAtendimento())
                 .usuario(modelMapper.map(acompanhamentoDTO.getAtendimento().getUsuario(), Usuario.class))
                 .dataSugeridaAcompanhamento(acompanhamentoDTO.getDataSugeridaAcompanhamento())

@@ -29,10 +29,11 @@ public class MassaDeTeste {
 
         final LocalAtendimentoDTO localAtendimento1 = modelMapper.map(localAtendimentoRepository.findById("1").get(), LocalAtendimentoDTO.class);
         final LocalAtendimentoDTO localAtendimento2 = modelMapper.map(localAtendimentoRepository.findById("2").get(), LocalAtendimentoDTO.class);
+        final LocalAtendimentoDTO localAtendimento3 = modelMapper.map(localAtendimentoRepository.findById("3").get(), LocalAtendimentoDTO.class);
 
-        AtendimentoDTO atendimentoDTOAC = criaAtentedimentoDTO(modelMapper, bairroRepository, usuarioRepository, localAtendimento1, TipoAtendimento.ACOMPANHAMENTO);
-        AtendimentoDTO atendimentoDTOIT = criaAtentedimentoDTO(modelMapper, bairroRepository, usuarioRepository, localAtendimento2, TipoAtendimento.INTERVENCAO);
-        AtendimentoDTO atendimentoDTORT = criaAtentedimentoDTO(modelMapper, bairroRepository, usuarioRepository, localAtendimento2, TipoAtendimento.RESULTADOS);
+        AtendimentoDTO atendimentoDTOAC = criaAtentedimentoDTO(modelMapper, bairroRepository, usuarioRepository, localAtendimento1, localAtendimento2, TipoAtendimento.ACOMPANHAMENTO);
+        AtendimentoDTO atendimentoDTOIT = criaAtentedimentoDTO(modelMapper, bairroRepository, usuarioRepository, localAtendimento2, localAtendimento3, TipoAtendimento.INTERVENCAO);
+        AtendimentoDTO atendimentoDTORT = criaAtentedimentoDTO(modelMapper, bairroRepository, usuarioRepository, localAtendimento2, localAtendimento3, TipoAtendimento.RESULTADOS);
 
         criaAtendimentoAcompanhamento(service, atendimentoDTOAC, modelMapper, fatorRiscoRepository, regiaoBocaRepository, lesaoRepository);
         criaAtendimentoIntervencao(service, atendimentoDTOIT);
@@ -79,11 +80,14 @@ public class MassaDeTeste {
             ModelMapper modelMapper,
             BairroRepository bairroRepository,
             UsuarioRepository usuarioRepository,
-            LocalAtendimentoDTO localAtendimento, TipoAtendimento tipoAtendimento) {
+            LocalAtendimentoDTO localAtendimento,
+            LocalAtendimentoDTO localEncaminhamento,
+            TipoAtendimento tipoAtendimento) {
 
         AtendimentoDTO dto = new AtendimentoDTO();
         dto.setDataAtendimento(new Date());
         dto.setLocalAtendimento(localAtendimento);
+        dto.setLocalEncaminhado(localEncaminhamento);
         dto.setPaciente(criaPaciente(bairroRepository, modelMapper));
         dto.setUsuario(modelMapper.map(usuarioRepository.findById("1").get(), UsuarioDTO.class));
         dto.setTipoAtendimento(tipoAtendimento);

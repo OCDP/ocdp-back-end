@@ -24,13 +24,15 @@ public class LogAtendimentos {
     private Date dataAtendimento;
     private Date dataSugeridaAcompanhamento;
     private Date dataSugeridaTratamento;
-    private String idLocalAtendimentoEncaminhado;
+    private String idLocalAtendimento;
+    private String idLocalEncaminhado;
 
     public void atualiza(Atendimento atendimento){
         this.setDataAtendimento(atendimento.getDataAtendimento());
         this.setDataSugeridaAcompanhamento(atendimento.getDataSugeridaAcompanhamento());
         this.setDataSugeridaTratamento(atendimento.getDataSugeridaTratamento());
-        this.setIdLocalAtendimentoEncaminhado(atendimento.getLocalAtendimento().getId());
+        this.setIdLocalAtendimento(atendimento.getLocalAtendimento().getId());
+        this.setIdLocalEncaminhado(atendimento.getLocalEncaminhado().getId());
         this.setIdPaciente(atendimento.getPaciente().getId());
         this.setIdUltimoAtendimento(atendimento.getId());
         this.setTipoAtendimento(atendimento.getTipoAtendimento());

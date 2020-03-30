@@ -30,6 +30,7 @@ public class Atendimento {
     private Paciente paciente;
     private TipoAtendimento tipoAtendimento;
     private LocalAtendimento localAtendimento;
+    private LocalAtendimento localEncaminhado;
     private Date dataSugeridaAcompanhamento;
     private Date dataSugeridaTratamento;
     private String hipoteseDiagnostico;

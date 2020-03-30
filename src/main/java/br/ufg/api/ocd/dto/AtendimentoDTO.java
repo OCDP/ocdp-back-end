@@ -26,4 +26,6 @@ public class AtendimentoDTO {
 
     @NotNull(message = "Forneça o local de antendimento do atendiemnto")
     private LocalAtendimentoDTO localAtendimento;
+
+    private LocalAtendimentoDTO localEncaminhado;
 }

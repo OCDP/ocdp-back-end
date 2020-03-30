@@ -69,6 +69,13 @@ public class LocalAtendimentoController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping
+    public List<LocalAtendimentoDTO> getAll() {
+        return service.getAll().stream()
+                .map(post -> modelMapper.map(post, LocalAtendimentoDTO.class))
+                .collect(Collectors.toList());
+    }
+
     @GetMapping(value = "/byDitrito/{distrito}")
     public List<LocalAtendimentoDTO> getByDistrito(
             @PathVariable("distrito") String distrito) {

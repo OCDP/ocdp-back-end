@@ -105,9 +105,12 @@ public class DataInitialization implements ApplicationListener<ContextRefreshedE
     @Autowired
     private PacienteRepository pacienteRepository;
 
+    @Autowired
+    private LogAtendimentosRepository logAtendimentosRepository;
+
     @Override
-    public void onApplicationEvent(ContextRefreshedEvent arg0) {
-   /*     customSequencesRepository.deleteAll();
+    public void onApplicationEvent(ContextRefreshedEvent arg0) {/*
+        customSequencesRepository.deleteAll();
         criarCidade();
         criarBairro();
         criarDistrito();
@@ -120,7 +123,8 @@ public class DataInitialization implements ApplicationListener<ContextRefreshedE
         criarLesao();
         criarVersaoBanco();
         criarUsuario();
-        criaMassaDeTeste();*/
+        criaMassaDeTeste();
+        */
     }
 
     private void criarVersaoBanco() {
@@ -248,6 +252,7 @@ public class DataInitialization implements ApplicationListener<ContextRefreshedE
         fatorRiscoAtendimentoRepository.deleteAll();
         regioesLesoesRepository.deleteAll();
         pacienteRepository.deleteAll();
+        logAtendimentosRepository.deleteAll();
 
         MassaDeTeste.criaAtendimentos(atendimentoService, modelMapper, usuarioRepository, bairroRepository, localAtendimentoRepository, fatorRiscoRepository, regiaoBocaRepository, lesaoRepository);
     }

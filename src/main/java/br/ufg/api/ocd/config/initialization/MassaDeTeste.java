@@ -13,6 +13,7 @@ import org.modelmapper.ModelMapper;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -31,9 +32,9 @@ public class MassaDeTeste {
         final LocalAtendimentoDTO localAtendimento2 = modelMapper.map(localAtendimentoRepository.findById("2").get(), LocalAtendimentoDTO.class);
         final LocalAtendimentoDTO localAtendimento3 = modelMapper.map(localAtendimentoRepository.findById("3").get(), LocalAtendimentoDTO.class);
 
-        AtendimentoDTO atendimentoDTOAC = criaAtentedimentoDTO(modelMapper, bairroRepository, usuarioRepository, localAtendimento1, localAtendimento2, TipoAtendimento.ACOMPANHAMENTO);
-        AtendimentoDTO atendimentoDTOIT = criaAtentedimentoDTO(modelMapper, bairroRepository, usuarioRepository, localAtendimento2, localAtendimento3, TipoAtendimento.INTERVENCAO);
-        AtendimentoDTO atendimentoDTORT = criaAtentedimentoDTO(modelMapper, bairroRepository, usuarioRepository, localAtendimento2, localAtendimento3, TipoAtendimento.RESULTADOS);
+        AtendimentoDTO atendimentoDTOAC = criaAtentedimentoDTO(modelMapper, bairroRepository, usuarioRepository, localAtendimento1, localAtendimento2, TipoAtendimento.ACOMPANHAMENTO, primeiraData());
+        AtendimentoDTO atendimentoDTOIT = criaAtentedimentoDTO(modelMapper, bairroRepository, usuarioRepository, localAtendimento2, localAtendimento3, TipoAtendimento.INTERVENCAO, segundaData());
+        AtendimentoDTO atendimentoDTORT = criaAtentedimentoDTO(modelMapper, bairroRepository, usuarioRepository, localAtendimento2, localAtendimento3, TipoAtendimento.RESULTADOS, terceiraData());
 
         criaAtendimentoAcompanhamento(service, atendimentoDTOAC, modelMapper, fatorRiscoRepository, regiaoBocaRepository, lesaoRepository);
         criaAtendimentoIntervencao(service, atendimentoDTOIT);
@@ -82,10 +83,11 @@ public class MassaDeTeste {
             UsuarioRepository usuarioRepository,
             LocalAtendimentoDTO localAtendimento,
             LocalAtendimentoDTO localEncaminhamento,
-            TipoAtendimento tipoAtendimento) {
+            TipoAtendimento tipoAtendimento,
+            Date dataAtendimento) {
 
         AtendimentoDTO dto = new AtendimentoDTO();
-        dto.setDataAtendimento(new Date());
+        dto.setDataAtendimento(dataAtendimento);
         dto.setLocalAtendimento(localAtendimento);
         dto.setLocalEncaminhado(localEncaminhamento);
         dto.setPaciente(criaPaciente(bairroRepository, modelMapper));
@@ -207,5 +209,38 @@ public class MassaDeTeste {
 
         return procedimentos;
 
+    }
+
+    private static Date primeiraData(){
+        Date d = new Date();
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(d);
+
+        c.set(2019, Calendar.AUGUST, 30);
+
+        return c.getTime();
+    }
+
+    private static Date segundaData(){
+        Date d = new Date();
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(d);
+
+        c.set(2020, Calendar.JANUARY, 30);
+
+        return c.getTime();
+    }
+
+    private static Date terceiraData(){
+        Date d = new Date();
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(d);
+
+        c.set(2020, Calendar.MARCH, 30);
+
+        return c.getTime();
     }
 }

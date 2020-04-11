@@ -8,7 +8,7 @@ import lombok.Data;
 public class HistoricoAtendimentoDTO {
     private String idAtendimento;
     private String tipoAtendiemtento;
-    private String diferencaDias;
+    private String diferencaMeses;
     private String localAtendimento;
     private String profissionalDeSaude;
     private String dataAtendimento;

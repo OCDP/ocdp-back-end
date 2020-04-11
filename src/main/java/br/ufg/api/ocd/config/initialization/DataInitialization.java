@@ -3,6 +3,7 @@ package br.ufg.api.ocd.config.initialization;
 
 import br.ufg.api.ocd.enums.NivelAtencao;
 import br.ufg.api.ocd.enums.StatusUsuario;
+import br.ufg.api.ocd.enums.TipoUsuario;
 import br.ufg.api.ocd.model.*;
 import br.ufg.api.ocd.repository.*;
 import br.ufg.api.ocd.service.*;
@@ -110,7 +111,7 @@ public class DataInitialization implements ApplicationListener<ContextRefreshedE
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent arg0) {/*
-        customSequencesRepository.deleteAll();
+      customSequencesRepository.deleteAll();
         criarCidade();
         criarBairro();
         criarDistrito();
@@ -123,8 +124,7 @@ public class DataInitialization implements ApplicationListener<ContextRefreshedE
         criarLesao();
         criarVersaoBanco();
         criarUsuario();
-        criaMassaDeTeste();
-        */
+        criaMassaDeTeste();*/
     }
 
     private void criarVersaoBanco() {
@@ -259,9 +259,9 @@ public class DataInitialization implements ApplicationListener<ContextRefreshedE
 
     private void criarUsuario() {
         usuarioService.deleteAll();
-
-        usuarioService.salvar(Usuario.builder().cpf("admin").email("teste@teste.com").nome("Teste").senha(passwordEncoder.encode("p@55w0Rd")).status(StatusUsuario.ATIVO).nivelAtencao(NivelAtencao.SECUNDARIA).telefone("62992017672").email("leandropedrosalp@gmail.com").build());
-        usuarioService.salvar(Usuario.builder().cpf("05853163680").email("teste@teste.com").nome("Teste").senha(passwordEncoder.encode("teste123")).status(StatusUsuario.ATIVO).nivelAtencao(NivelAtencao.PRIMARIA).telefone("62992017672").email("leandropedrosalp@gmail.com").build());
+        usuarioService.salvar(Usuario.builder().cpf("admin").email("teste@teste.com").nome("Administrador").senha(passwordEncoder.encode("p@55w0Rd")).status(StatusUsuario.ATIVO).nivelAtencao(NivelAtencao.SECUNDARIA).telefone("62992017672").tipoUsuario(TipoUsuario.MEDICO).email("leandropedrosalp@gmail.com").build());
+        usuarioService.salvar(Usuario.builder().cpf("111.111.111-11").email("teste@teste.com").nome("Carlos").senha(passwordEncoder.encode("p@55w0Rd")).status(StatusUsuario.ATIVO).nivelAtencao(NivelAtencao.PRIMARIA).telefone("62992017672").tipoUsuario(TipoUsuario.DENTISTA).email("leandropedrosalp@gmail.com").build());
+        usuarioService.salvar(Usuario.builder().cpf("222.222.222-22").email("teste@teste.com").nome("Dr. Arnaldo").senha(passwordEncoder.encode("teste123")).status(StatusUsuario.ATIVO).nivelAtencao(NivelAtencao.SECUNDARIA).telefone("62992017672").tipoUsuario(TipoUsuario.ASSISTENTE).email("leandropedrosalp@gmail.com").build());
     }
 
     private void salvaVersaoBanco(VersaoBanco versaoBanco) {

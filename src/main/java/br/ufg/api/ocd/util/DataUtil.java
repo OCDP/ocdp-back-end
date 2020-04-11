@@ -3,6 +3,7 @@ package br.ufg.api.ocd.util;
 import lombok.NonNull;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
+import org.joda.time.Months;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,8 +25,10 @@ public class DataUtil {
         return null;
     }
 
-    public static int diferencaEmDias(@NonNull Date data1, @NonNull Date data2) {
-        return Days.daysBetween(new DateTime(data1), new DateTime(data2)).getDays();
+    public static int diferencaEmMeses(@NonNull Date data1, @NonNull Date data2) {
+        DateTime dateTime1 = new DateTime(data1);
+        DateTime dateTime2 = new DateTime(data2);
+        return Months.monthsBetween(dateTime1, dateTime2).getMonths();
     }
 
     public static String retornaApenasDataString(@NonNull Date data) {

@@ -48,7 +48,7 @@ public class GerenciadorDados {
     }
 
     private void adicionaNaLista(LogAtendimentos log, Date data, List<LogAtendimentos> listaLogAcompanhamento, ParametrosScheduler parametro) {
-        String diferencaAcompanhamento = String.valueOf(DataUtil.diferencaEmDias(data, new Date()));
+        String diferencaAcompanhamento = String.valueOf(DataUtil.diferencaEmMeses(data, new Date()));
         List<String> diasParametro = Arrays.asList(parametro.getValor().split("\\,"));
         if (diasParametro.contains(diferencaAcompanhamento)) {
             listaLogAcompanhamento.add(log);
@@ -56,7 +56,7 @@ public class GerenciadorDados {
     }
 
     private void adicionaNaListaSemAgendamento(LogAtendimentos log, List<LogAtendimentos> listaLog, ParametrosScheduler parametroInicial, ParametrosScheduler parametroFinal) {
-        int diferenca = DataUtil.diferencaEmDias(log.getDataAtendimento(), new Date());
+        int diferenca = DataUtil.diferencaEmMeses(log.getDataAtendimento(), new Date());
 
         if (Integer.valueOf(parametroInicial.getValor()) > diferenca && Integer.valueOf(parametroFinal.getValor())< diferenca) {
             listaLog.add(log);

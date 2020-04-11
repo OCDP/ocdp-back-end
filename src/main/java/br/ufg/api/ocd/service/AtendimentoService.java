@@ -71,7 +71,7 @@ public class AtendimentoService {
     }
 
     public List<Atendimento> getByNomePaciente(@NonNull String nome) {
-        Sort sort = new Sort(Sort.Direction.DESC, "dataAtendimento");
+        Sort sort = new Sort(Sort.Direction.ASC, "dataAtendimento");
         return repository.findAllByPaciente_Nome(nome,sort);
     }
 
@@ -81,10 +81,12 @@ public class AtendimentoService {
 
     private List<HistoricoAtendimentoDTO> preparaDadosHistorico(@NonNull String nome) {
         List<HistoricoAtendimentoDTO> listaRetorno = new ArrayList<>();
-        Sort sort = new Sort(Sort.Direction.DESC, "dataAtendimento");
+        Sort sort = new Sort(Sort.Direction.ASC, "dataAtendimento");
         final List<Atendimento> historicoPaciente = repository.findAllByPaciente_Nome(nome,sort);
-        if (historicoPaciente != null && !historicoPaciente.isEmpty())
+        if (historicoPaciente != null && !historicoPaciente.isEmpty()) {
             prenchelistaHistorico(listaRetorno, historicoPaciente);
+            Collections.sort(listaRetorno);
+        }
         return listaRetorno;
     }
 
@@ -92,8 +94,12 @@ public class AtendimentoService {
         Date dataAnterior = null;
         int cont = 0;
         for (Atendimento atendimento : historicoPaciente) {
-            if(cont == 0) dataAnterior = atendimento.getDataAtendimento();
-            else historicoPaciente.get(cont).getDataAtendimento();
+            if(cont == 0){
+                dataAnterior = atendimento.getDataAtendimento();
+            } else{
+                dataAnterior = historicoPaciente.get(cont-1).getDataAtendimento();
+            }
+            cont = cont + 1;
             listaRetorno.add(HistoricoAtendimentoDTO.builder()
                     .dataAtendimento(DataUtil.dateToString(atendimento.getDataAtendimento()))
                     .idAtendimento(atendimento.getId())
@@ -101,7 +107,6 @@ public class AtendimentoService {
                     .profissionalDeSaude(atendimento.getUsuario().getNome())
                     .tipoAtendiemtento(atendimento.getTipoAtendimento().name())
                     .diferencaMeses(DataUtil.diferencaEmMeses(dataAnterior, atendimento.getDataAtendimento()) + " meses após").build());
-            cont = cont + 1;
         }
     }
 

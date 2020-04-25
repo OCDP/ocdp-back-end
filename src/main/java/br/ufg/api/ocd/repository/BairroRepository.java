@@ -1,14 +1,13 @@
 package br.ufg.api.ocd.repository;
 
 import br.ufg.api.ocd.model.Bairro;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
+import org.socialsignin.spring.data.dynamodb.repository.EnableScan;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-@Repository
-public interface BairroRepository extends MongoRepository<Bairro, String> {
-
+@EnableScan
+public interface BairroRepository extends CrudRepository<Bairro, String> {
     public List<Bairro> findByNome(String nome);
 
     public List<Bairro> findByCidade_NomeOrderByNomeDesc(String nome);

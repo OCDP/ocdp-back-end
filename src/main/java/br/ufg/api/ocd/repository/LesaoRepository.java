@@ -1,13 +1,13 @@
 package br.ufg.api.ocd.repository;
 
 import br.ufg.api.ocd.model.Lesao;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
+import org.socialsignin.spring.data.dynamodb.repository.EnableScan;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-@Repository
-public interface LesaoRepository extends MongoRepository<Lesao, String> {
+@EnableScan
+public interface LesaoRepository extends CrudRepository<Lesao, String> {
 
     public List<Lesao> findByTipoLesao_Nome(String nome);
 

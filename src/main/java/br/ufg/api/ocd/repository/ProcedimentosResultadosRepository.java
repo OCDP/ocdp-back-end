@@ -1,13 +1,13 @@
 package br.ufg.api.ocd.repository;
 
 import br.ufg.api.ocd.model.ProcedimentosResultados;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
+import org.socialsignin.spring.data.dynamodb.repository.EnableScan;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-@Repository
-public interface ProcedimentosResultadosRepository extends MongoRepository<ProcedimentosResultados, String> {
+@EnableScan
+public interface ProcedimentosResultadosRepository extends CrudRepository<ProcedimentosResultados, String> {
 
     public List<ProcedimentosResultados> findByAtendimento_Id(String id);
 

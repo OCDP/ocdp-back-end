@@ -1,10 +1,10 @@
 package br.ufg.api.ocd.repository;
 
 import br.ufg.api.ocd.model.TipoLesao;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
+import org.socialsignin.spring.data.dynamodb.repository.EnableScan;
+import org.springframework.data.repository.CrudRepository;
 
-@Repository
-public interface TipoLesaoRepository extends MongoRepository<TipoLesao, String> {
+@EnableScan
+public interface TipoLesaoRepository extends CrudRepository<TipoLesao, String> {
 
 }

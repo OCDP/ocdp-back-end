@@ -1,18 +1,18 @@
 package br.ufg.api.ocd.repository;
 
 import br.ufg.api.ocd.model.Paciente;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
-import org.springframework.stereotype.Repository;
+import org.socialsignin.spring.data.dynamodb.repository.EnableScan;
+import org.socialsignin.spring.data.dynamodb.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-@Repository
-public interface PacienteRepository extends MongoRepository<Paciente, String> {
+@EnableScan
+public interface PacienteRepository extends CrudRepository<Paciente, String> {
 
     public List<Paciente> findByNome(String nome);
 
-    @Query("{'nome' : { $regex : ?0, $options: 'i' } }")
+    @Query(fields = "nome")
     public List<Paciente> findByQuery(String nome);
 
     public Paciente findByEmail(String email);

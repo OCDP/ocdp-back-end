@@ -1,6 +1,5 @@
 package br.ufg.api.ocd.service;
 
-import br.ufg.api.ocd.model.CustomSequences;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Update;

@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface LesaoRepository extends MongoRepository<Lesao, String> {
 
-    public List<Lesao> findByTipoLesao_Nome(String tipo);
+    public List<Lesao> findByTipoLesao_Nome(String nome);
 
 }

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Document(collection = "logAtendimentos")
@@ -21,17 +22,19 @@ public class LogAtendimentos {
     private String idPaciente;
     private String idUltimoAtendimento;
     private TipoAtendimento tipoAtendimento;
-    private Date dataAtendimento;
-    private Date dataSugeridaAcompanhamento;
-    private Date dataSugeridaTratamento;
-    private String idLocalAtendimentoEncaminhado;
+    private LocalDateTime dataAtendimento;
+    private LocalDateTime dataSugeridaAcompanhamento;
+    private LocalDateTime dataSugeridaTratamento;
+    private String idLocalAtendimento;
+    private String idLocalEncaminhado;
 
     public void atualiza(Atendimento atendimento){
         this.setDataAtendimento(atendimento.getDataAtendimento());
         this.setDataSugeridaAcompanhamento(atendimento.getDataSugeridaAcompanhamento());
         this.setDataSugeridaTratamento(atendimento.getDataSugeridaTratamento());
-        this.setIdLocalAtendimentoEncaminhado(atendimento.getLocalAtendimento().getId());
-        this.setIdPaciente(atendimento.getPaciente().getId());
+        this.setIdLocalAtendimento(atendimento.getLocalAtendimento() != null ? atendimento.getLocalAtendimento().getId() : null);
+        this.setIdLocalEncaminhado(atendimento.getLocalEncaminhado() != null ? atendimento.getLocalEncaminhado().getId() : null);
+        this.setIdPaciente(atendimento.getPaciente() != null ? atendimento.getPaciente().getId() : null);
         this.setIdUltimoAtendimento(atendimento.getId());
         this.setTipoAtendimento(atendimento.getTipoAtendimento());
     }

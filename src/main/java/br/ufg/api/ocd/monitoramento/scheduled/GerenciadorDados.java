@@ -8,6 +8,7 @@ import br.ufg.api.ocd.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -47,8 +48,8 @@ public class GerenciadorDados {
                 .logNaoCompareceu(logNaoCompareceu).build();
     }
 
-    private void adicionaNaLista(LogAtendimentos log, Date data, List<LogAtendimentos> listaLogAcompanhamento, ParametrosScheduler parametro) {
-        String diferencaAcompanhamento = String.valueOf(DataUtil.diferencaEmDias(data, new Date()));
+    private void adicionaNaLista(LogAtendimentos log, LocalDateTime data, List<LogAtendimentos> listaLogAcompanhamento, ParametrosScheduler parametro) {
+        String diferencaAcompanhamento = String.valueOf(DataUtil.diferencaEmMeses(data, LocalDateTime.now()));
         List<String> diasParametro = Arrays.asList(parametro.getValor().split("\\,"));
         if (diasParametro.contains(diferencaAcompanhamento)) {
             listaLogAcompanhamento.add(log);
@@ -56,7 +57,7 @@ public class GerenciadorDados {
     }
 
     private void adicionaNaListaSemAgendamento(LogAtendimentos log, List<LogAtendimentos> listaLog, ParametrosScheduler parametroInicial, ParametrosScheduler parametroFinal) {
-        int diferenca = DataUtil.diferencaEmDias(log.getDataAtendimento(), new Date());
+        int diferenca = DataUtil.diferencaEmMeses(log.getDataAtendimento(), LocalDateTime.now());
 
         if (Integer.valueOf(parametroInicial.getValor()) > diferenca && Integer.valueOf(parametroFinal.getValor())< diferenca) {
             listaLog.add(log);

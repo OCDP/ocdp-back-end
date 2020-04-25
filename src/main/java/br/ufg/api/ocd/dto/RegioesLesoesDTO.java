@@ -1,11 +1,17 @@
 package br.ufg.api.ocd.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class RegioesLesoesDTO {
-    private List<LesaoDTO> lesoes;
-    private List<RegiaoBocaDTO> regioes;
+    private LesaoDTO lesao;
+    private RegiaoBocaDTO regiaoBoca;
 }

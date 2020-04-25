@@ -6,6 +6,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface LogAtendimentosRepository extends MongoRepository<LogAtendimentos, String> {
-    public List<LogAtendimentos> findAllByIdLocalAtendimentoEncaminhado(String idLocal);
+    public List<LogAtendimentos> findAllByIdLocalEncaminhado(String idLocal);
     public LogAtendimentos findByIdPaciente(String IdPaciente);
 }

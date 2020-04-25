@@ -11,6 +11,5 @@ public class RegiaoBocaDTO {
     private String id;
     @NotEmpty(message = "Forneça o nome da região da boca")
     private String nome;
-    @NotNull(message = "Forneça os dados da sigla que a região pertence")
     private SiglaRegiaoBocaDTO siglaRegiaoBoca;
 }

@@ -1,23 +1,23 @@
 package br.ufg.api.ocd.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Document(collection = "localDaLesao")
+@Document(collection = "regioesLesoes")
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class RegioesLesoes {
     @Id
     private String id;
-    private List<Lesao> lesoes;
-    private List<RegiaoBoca> regioes;
+    private Lesao lesao;
+    private RegiaoBoca regiaoBoca;
     private Atendimento atendimento;
-
-    public RegioesLesoes(List<Lesao> lesoes, List<RegiaoBoca> regioes, Atendimento atendimento) {
-        this.lesoes = lesoes;
-        this.regioes = regioes;
-        this.atendimento = atendimento;
-    }
 }

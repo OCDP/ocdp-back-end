@@ -57,20 +57,12 @@ public class BuscarAcompanhamento implements EstrategiaBusca {
             List<RegioesLesoesDTO> regioesLesoesLista = new ArrayList<>();
             regioesLesoes.forEach(reLe -> {
                 RegioesLesoesDTO regioesLesoesDTO = new RegioesLesoesDTO();
-                regioesLesoesDTO.setLesoes(retornaListaLesao(reLe));
-                regioesLesoesDTO.setRegioes(retornaListaRegiao(reLe));
+                regioesLesoesDTO.setLesao(modelMapper.map(reLe.getLesao(), LesaoDTO.class));
+                regioesLesoesDTO.setRegiaoBoca(modelMapper.map(reLe.getRegiaoBoca(), RegiaoBocaDTO.class));
                 regioesLesoesLista.add(regioesLesoesDTO);
             });
             dto.setRegioesLesoes(regioesLesoesLista);
         }
-    }
-
-    private List<LesaoDTO> retornaListaLesao(RegioesLesoes regioesLesoes){
-       return regioesLesoes.getLesoes().stream().map(lesao -> modelMapper.map(lesao, LesaoDTO.class)).collect(Collectors.toList());
-    }
-
-    private List<RegiaoBocaDTO> retornaListaRegiao(RegioesLesoes regioesLesoes){
-        return regioesLesoes.getRegioes().stream().map(regiao -> modelMapper.map(regiao, RegiaoBocaDTO.class)).collect(Collectors.toList());
     }
 
     private void addFatorRisco(final List<FatorRiscoAcompanhamento> fatorRiscoAcompanhamentos) {

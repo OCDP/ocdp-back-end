@@ -22,7 +22,7 @@ public class UsuarioDTO {
     @NotEmpty(message = "Forneça o telefone do usuário")
     private String telefone;
     @NotNull(message = "Forneça o nivel de atenção do usuário")
-    private NivelAtencao tipoAtencao;
+    private NivelAtencao nivelAtencao;
     @NotNull(message = "Forneça do tipo de usuário")
     private TipoUsuario tipoUsuario;
 }

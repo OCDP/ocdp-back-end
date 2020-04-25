@@ -36,8 +36,8 @@ public class LesaoService {
         return repository.findById(id).get();
     }
 
-    public List<Lesao> findByTipo(@NonNull String tipoLesao) {
-        return repository.findByTipoLesao_Nome(tipoLesao);
+    public List<Lesao> findByTipo(@NonNull String nome) {
+        return repository.findByTipoLesao_Nome(nome);
     }
 
     public void deleteAll(){

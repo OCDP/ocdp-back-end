@@ -23,9 +23,11 @@ public class LogAtendimentosService {
 
     public void salvarLog(Atendimento atendimento) {
         LogAtendimentos log = repository.findByIdPaciente(atendimento.getPaciente().getId());
-        if (log == null) log = preencheLog(atendimento);
-        else log.atualiza(atendimento);
-        log.setId(nextSequenceService.getNextSequence("log"));
+        if (log == null){
+            log = preencheLog(atendimento);
+            log.setId(nextSequenceService.getNextSequence("log"));
+        } else log.atualiza(atendimento);
+
         repository.save(log);
     }
 
@@ -34,7 +36,7 @@ public class LogAtendimentosService {
     }
 
     public List<LogAtendimentos> buscaPeloLocalAtendimento(LocalAtendimento localAtendimento) {
-        return repository.findAllByIdLocalAtendimentoEncaminhado(localAtendimento.getId());
+        return repository.findAllByIdLocalEncaminhado(localAtendimento.getId());
     }
 
     private LogAtendimentos preencheLog(Atendimento atendimento) {
@@ -42,7 +44,8 @@ public class LogAtendimentosService {
                 .dataAtendimento(atendimento.getDataAtendimento())
                 .dataSugeridaAcompanhamento(atendimento.getDataSugeridaAcompanhamento())
                 .dataSugeridaTratamento(atendimento.getDataSugeridaTratamento())
-                .idLocalAtendimentoEncaminhado(atendimento.getLocalAtendimento().getId())
+                .idLocalAtendimento(atendimento.getLocalAtendimento().getId())
+                .idLocalEncaminhado(atendimento.getLocalEncaminhado() != null ? atendimento.getLocalEncaminhado().getId(): null)
                 .idPaciente(atendimento.getPaciente().getId())
                 .idUltimoAtendimento(atendimento.getId())
                 .tipoAtendimento(atendimento.getTipoAtendimento())

@@ -1,10 +1,13 @@
 package br.ufg.api.ocd.dto;
 
 import br.ufg.api.ocd.enums.Sexo;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -18,7 +21,9 @@ public class PacienteDTO {
     private String cpf;
 
     @NotNull(message = "Forneça a data de nascimento do paciente")
-    private Date dataNascimento;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss", iso = DateTimeFormat.ISO.DATE_TIME)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime dataNascimento;
 
     @NotNull(message = "Forneça o sexo do paciente")
     private Sexo sexo;

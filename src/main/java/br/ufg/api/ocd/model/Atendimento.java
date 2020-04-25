@@ -1,6 +1,7 @@
 package br.ufg.api.ocd.model;
 
 import br.ufg.api.ocd.enums.TipoAtendimento;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,6 +11,8 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Document(collection = "atendimento")
@@ -24,15 +27,14 @@ public class Atendimento {
 
     @Id
     private String id;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private Date dataAtendimento;
+    private LocalDateTime dataAtendimento;
     private Usuario usuario;
     private Paciente paciente;
     private TipoAtendimento tipoAtendimento;
     private LocalAtendimento localAtendimento;
     private LocalAtendimento localEncaminhado;
-    private Date dataSugeridaAcompanhamento;
-    private Date dataSugeridaTratamento;
+    private LocalDateTime dataSugeridaAcompanhamento;
+    private LocalDateTime dataSugeridaTratamento;
     private String hipoteseDiagnostico;
     private Boolean confirmaRastreamento;
     private String observacao;

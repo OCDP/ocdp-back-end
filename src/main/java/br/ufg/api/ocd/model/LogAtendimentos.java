@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Document(collection = "logAtendimentos")
@@ -21,9 +22,9 @@ public class LogAtendimentos {
     private String idPaciente;
     private String idUltimoAtendimento;
     private TipoAtendimento tipoAtendimento;
-    private Date dataAtendimento;
-    private Date dataSugeridaAcompanhamento;
-    private Date dataSugeridaTratamento;
+    private LocalDateTime dataAtendimento;
+    private LocalDateTime dataSugeridaAcompanhamento;
+    private LocalDateTime dataSugeridaTratamento;
     private String idLocalAtendimento;
     private String idLocalEncaminhado;
 

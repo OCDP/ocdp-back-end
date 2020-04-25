@@ -8,10 +8,11 @@ import br.ufg.api.ocd.repository.*;
 import br.ufg.api.ocd.service.AtendimentoService;
 import br.ufg.api.ocd.service.PacienteService;
 import org.modelmapper.ModelMapper;
-
+import java.time.LocalDateTime;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -171,8 +172,8 @@ public class MassaDeTeste {
         atendimento(atendimentoDTO).
         fatoresDeRisco(criaListFatorRiscoDTO()).
         regioesLesoes(criaListRegioesLesoesDTO()).
-        dataSugeridaAcompanhamento(new Date()).
-        dataSugeridaTratamento(new Date()).build();
+        dataSugeridaAcompanhamento(LocalDateTime.now()).
+        dataSugeridaTratamento(LocalDateTime.now()).build();
 
         service.salvarAcompanhamento(dto);
     }
@@ -203,7 +204,7 @@ public class MassaDeTeste {
             LocalAtendimentoDTO localAtendimento,
             LocalAtendimentoDTO localEncaminhamento,
             TipoAtendimento tipoAtendimento,
-            Date dataAtendimento,
+            LocalDateTime dataAtendimento,
             Usuario usuario) {
 
         AtendimentoDTO dto = AtendimentoDTO.builder().
@@ -313,11 +314,13 @@ public class MassaDeTeste {
 
     }
 
-    private static Date montaData(int ano, int mes, int dia){
+    private static LocalDateTime montaData(int ano, int mes, int dia){
+        ZoneId defaultZoneId = ZoneId.systemDefault();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date d = null;
+        LocalDateTime d = null;
         try{
-            d = (Date) dateFormat.parse(dia+"/"+mes+"/"+ano);
+            Date data = (Date) dateFormat.parse(dia+"/"+mes+"/"+ano);
+            d = LocalDateTime.ofInstant(data.toInstant(), ZoneId.systemDefault());
         }catch(ParseException e){
             e.printStackTrace();
         }

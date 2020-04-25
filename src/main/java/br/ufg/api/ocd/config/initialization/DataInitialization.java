@@ -14,6 +14,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -132,7 +133,7 @@ public class DataInitialization implements ApplicationListener<ContextRefreshedE
 
     private void criarVersaoBanco() {
         versaoBancoService.deleteAll();
-        salvaVersaoBanco(VersaoBanco.builder().descricao("1.0").data(new Date()).build());
+        salvaVersaoBanco(VersaoBanco.builder().descricao("1.0").data(LocalDateTime.now()).build());
     }
 
 

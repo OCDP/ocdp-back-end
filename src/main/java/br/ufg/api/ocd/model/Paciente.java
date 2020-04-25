@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Document(collection = "paciente")
@@ -18,7 +19,7 @@ public class Paciente {
     private String nome;
     private String enderecoCompleto;
     private String cpf;
-    private Date dataNascimento;
+    private LocalDateTime dataNascimento;
     private Sexo sexo;
     private String email;
     private String telefoneCelular;

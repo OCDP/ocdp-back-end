@@ -18,6 +18,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -86,7 +87,7 @@ public class AtendimentoService {
     }
 
     private void prenchelistaHistorico(List<HistoricoAtendimentoDTO> listaRetorno, List<Atendimento> historicoPaciente) {
-        Date dataAnterior = null;
+        LocalDateTime dataAnterior = null;
         int cont = 0;
         for (Atendimento atendimento : historicoPaciente) {
             if(cont == 0){

@@ -5,10 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Data
@@ -25,9 +27,12 @@ public class AcompanhamentoDTO {
     private List<FatorRiscoDTO> fatoresDeRisco;
     private List<RegioesLesoesDTO> regioesLesoes;
 
-    @JsonFormat(pattern="dd-MM-yyyyy HH:mm:ss")
-    private Date dataSugeridaAcompanhamento;
 
-    @JsonFormat(pattern="dd-MM-yyyyy HH:mm:ss")
-    private Date dataSugeridaTratamento;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss", iso = DateTimeFormat.ISO.DATE_TIME)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime dataSugeridaAcompanhamento;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss", iso = DateTimeFormat.ISO.DATE_TIME)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime dataSugeridaTratamento;
 }

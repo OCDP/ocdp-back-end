@@ -12,5 +12,6 @@ import java.util.List;
 public interface AtendimentoRepository extends MongoRepository<Atendimento, String> {
 
     public List<Atendimento> findAllByPaciente_Nome(String nome, Sort sort);
+    public List<Atendimento> findAllByPaciente_Cpf(String cpf, Sort sort);
     public List<Atendimento> findAllByLocalAtendimento_Id(String id);
 }

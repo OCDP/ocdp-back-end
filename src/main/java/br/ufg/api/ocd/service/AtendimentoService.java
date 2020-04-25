@@ -70,19 +70,14 @@ public class AtendimentoService {
         repository.deleteAll();
     }
 
-    public List<Atendimento> getByNomePaciente(@NonNull String nome) {
+    public List<HistoricoAtendimentoDTO> getHistoricoPacienteCpf(@NonNull String cpf) {
         Sort sort = new Sort(Sort.Direction.ASC, "dataAtendimento");
-        return repository.findAllByPaciente_Nome(nome,sort);
+        List<Atendimento> historicoPaciente = repository.findAllByPaciente_Cpf(cpf, sort);
+        return preparaDadosHistorico(historicoPaciente);
     }
 
-    public List<HistoricoAtendimentoDTO> getHistoricoPaciente(@NonNull String nome) {
-        return preparaDadosHistorico(nome);
-    }
-
-    private List<HistoricoAtendimentoDTO> preparaDadosHistorico(@NonNull String nome) {
+    private List<HistoricoAtendimentoDTO> preparaDadosHistorico(@NonNull List<Atendimento> historicoPaciente) {
         List<HistoricoAtendimentoDTO> listaRetorno = new ArrayList<>();
-        Sort sort = new Sort(Sort.Direction.ASC, "dataAtendimento");
-        final List<Atendimento> historicoPaciente = repository.findAllByPaciente_Nome(nome,sort);
         if (historicoPaciente != null && !historicoPaciente.isEmpty()) {
             prenchelistaHistorico(listaRetorno, historicoPaciente);
             Collections.sort(listaRetorno);
@@ -137,7 +132,7 @@ public class AtendimentoService {
 
         return salvaAtendimento(Atendimento.builder()
                 .dataAtendimento(acompanhamentoDTO.getAtendimento().getDataAtendimento())
-                .paciente(pacienteService.salvarPacienteDTO(acompanhamentoDTO.getAtendimento().getPaciente()))
+                .paciente(modelMapper.map(acompanhamentoDTO.getAtendimento().getPaciente(), Paciente.class))
                 .localAtendimento(modelMapper.map(acompanhamentoDTO.getAtendimento().getLocalAtendimento(), LocalAtendimento.class))
                 .localEncaminhado(modelMapper.map(acompanhamentoDTO.getAtendimento().getLocalEncaminhado(), LocalAtendimento.class))
                 .tipoAtendimento(acompanhamentoDTO.getAtendimento().getTipoAtendimento())
@@ -149,7 +144,7 @@ public class AtendimentoService {
     private Atendimento salvaIntervencaoDTO(IntervencaoDTO intervencaoDTO) {
         return salvaAtendimento(Atendimento.builder()
                  .dataAtendimento(intervencaoDTO.getAtendimento().getDataAtendimento())
-                 .paciente(pacienteService.salvarPacienteDTO(intervencaoDTO.getAtendimento().getPaciente()))
+                 .paciente(modelMapper.map(intervencaoDTO.getAtendimento().getPaciente(), Paciente.class))
                  .localAtendimento(modelMapper.map(intervencaoDTO.getAtendimento().getLocalAtendimento(), LocalAtendimento.class))
                  .tipoAtendimento(intervencaoDTO.getAtendimento().getTipoAtendimento())
                  .usuario(modelMapper.map(intervencaoDTO.getAtendimento().getUsuario(), Usuario.class))
@@ -161,7 +156,7 @@ public class AtendimentoService {
     private Atendimento salvaResultadosDTO(ResultadosDTO resultadosDTO) {
         return salvaAtendimento(Atendimento.builder()
                 .dataAtendimento(resultadosDTO.getAtendimento().getDataAtendimento())
-                .paciente(pacienteService.salvarPacienteDTO(resultadosDTO.getAtendimento().getPaciente()))
+                .paciente(modelMapper.map(resultadosDTO.getAtendimento().getPaciente(), Paciente.class))
                 .localAtendimento(modelMapper.map(resultadosDTO.getAtendimento().getLocalAtendimento(), LocalAtendimento.class))
                 .tipoAtendimento(resultadosDTO.getAtendimento().getTipoAtendimento())
                 .usuario(modelMapper.map(resultadosDTO.getAtendimento().getUsuario(), Usuario.class))

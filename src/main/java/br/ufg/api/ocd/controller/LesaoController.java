@@ -1,6 +1,7 @@
 package br.ufg.api.ocd.controller;
 
 import br.ufg.api.ocd.dto.LesaoDTO;
+import br.ufg.api.ocd.dto.TipoLesaoDTO;
 import br.ufg.api.ocd.model.Lesao;
 import br.ufg.api.ocd.service.LesaoService;
 import org.modelmapper.ModelMapper;
@@ -52,9 +53,11 @@ public class LesaoController {
         return modelMapper.map(service.findById(id), LesaoDTO.class);
     }
 
-    @GetMapping(value = "/byTipo/{tipo}")
-    public LesaoDTO getByTipoLesao(@PathVariable String tipo) {
-        return modelMapper.map(service.findById(tipo), LesaoDTO.class);
+    @GetMapping(value = "/byTipo/{nomeTipo}")
+    public List<LesaoDTO> getByTipoLesao(@PathVariable String nomeTipo) {
+        return service.findByTipo(nomeTipo).stream()
+                .map(post -> modelMapper.map(post, LesaoDTO.class))
+                .collect(Collectors.toList());
     }
 
     @GetMapping

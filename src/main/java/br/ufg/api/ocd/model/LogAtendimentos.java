@@ -31,9 +31,9 @@ public class LogAtendimentos {
         this.setDataAtendimento(atendimento.getDataAtendimento());
         this.setDataSugeridaAcompanhamento(atendimento.getDataSugeridaAcompanhamento());
         this.setDataSugeridaTratamento(atendimento.getDataSugeridaTratamento());
-        this.setIdLocalAtendimento(atendimento.getLocalAtendimento().getId());
-        this.setIdLocalEncaminhado(atendimento.getLocalEncaminhado().getId());
-        this.setIdPaciente(atendimento.getPaciente().getId());
+        this.setIdLocalAtendimento(atendimento.getLocalAtendimento() != null ? atendimento.getLocalAtendimento().getId() : null);
+        this.setIdLocalEncaminhado(atendimento.getLocalEncaminhado() != null ? atendimento.getLocalEncaminhado().getId() : null);
+        this.setIdPaciente(atendimento.getPaciente() != null ? atendimento.getPaciente().getId() : null);
         this.setIdUltimoAtendimento(atendimento.getId());
         this.setTipoAtendimento(atendimento.getTipoAtendimento());
     }

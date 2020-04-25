@@ -35,9 +35,9 @@ public class HistoricoPacienteController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping(value = "/atendimentos/{nomePaciente}")
-    public List<HistoricoAtendimentoDTO> getAtendimentosByNomePaciente(@PathVariable("nomePaciente") String nomePaciente) {
-        return atendimentoService.getHistoricoPaciente(nomePaciente);
+    @GetMapping(value = "/atendimentos/cpf/{cpf}")
+    public List<HistoricoAtendimentoDTO> getAtendimentosByCpfPaciente(@PathVariable("cpf") String cpf) {
+        return atendimentoService.getHistoricoPacienteCpf(cpf);
     }
 
     @GetMapping(path = "/tiposAtendimentos")

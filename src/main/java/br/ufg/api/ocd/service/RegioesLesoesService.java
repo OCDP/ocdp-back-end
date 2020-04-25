@@ -27,7 +27,7 @@ public class RegioesLesoesService {
     private ModelMapper modelMapper;
 
     @Autowired
-    private  NextSequenceService nextSequenceService;
+    private NextSequenceService nextSequenceService;
 
     public List<RegioesLesoes> getAll() {
         return repository.findAll();
@@ -35,27 +35,16 @@ public class RegioesLesoesService {
 
     public void salvarRegioesLesoes(Atendimento atendimento, List<RegioesLesoesDTO> regioesLesoes) {
         regioesLesoes.forEach(local -> {
-            RegioesLesoes rl = new RegioesLesoes(retornaListaLesoes(local.getLesoes()), retornaListaRegioes(local.getRegioes()), atendimento);
-            rl.setId(nextSequenceService.getNextSequence("regioesLesoes"));
+            RegioesLesoes rl = RegioesLesoes.builder()
+                    .atendimento(atendimento)
+                    .lesao(modelMapper.map(local.getLesao(), Lesao.class))
+                    .regiaoBoca(modelMapper.map(local.getRegiaoBoca(), RegiaoBoca.class))
+                    .id(nextSequenceService.getNextSequence("regioesLesoes")).build();
             repository.save(rl);
         });
     }
 
-    private List<Lesao> retornaListaLesoes(List<LesaoDTO> lesoes) {
-        if(lesoes == null || lesoes.isEmpty()) return null;
-        return lesoes.stream()
-                .map(lesao -> modelMapper.map(lesao, Lesao.class))
-                .collect(Collectors.toList());
-    }
-
-    private List<RegiaoBoca> retornaListaRegioes(List<RegiaoBocaDTO> regioes) {
-        if(regioes == null || regioes.isEmpty()) return null;
-        return regioes.stream()
-                .map(regiao -> modelMapper.map(regiao, RegiaoBoca.class))
-                .collect(Collectors.toList());
-    }
-
-    public void deleteAll(){
+    public void deleteAll() {
         repository.deleteAll();
     }
 }

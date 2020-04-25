@@ -23,7 +23,7 @@ public class PacienteService {
     private ModelMapper modelMapper;
 
     public Paciente salvarPacienteDTO(PacienteDTO pacienteDTO){
-        Paciente paciente = repository.findByTelefoneCelular(pacienteDTO.getEmail());
+        Paciente paciente = repository.findByCpf(pacienteDTO.getCpf());
         if(paciente == null){
             paciente = salvar(modelMapper.map(pacienteDTO, Paciente.class));
         }
@@ -31,7 +31,7 @@ public class PacienteService {
     }
 
     public List<Paciente> geByNome(@NonNull String nome) {
-        return repository.findByNome(nome);
+        return repository.findByQuery(nome);
     }
 
     public List<Paciente> findAll() {

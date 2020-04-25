@@ -3,6 +3,9 @@ package br.ufg.api.ocd.model;
 import br.ufg.api.ocd.enums.Sexo;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
+import org.springframework.data.mongodb.core.index.CompoundIndexes;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -13,8 +16,7 @@ public class Paciente {
     @Id
     private String id;
     private String nome;
-   //@Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
-   private String enderecoCompleto;
+    private String enderecoCompleto;
     private String cpf;
     private Date dataNascimento;
     private Sexo sexo;

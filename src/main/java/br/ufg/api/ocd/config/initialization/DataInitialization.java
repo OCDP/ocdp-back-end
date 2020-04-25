@@ -104,6 +104,9 @@ public class DataInitialization implements ApplicationListener<ContextRefreshedE
     private RegioesLesoesRepository regioesLesoesRepository;
 
     @Autowired
+    private PacienteService pacienteService;
+
+    @Autowired
     private PacienteRepository pacienteRepository;
 
     @Autowired
@@ -254,7 +257,7 @@ public class DataInitialization implements ApplicationListener<ContextRefreshedE
         pacienteRepository.deleteAll();
         logAtendimentosRepository.deleteAll();
 
-        MassaDeTeste.criaAtendimentos(atendimentoService, modelMapper, usuarioRepository, bairroRepository, localAtendimentoRepository, fatorRiscoRepository, regiaoBocaRepository, lesaoRepository);
+        MassaDeTeste.criaAtendimentos(atendimentoService, modelMapper, usuarioRepository, bairroRepository, localAtendimentoRepository, fatorRiscoRepository, regiaoBocaRepository, lesaoRepository, pacienteService);
     }
 
     private void criarUsuario() {

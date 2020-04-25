@@ -52,9 +52,9 @@ public class HistoricoPacienteControllerTest {
     }
 
     @Test
-    public void getAtendimentoByNomePaciente_Ok() throws Exception {
+    public void getAtendimentoByNomeCpf_Ok() throws Exception {
         mvc.perform(
-                get(this.PATH_REST+"/atendimentos/fulano")
+                get(this.PATH_REST+"/atendimentos/cpf/999.999.999-99")
         ).andExpect(status().isOk());
     }
 

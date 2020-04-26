@@ -1,5 +1,6 @@
 package br.ufg.api.ocd.service;
 
+import br.ufg.api.ocd.model.SiglaRegiaoBoca;
 import br.ufg.api.ocd.model.TipoLesao;
 import br.ufg.api.ocd.repository.TipoLesaoRepository;
 import lombok.NonNull;
@@ -16,10 +17,10 @@ public class TipoLesaoService {
     private TipoLesaoRepository repository;
 
     @Autowired
-    private NextSequenceService nextSequenceService;
+    private GenericService genericService;
 
     public TipoLesao salvar(TipoLesao tipoLesao) {
-        tipoLesao.setId(nextSequenceService.getNextSequence("tipoLesao"));
+        genericService.init(TipoLesao.class);
         return repository.save(tipoLesao);
     }
 
@@ -36,7 +37,7 @@ public class TipoLesaoService {
     }
 
     public List<TipoLesao> getAll() {
-        return repository.findAll();
+        return (List<TipoLesao>) repository.findAll();
     }
 
     public void deleteAll(){

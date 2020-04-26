@@ -1,7 +1,13 @@
 package br.ufg.api.ocd.service;
 
+import br.ufg.api.ocd.model.Cidade;
 import br.ufg.api.ocd.model.Distrito;
 import br.ufg.api.ocd.repository.DistritoRepository;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.model.CreateTableRequest;
+import com.amazonaws.services.dynamodbv2.model.ProvisionedThroughput;
+import com.amazonaws.services.dynamodbv2.util.TableUtils;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,14 +20,14 @@ public class DistritoService {
     private DistritoRepository repository;
 
     @Autowired
-    private  NextSequenceService nextSequenceService;
+    private GenericService genericService;
 
     public List<Distrito> getAll() {
-        return repository.findAll();
+        return (List<Distrito>)  repository.findAll();
     }
 
     public Distrito salvar(Distrito distrito) {
-        distrito.setId(nextSequenceService.getNextSequence("distrito"));
+        genericService.init(Distrito.class);
         return repository.save(distrito);
     }
 

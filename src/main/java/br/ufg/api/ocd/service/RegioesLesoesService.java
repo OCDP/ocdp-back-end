@@ -1,7 +1,5 @@
 package br.ufg.api.ocd.service;
 
-import br.ufg.api.ocd.dto.LesaoDTO;
-import br.ufg.api.ocd.dto.RegiaoBocaDTO;
 import br.ufg.api.ocd.dto.RegioesLesoesDTO;
 import br.ufg.api.ocd.model.Atendimento;
 import br.ufg.api.ocd.model.Lesao;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -27,19 +24,19 @@ public class RegioesLesoesService {
     private ModelMapper modelMapper;
 
     @Autowired
-    private NextSequenceService nextSequenceService;
+    private GenericService genericService;
 
     public List<RegioesLesoes> getAll() {
-        return repository.findAll();
+        return (List<RegioesLesoes>) repository.findAll();
     }
 
     public void salvarRegioesLesoes(Atendimento atendimento, List<RegioesLesoesDTO> regioesLesoes) {
+        genericService.init(RegioesLesoes.class);
         regioesLesoes.forEach(local -> {
             RegioesLesoes rl = RegioesLesoes.builder()
                     .atendimento(atendimento)
                     .lesao(modelMapper.map(local.getLesao(), Lesao.class))
-                    .regiaoBoca(modelMapper.map(local.getRegiaoBoca(), RegiaoBoca.class))
-                    .id(nextSequenceService.getNextSequence("regioesLesoes")).build();
+                    .regiaoBoca(modelMapper.map(local.getRegiaoBoca(), RegiaoBoca.class)).build();
             repository.save(rl);
         });
     }

@@ -3,7 +3,6 @@ package br.ufg.api.ocd.service;
 import br.ufg.api.ocd.model.Usuario;
 import br.ufg.api.ocd.repository.UsuarioRepository;
 import lombok.NonNull;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,17 +13,14 @@ public class UsuarioService {
     private UsuarioRepository repository;
 
     @Autowired
-    private ModelMapper modelMapper;
-
-    @Autowired
-    private  NextSequenceService nextSequenceService;
+    private GenericService genericService;
 
     public Usuario findByCpf(@NonNull String cpf) {
         return repository.findByCpf(cpf);
     }
 
     public Usuario salvar(Usuario usuario) {
-        usuario.setId(nextSequenceService.getNextSequence("usuario"));
+        genericService.init(Usuario.class);
         return repository.save(usuario);
     }
 

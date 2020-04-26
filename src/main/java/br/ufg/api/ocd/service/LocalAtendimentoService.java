@@ -1,5 +1,6 @@
 package br.ufg.api.ocd.service;
 
+import br.ufg.api.ocd.model.Lesao;
 import br.ufg.api.ocd.model.LocalAtendimento;
 import br.ufg.api.ocd.repository.LocalAtendimentoRepository;
 import lombok.NonNull;
@@ -15,10 +16,10 @@ public class LocalAtendimentoService {
     private LocalAtendimentoRepository repository;
 
     @Autowired
-    private NextSequenceService nextSequenceService;
+    private GenericService genericService;
 
     public LocalAtendimento salvar(LocalAtendimento localAtendimento) {
-        localAtendimento.setId(nextSequenceService.getNextSequence("localAtendimento"));
+        genericService.init(LocalAtendimento.class);
         return repository.save(localAtendimento);
     }
 
@@ -36,7 +37,7 @@ public class LocalAtendimentoService {
 
     public List<LocalAtendimento> getAll() {
 
-        return repository.findAll();
+        return (List<LocalAtendimento>) repository.findAll();
     }
 
     public List<LocalAtendimento> getByNome(@NonNull String nome) {

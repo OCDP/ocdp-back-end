@@ -17,7 +17,7 @@ public class PacienteService {
     private PacienteRepository repository;
 
     @Autowired
-    private  NextSequenceService nextSequenceService;
+    private GenericService genericService;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -35,11 +35,11 @@ public class PacienteService {
     }
 
     public List<Paciente> findAll() {
-        return repository.findAll();
+        return (List<Paciente>) repository.findAll();
     }
 
     public Paciente salvar(Paciente paciente) {
-        paciente.setId(nextSequenceService.getNextSequence("paciente"));
+        genericService.init(Paciente.class);
         return repository.save(paciente);
     }
 

@@ -15,10 +15,10 @@ public class CidadeService {
     private CidadeRepository repository;
 
     @Autowired
-    private NextSequenceService nextSequenceService;
+    private GenericService genericService;
 
     public Cidade salvar(Cidade cidade) {
-        cidade.setId(nextSequenceService.getNextSequence("cidade"));
+        genericService.init(Cidade.class);
         return repository.save(cidade);
     }
 
@@ -39,7 +39,7 @@ public class CidadeService {
     }
 
     public List<Cidade> getAll() {
-        return repository.findAll();
+        return (List<Cidade>) repository.findAll();
     }
 
     public void deleteAll(){

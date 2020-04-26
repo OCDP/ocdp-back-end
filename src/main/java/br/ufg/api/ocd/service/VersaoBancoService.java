@@ -15,10 +15,10 @@ public class VersaoBancoService {
     private VersaoBancoRepository repository;
 
     @Autowired
-    private  NextSequenceService nextSequenceService;
+    private GenericService genericService;
 
     public VersaoBanco salvar(VersaoBanco versaoBanco) {
-        versaoBanco.setId(nextSequenceService.getNextSequence("versaoBanco"));
+        genericService.init(VersaoBanco.class);
         return repository.save(versaoBanco);
     }
 
@@ -27,7 +27,6 @@ public class VersaoBancoService {
         if(versaoBancoDB == null){
             throw new Exception("VersaoBanco não existe com esse id: "+versaoBanco.getId());
         }
-        versaoBanco.setId(nextSequenceService.getNextSequence("versaoBanco"));
         return repository.save(versaoBanco);
     }
 
@@ -36,7 +35,7 @@ public class VersaoBancoService {
     }
 
     public List<VersaoBanco> getAll() {
-        return repository.findAll();
+        return (List<VersaoBanco>) repository.findAll();
     }
 
     public void deleteAll(){

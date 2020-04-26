@@ -15,10 +15,10 @@ public class FatorRiscoService {
     private FatorRiscoRepository repository;
 
     @Autowired
-    private NextSequenceService nextSequenceService;
+    private GenericService genericService;
 
     public FatorRisco salvar(FatorRisco fatorRisco) {
-        fatorRisco.setId(nextSequenceService.getNextSequence("fatorRisco"));
+        genericService.init(FatorRisco.class);
         return repository.save(fatorRisco);
     }
 
@@ -35,7 +35,7 @@ public class FatorRiscoService {
     }
 
     public List<FatorRisco> getAll() {
-        return repository.findAll();
+        return (List<FatorRisco>) repository.findAll();
     }
 
     public void deleteAll(){

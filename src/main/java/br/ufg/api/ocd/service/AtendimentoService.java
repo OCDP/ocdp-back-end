@@ -26,6 +26,9 @@ import java.util.*;
 public class AtendimentoService {
 
     @Autowired
+    private GenericService genericService;
+
+    @Autowired
     private AtendimentoRepository repository;
 
     @Autowired
@@ -44,19 +47,12 @@ public class AtendimentoService {
     private BuscarAcompanhamento buscarAcompanhamento;
 
     @Autowired
-    private PacienteService pacienteService;
-
-    @Autowired
     private LogAtendimentosService logService;
 
     @Autowired
     private ModelMapper modelMapper;
 
     private Map<TipoAtendimento, EstrategiaBusca> acoes;
-
-    @Autowired
-    private  NextSequenceService nextSequenceService;
-
 
     public AtendimentoBuscarDTO getAtendimentosById(@NonNull String id) {
 
@@ -67,7 +63,7 @@ public class AtendimentoService {
         return null;
     }
 
-    public void deleteAll(){
+    public void deleteAll() {
         repository.deleteAll();
     }
 
@@ -90,10 +86,10 @@ public class AtendimentoService {
         LocalDateTime dataAnterior = null;
         int cont = 0;
         for (Atendimento atendimento : historicoPaciente) {
-            if(cont == 0){
+            if (cont == 0) {
                 dataAnterior = atendimento.getDataAtendimento();
-            } else{
-                dataAnterior = historicoPaciente.get(cont-1).getDataAtendimento();
+            } else {
+                dataAnterior = historicoPaciente.get(cont - 1).getDataAtendimento();
             }
             cont = cont + 1;
             listaRetorno.add(HistoricoAtendimentoDTO.builder()
@@ -113,7 +109,7 @@ public class AtendimentoService {
         return atendimento;
     }
 
-    public Atendimento salvarResultados(ResultadosDTO resultadosDTO){
+    public Atendimento salvarResultados(ResultadosDTO resultadosDTO) {
         Atendimento atendimento = salvaResultadosDTO(resultadosDTO);
         salvaResultadosProcedimentos(atendimento, resultadosDTO.getProcedimentos());
 
@@ -144,14 +140,14 @@ public class AtendimentoService {
 
     private Atendimento salvaIntervencaoDTO(IntervencaoDTO intervencaoDTO) {
         return salvaAtendimento(Atendimento.builder()
-                 .dataAtendimento(intervencaoDTO.getAtendimento().getDataAtendimento())
-                 .paciente(modelMapper.map(intervencaoDTO.getAtendimento().getPaciente(), Paciente.class))
-                 .localAtendimento(modelMapper.map(intervencaoDTO.getAtendimento().getLocalAtendimento(), LocalAtendimento.class))
-                 .tipoAtendimento(intervencaoDTO.getAtendimento().getTipoAtendimento())
-                 .usuario(modelMapper.map(intervencaoDTO.getAtendimento().getUsuario(), Usuario.class))
-                 .hipoteseDiagnostico(intervencaoDTO.getHipoteseDiagnostico())
-                 .confirmaRastreamento(intervencaoDTO.getConfirmaRastreamento())
-                 .observacao(intervencaoDTO.getObservacao()).build());
+                .dataAtendimento(intervencaoDTO.getAtendimento().getDataAtendimento())
+                .paciente(modelMapper.map(intervencaoDTO.getAtendimento().getPaciente(), Paciente.class))
+                .localAtendimento(modelMapper.map(intervencaoDTO.getAtendimento().getLocalAtendimento(), LocalAtendimento.class))
+                .tipoAtendimento(intervencaoDTO.getAtendimento().getTipoAtendimento())
+                .usuario(modelMapper.map(intervencaoDTO.getAtendimento().getUsuario(), Usuario.class))
+                .hipoteseDiagnostico(intervencaoDTO.getHipoteseDiagnostico())
+                .confirmaRastreamento(intervencaoDTO.getConfirmaRastreamento())
+                .observacao(intervencaoDTO.getObservacao()).build());
     }
 
     private Atendimento salvaResultadosDTO(ResultadosDTO resultadosDTO) {
@@ -168,6 +164,7 @@ public class AtendimentoService {
     private void salvaIntervencaoProcedimentos(Atendimento atendimento, List<ProcedimentosIntervencaoDTO> procedimentos) {
         procedimentosResultadosService.salvaIntervencaoProcedimentos(atendimento, procedimentos);
     }
+
     private void salvaResultadosProcedimentos(Atendimento atendimento, List<ProcedimentosResultadosDTO> procedimentos) {
         procedimentosResultadosService.salvaResultadosProcedimentos(atendimento, procedimentos);
     }
@@ -183,8 +180,8 @@ public class AtendimentoService {
         return acoes;
     }
 
-    private Atendimento salvaAtendimento(Atendimento atendimento){
-        atendimento.setId(nextSequenceService.getNextSequence("atendimento"));
+    private Atendimento salvaAtendimento(Atendimento atendimento) {
+        genericService.init(Atendimento.class);
         Atendimento save = repository.save(atendimento);
         logService.salvarLog(save);
         return save;

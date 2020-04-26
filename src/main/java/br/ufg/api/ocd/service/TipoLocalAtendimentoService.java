@@ -15,14 +15,14 @@ public class TipoLocalAtendimentoService {
     private TipoLocalAtendimentoRepository repository;
 
     @Autowired
-    private  NextSequenceService nextSequenceService;
+    private GenericService genericService;
 
     public List<TipoLocalAtendimento> getAll() {
-        return repository.findAll();
+        return (List<TipoLocalAtendimento>) repository.findAll();
     }
 
     public TipoLocalAtendimento salvar(TipoLocalAtendimento tipo) {
-        tipo.setId(nextSequenceService.getNextSequence("tipoLocalAtendimento"));
+        genericService.init(TipoLocalAtendimento.class);
         return repository.save(tipo);
     }
 

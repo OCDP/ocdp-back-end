@@ -19,13 +19,13 @@ public class LogAtendimentosService {
     private LogAtendimentosRepository repository;
 
     @Autowired
-    private NextSequenceService nextSequenceService;
+    private GenericService genericService;
 
     public void salvarLog(Atendimento atendimento) {
+        genericService.init(LogAtendimentos.class);
         LogAtendimentos log = repository.findByIdPaciente(atendimento.getPaciente().getId());
         if (log == null){
             log = preencheLog(atendimento);
-            log.setId(nextSequenceService.getNextSequence("log"));
         } else log.atualiza(atendimento);
 
         repository.save(log);

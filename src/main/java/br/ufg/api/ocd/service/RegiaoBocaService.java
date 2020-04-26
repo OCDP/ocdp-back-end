@@ -14,10 +14,10 @@ public class RegiaoBocaService {
     private RegiaoBocaRepository repository;
 
     @Autowired
-    private NextSequenceService nextSequenceService;
+    private GenericService genericService;
 
     public List<RegiaoBoca> getAll() {
-        return repository.findAll();
+        return (List<RegiaoBoca>) repository.findAll();
     }
 
     public List<RegiaoBoca> getBySigla(@NonNull String sigla) {
@@ -25,7 +25,7 @@ public class RegiaoBocaService {
     }
 
     public RegiaoBoca salvar(RegiaoBoca regiaoBoca) {
-        regiaoBoca.setId(nextSequenceService.getNextSequence("regiaoBoca"));
+        genericService.init(RegiaoBoca.class);
         return repository.save(regiaoBoca);
     }
 

@@ -15,7 +15,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 import static br.ufg.api.ocd.config.initialization.BairroInicialization.criarBairros;
@@ -66,9 +65,6 @@ public class DataInitialization implements ApplicationListener<ContextRefreshedE
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private CustomSequencesRepository customSequencesRepository;
-
-    @Autowired
     private AtendimentoService atendimentoService;
 
     @Autowired
@@ -115,7 +111,6 @@ public class DataInitialization implements ApplicationListener<ContextRefreshedE
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent arg0) {/*
-      customSequencesRepository.deleteAll();
         criarCidade();
         criarBairro();
         criarDistrito();

@@ -20,16 +20,16 @@ public class FatorRiscoAtendimentoService {
     private FatorRiscoAtendimentoRepository repository;
 
     @Autowired
-    private NextSequenceService nextSequenceService;
+    private GenericService genericService;
 
     @Autowired
     private ModelMapper modelMapper;
 
     public void salvarFatorRiscoAcompanhamento(Atendimento atendimento, List<FatorRiscoDTO> fatoresDeRisco) {
+        genericService.init(FatorRisco.class);
         fatoresDeRisco.forEach(fator -> {
             FatorRisco fatorRisco = modelMapper.map(fator, FatorRisco.class);
             FatorRiscoAcompanhamento fatorRiscoAcompanhamento = new FatorRiscoAcompanhamento(fatorRisco, atendimento);
-            fatorRiscoAcompanhamento.setId(nextSequenceService.getNextSequence("fatorRiscoAcompanhamento"));
             repository.save(fatorRiscoAcompanhamento);
         });
     }

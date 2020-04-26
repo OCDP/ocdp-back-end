@@ -15,10 +15,10 @@ public class ParametrosSchedulerService {
     private ParametrosSchedulerRepository repository;
 
     @Autowired
-    private  NextSequenceService nextSequenceService;
+    private GenericService genericService;
 
     public ParametrosScheduler salvar(ParametrosScheduler parametrosScheduler){
-        parametrosScheduler.setId(nextSequenceService.getNextSequence("parametrosScheduler"));
+        genericService.init(ParametrosScheduler.class);
         return repository.save(parametrosScheduler);
     }
 
@@ -39,7 +39,7 @@ public class ParametrosSchedulerService {
     }
 
     public List<ParametrosScheduler> getAll() {
-        return repository.findAll();
+        return (List<ParametrosScheduler>) repository.findAll();
     }
 
     public void deleteAll(){

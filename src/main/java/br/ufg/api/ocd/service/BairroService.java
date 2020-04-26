@@ -15,11 +15,10 @@ public class BairroService {
     private BairroRepository repository;
 
     @Autowired
-    private NextSequenceService nextSequenceService;
-
+    private GenericService genericService;
 
     public Bairro salvar(Bairro bairro) {
-        bairro.setId(nextSequenceService.getNextSequence("bairro"));
+        genericService.init(Bairro.class);
         return repository.save(bairro);
     }
 
@@ -40,7 +39,7 @@ public class BairroService {
     }
 
     public List<Bairro> getAll() {
-        return repository.findAll();
+        return (List<Bairro>) repository.findAll();
     }
 
     public void deleteAll(){

@@ -6,5 +6,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface FatorRiscoAtendimentoRepository extends MongoRepository<FatorRiscoAcompanhamento, String> {
-    public List<FatorRiscoAcompanhamento> findByAtendimento_Id(String id);
+    public List<FatorRiscoAcompanhamento> findAllByAtendimento_Id(String id);
 }

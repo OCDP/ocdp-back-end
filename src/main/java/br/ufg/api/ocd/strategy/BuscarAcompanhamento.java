@@ -48,7 +48,7 @@ public class BuscarAcompanhamento implements EstrategiaBusca {
     }
 
     private List<FatorRiscoAcompanhamento> buscaFatoresRisco(final Atendimento atendimento){
-        return fatorRiscoAtendimentoRepository.findByAtendimento_Id(atendimento.getId());
+        return fatorRiscoAtendimentoRepository.findAllByAtendimento_Id(atendimento.getId());
 
     }
 
@@ -69,7 +69,7 @@ public class BuscarAcompanhamento implements EstrategiaBusca {
         if (fatorRiscoAcompanhamentos != null && !fatorRiscoAcompanhamentos.isEmpty()) {
             List<FatorRiscoDTO> fatoresDto = new ArrayList<>();
             fatorRiscoAcompanhamentos.forEach(fator -> {
-                fatoresDto.add(modelMapper.map(fator, FatorRiscoDTO.class));
+                fatoresDto.add(modelMapper.map(fator.getFatorRisco(), FatorRiscoDTO.class));
             });
             dto.setFatoresDeRisco(fatoresDto);
         }

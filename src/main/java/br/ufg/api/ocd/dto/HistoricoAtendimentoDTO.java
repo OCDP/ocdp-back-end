@@ -1,11 +1,13 @@
 package br.ufg.api.ocd.dto;
 
+import br.ufg.api.ocd.util.DataUtil;
 import lombok.Builder;
 import lombok.Data;
 import org.joda.time.DateTime;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -19,23 +21,15 @@ public class HistoricoAtendimentoDTO implements Comparable<HistoricoAtendimentoD
 
     @Override
     public int compareTo(HistoricoAtendimentoDTO o) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        java.util.Date dateComparer, dateActual;
-
-        try {
-            dateActual = sdf.parse(this.getDataAtendimento());
-            dateComparer = sdf.parse(o.getDataAtendimento());
-
-            if (dateActual.after(dateComparer)) {
+        LocalDateTime dateComparer, dateActual;
+            dateActual = DataUtil.stringToDate(this.getDataAtendimento());
+            dateComparer = DataUtil.stringToDate(this.getDataAtendimento());
+            if (dateActual.isAfter(dateComparer)) {
                 return -1;
             }
-            if (dateActual.before(dateComparer)) {
+            if (dateActual.isBefore(dateComparer)) {
                 return 1;
             }
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
         return 0;
     }

@@ -9,6 +9,7 @@ import br.ufg.api.ocd.model.Usuario;
 import br.ufg.api.ocd.repository.AtendimentoRepository;
 import br.ufg.api.ocd.strategy.BuscarAcompanhamento;
 import br.ufg.api.ocd.strategy.BuscarIntervencao;
+import br.ufg.api.ocd.strategy.BuscarResultados;
 import br.ufg.api.ocd.strategy.EstrategiaBusca;
 import br.ufg.api.ocd.util.DataUtil;
 import lombok.NonNull;
@@ -39,6 +40,9 @@ public class AtendimentoService {
 
     @Autowired
     private BuscarIntervencao buscarIntervencao;
+
+    @Autowired
+    private BuscarResultados buscarResultados;
 
     @Autowired
     private BuscarAcompanhamento buscarAcompanhamento;
@@ -176,7 +180,7 @@ public class AtendimentoService {
 
         if (acoes == null) {
             acoes = new HashMap<>();
-            acoes.put(TipoAtendimento.RESULTADOS, buscarIntervencao);
+            acoes.put(TipoAtendimento.RESULTADOS, buscarResultados);
             acoes.put(TipoAtendimento.INTERVENCAO, buscarIntervencao);
             acoes.put(TipoAtendimento.ACOMPANHAMENTO, buscarAcompanhamento);
         }

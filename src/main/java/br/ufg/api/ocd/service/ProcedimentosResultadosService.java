@@ -5,6 +5,7 @@ import br.ufg.api.ocd.dto.ProcedimentosResultadosDTO;
 import br.ufg.api.ocd.model.Atendimento;
 import br.ufg.api.ocd.model.ProcedimentosResultados;
 import br.ufg.api.ocd.repository.ProcedimentosResultadosRepository;
+import br.ufg.api.ocd.util.GzipUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,7 @@ public class ProcedimentosResultadosService {
             ProcedimentosResultados procedimentoR = new ProcedimentosResultados();
             procedimentoR.setNome(procedimento.getNome());
             procedimentoR.setAtendimento(atendimento);
-            procedimentoR.setAnexo(procedimento.getAnexo());
+            procedimentoR.setAnexo(GzipUtil.zip("data:image/jpeg;base64,"+procedimento.getAnexo64()));
             procedimentoR.setId(nextSequenceService.getNextSequence("procedimento"));
             repository.save(procedimentoR);
         });

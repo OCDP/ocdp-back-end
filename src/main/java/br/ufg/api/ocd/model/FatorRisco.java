@@ -15,6 +15,5 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class FatorRisco {
     @Id
     private String id;
-    //@Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
     private String nome;
 }

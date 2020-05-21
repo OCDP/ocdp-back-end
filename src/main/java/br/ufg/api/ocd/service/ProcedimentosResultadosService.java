@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -40,7 +41,7 @@ public class ProcedimentosResultadosService {
             ProcedimentosResultados procedimentoR = new ProcedimentosResultados();
             procedimentoR.setNome(procedimento.getNome());
             procedimentoR.setAtendimento(atendimento);
-            procedimentoR.setAnexo(GzipUtil.zip("data:image/jpeg;base64,"+procedimento.getAnexo64()));
+            procedimentoR.setNomeArquivo(procedimento.getNomeArquivo());
             procedimentoR.setId(nextSequenceService.getNextSequence("procedimento"));
             repository.save(procedimentoR);
         });

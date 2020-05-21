@@ -1,51 +1,49 @@
 package br.ufg.api.ocd.util;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
+import lombok.NonNull;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 public class GzipUtil {
 
-    public static byte[] zip(final String str) {
-        if ((str == null) || (str.length() == 0)) {
-            throw new IllegalArgumentException("Não é possível compactar cadeia nula ou vazia");
-        }
-
-        try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
-            try (GZIPOutputStream gzipOutputStream = new GZIPOutputStream(byteArrayOutputStream)) {
-                gzipOutputStream.write(str.getBytes(StandardCharsets.UTF_8));
+    public static byte[] zip(@NonNull final byte[] anexo) {
+        if (!isZipped(anexo)) {
+            try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
+                try (GZIPOutputStream gzipOutputStream = new GZIPOutputStream(byteArrayOutputStream)) {
+                    gzipOutputStream.write(anexo);
+                }
+                return byteArrayOutputStream.toByteArray();
+            } catch (IOException e) {
+                throw new RuntimeException("Falha ao compactar o conteúdo", e);
             }
-            return byteArrayOutputStream.toByteArray();
-        } catch(IOException e) {
-            throw new RuntimeException("Falha ao compactar o conteúdo", e);
         }
+        return anexo;
     }
 
-    public static String unzip(final byte[] compressed) {
-        if ((compressed == null) || (compressed.length == 0)) {
-            throw new IllegalArgumentException("Não é possível descompactar bytes nulos ou vazios");
-        }
-        if (!isZipped(compressed)) {
-            return new String(compressed);
+    public static byte[] unzip(@NonNull  final byte[] compressed) {
+        if (isZipped(compressed)) {
+            try {
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                ByteArrayInputStream bis = new ByteArrayInputStream(compressed);
+                GZIPInputStream in = new GZIPInputStream(bis);
+                byte[] buffer = new byte[1024];
+                int len = 0;
+                while ((len = in.read(buffer)) >= 0) {
+                    bos.write(buffer, 0, len);
+                }
+                in.close();
+                bos.close();
+                return bos.toByteArray();
+            } catch (IOException e) {
+                throw new RuntimeException("Falha ao descompactar o conteúdo", e);
+            }
         }
 
-        try (ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(compressed)) {
-            try (GZIPInputStream gzipInputStream = new GZIPInputStream(byteArrayInputStream)) {
-                try (InputStreamReader inputStreamReader = new InputStreamReader(gzipInputStream, StandardCharsets.UTF_8)) {
-                    try (BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
-                        StringBuilder output = new StringBuilder();
-                        String line;
-                        while((line = bufferedReader.readLine()) != null){
-                            output.append(line);
-                        }
-                        return output.toString();
-                    }
-                }
-            }
-        } catch(IOException e) {
-            throw new RuntimeException("Falha ao descompactar o conteúdo", e);
-        }
+        return compressed;
     }
 
     public static boolean isZipped(final byte[] compressed) {

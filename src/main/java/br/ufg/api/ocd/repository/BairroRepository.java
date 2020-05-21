@@ -11,6 +11,6 @@ public interface BairroRepository extends MongoRepository<Bairro, String> {
 
     public List<Bairro> findByNome(String nome);
 
-    public List<Bairro> findByCidade_NomeOrderByNomeDesc(String nome);
+    public List<Bairro> findByFileDownloadUri(String uri);
 
 }

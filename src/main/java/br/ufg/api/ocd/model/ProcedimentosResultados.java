@@ -18,7 +18,7 @@ import java.io.File;
 public class ProcedimentosResultados {
     @Id
     private String id;
-    private byte[] anexo;
+    private String nomeArquivo;
     private String nome;
     private String observacao;
     private Atendimento atendimento;

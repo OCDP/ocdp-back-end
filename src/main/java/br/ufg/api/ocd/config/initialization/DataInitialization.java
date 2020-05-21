@@ -113,6 +113,12 @@ public class DataInitialization implements ApplicationListener<ContextRefreshedE
     @Autowired
     private LogAtendimentosRepository logAtendimentosRepository;
 
+    @Autowired
+    private UploadFileRepository uploadFileRepository;
+
+    @Autowired
+    private FileStorageService fileStorageService;
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent arg0) {/*
       customSequencesRepository.deleteAll();
@@ -257,8 +263,9 @@ public class DataInitialization implements ApplicationListener<ContextRefreshedE
         regioesLesoesRepository.deleteAll();
         pacienteRepository.deleteAll();
         logAtendimentosRepository.deleteAll();
+        uploadFileRepository.deleteAll();
 
-        MassaDeTeste.criaAtendimentos(atendimentoService, modelMapper, usuarioRepository, bairroRepository, localAtendimentoRepository, fatorRiscoRepository, regiaoBocaRepository, lesaoRepository, pacienteService);
+        MassaDeTeste.criaAtendimentos(atendimentoService, fileStorageService, modelMapper, usuarioRepository, bairroRepository, localAtendimentoRepository, fatorRiscoRepository, regiaoBocaRepository, lesaoRepository, pacienteService);
     }
 
     private void criarUsuario() {

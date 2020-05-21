@@ -47,7 +47,7 @@ public class BuscarResultados implements EstrategiaBusca {
                 procedimentoDto.add(ProcedimentosResultadosDTO.builder()
                         .id(procedimento.getId())
                         .nome(procedimento.getNome())
-                        .anexo64(GzipUtil.unzip(procedimento.getAnexo()))
+                        .nomeArquivo(procedimento.getNomeArquivo())
                         .observacao(procedimento.getObservacao()).build());
             });
             dto.setProcedimentos(procedimentoDto);

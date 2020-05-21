@@ -22,18 +22,25 @@ import java.util.Date;
 public class Paciente {
     @Id
     private String id;
-    private String nome;
+    private String nomeRegistro;
+    private String nomeSocial;
     private String enderecoCompleto;
     private String cpf;
     private LocalDateTime dataNascimento;
     private Sexo sexo;
+    private String cns;
+    private String rg;
+    private String escolaridade;
+    private String orgaoEmissor;
+    private String nacionalidade;
+    private String racaCor;
+    private LocalDateTime dataEmissao;
     private String email;
     private String telefoneCelular;
     private String nomeDaMae;
     private String telefoneResponsavel;
     private Bairro bairro;
     private LogAtendimentos log;
-
 }
 
 

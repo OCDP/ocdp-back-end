@@ -3,6 +3,7 @@ package br.ufg.api.ocd.controller;
 import br.ufg.api.ocd.dto.UploadFileDTO;
 import br.ufg.api.ocd.model.UploadFile;
 import br.ufg.api.ocd.service.FileStorageService;
+import com.google.common.io.ByteSource;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -14,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,15 +30,15 @@ public class FileController {
     private FileStorageService fileStorageService;
 
     @PostMapping("/uploadFile")
-    public UploadFileDTO uploadFile(@RequestParam("file") MultipartFile arquivo, String idAtendimento) {
-        return modelMapper.map(fileStorageService.armazenarArquivo(arquivo, idAtendimento), UploadFileDTO.class);
+    public UploadFileDTO uploadFile(@RequestParam("file") MultipartFile arquivo, String cpf) {
+        return modelMapper.map(fileStorageService.armazenarArquivo(arquivo, cpf), UploadFileDTO.class);
     }
 
     @PostMapping("/uploadMultipleFiles")
-    public List<UploadFileDTO> uploadMultipleFiles(@RequestParam("files") MultipartFile[] arquivos, String idAtendimento) {
+    public List<UploadFileDTO> uploadMultipleFiles(@RequestParam("files") MultipartFile[] arquivos, String cpf) {
         return Arrays.asList(arquivos)
                 .stream()
-                .map(file -> uploadFile(file, idAtendimento))
+                .map(file -> uploadFile(file, cpf))
                 .collect(Collectors.toList());
     }
 
@@ -48,15 +51,21 @@ public class FileController {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+        headers.add("Content-Type", "image/jpeg");
         headers.add("Pragma", "no-cache");
         headers.add("Expires", "0");
-
-        InputStreamResource resource = new InputStreamResource(uploadFileDB.getInputStream());
+        InputStream targetStream = null;
+        try {
+            targetStream = ByteSource.wrap(uploadFileDB.getBytes()).openStream();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        InputStreamResource resource = new InputStreamResource(targetStream);
 
         return ResponseEntity.ok()
                 .headers(headers)
                 .contentLength(uploadFileDB.getSize())
-                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .contentType(MediaType.IMAGE_JPEG)
                 .body(resource);
     }
 }

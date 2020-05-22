@@ -24,14 +24,13 @@ public class FileStorageService {
     @Autowired
     private UploadFileRepository uploadFileRepository;
 
-    public UploadFile armazenarArquivo(MultipartFile multipartFile, String idAtendimento) {
+    public UploadFile armazenarArquivo(MultipartFile multipartFile, String cpf) {
         try {
-            String fileName = multipartFile.getName() + idAtendimento + DataUtil.dateToString(LocalDateTime.now());
+            String fileName = multipartFile.getName() + cpf + DataUtil.dateToString(LocalDateTime.now());
             UploadFile uploadFile = UploadFile.builder()
                     .id(nextSequenceService.getNextSequence("file"))
-                    .name(fileName)
+                    .name(fileName.replace(" ", "").replace("/", "-").trim())
                     .bytes(multipartFile.getBytes())
-                    .inputStream(multipartFile.getInputStream())
                     .type(multipartFile.getContentType())
                     .size(multipartFile.getSize()).build();
 
@@ -44,7 +43,7 @@ public class FileStorageService {
     }
 
     public UploadFile carregarArquivoComoRecurso(@NonNull String fileName) {
-        final UploadFile uploadFile = uploadFileRepository.findByFileName(fileName);
+        final UploadFile uploadFile = uploadFileRepository.findByName(fileName);
         if (uploadFile != null) {
             uploadFile.setLength(retorneLength(uploadFile, fileName));
         }
@@ -54,7 +53,7 @@ public class FileStorageService {
     private long retorneLength(UploadFile uploadFile, String fileName) {
         File file = null;
         try {
-            file = new File("src/main/resources/targetFile.tmp");
+            file = new File("src/main/resources/targetFile.jpeg");
             FileOutputStream fos = new FileOutputStream(file);
             if (!file.exists()) {
                 file.createNewFile();

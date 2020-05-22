@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface UploadFileRepository extends MongoRepository<UploadFile, String> {
 
-    public UploadFile findByFileName(String nome);
+    public UploadFile findByName(String nome);
 
-    public List<UploadFile> findByIdAtendimento(String nome);
+    public List<UploadFile> findByCpf(String cpf);
 }

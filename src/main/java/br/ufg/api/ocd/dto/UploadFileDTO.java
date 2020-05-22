@@ -12,9 +12,8 @@ import java.io.InputStream;
 public class UploadFileDTO {
     private String name;
     private byte[] bytes;
-    private InputStream inputStream;
     private String type;
     private long size;
     private long length;
-    private String idAtendimento;
+    private String cpf;
 }

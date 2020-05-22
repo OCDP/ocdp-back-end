@@ -120,9 +120,9 @@ public class DataInitialization implements ApplicationListener<ContextRefreshedE
     private FileStorageService fileStorageService;
 
     @Override
-    public void onApplicationEvent(ContextRefreshedEvent arg0) {/*
-      customSequencesRepository.deleteAll();
-        criarCidade();
+    public void onApplicationEvent(ContextRefreshedEvent arg0) {
+     /* customSequencesRepository.deleteAll();
+       criarCidade();
         criarBairro();
         criarDistrito();
         criarTipoLocalAtendimento();
@@ -134,7 +134,8 @@ public class DataInitialization implements ApplicationListener<ContextRefreshedE
         criarLesao();
         criarVersaoBanco();
         criarUsuario();
-        criaMassaDeTeste();*/
+         criaMassaDeTeste();
+         */
     }
 
     private void criarVersaoBanco() {

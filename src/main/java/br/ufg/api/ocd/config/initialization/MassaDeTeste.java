@@ -59,7 +59,7 @@ public class MassaDeTeste {
                                         LesaoRepository lesaoRepository,
                                         PacienteService pacienteService) {
 
-        init(service, modelMapper, usuarioRepository, bairroRepository, localAtendimentoRepository, fatorRiscoRepository, regiaoBocaRepository, lesaoRepository, pacienteService);
+        init(service, fileStorageService, modelMapper, usuarioRepository, bairroRepository, localAtendimentoRepository, fatorRiscoRepository, regiaoBocaRepository, lesaoRepository, pacienteService);
         criaAtendiemtnoJoao();
         criaAtendiemtnoJoao2();
         criaAtendiemtnoBatista();
@@ -68,6 +68,7 @@ public class MassaDeTeste {
     }
 
     private static void init(AtendimentoService service2,
+                             FileStorageService fileStorageService2,
                              ModelMapper modelMapper2,
                              UsuarioRepository usuarioRepository2,
                              BairroRepository bairroRepository2,
@@ -78,6 +79,7 @@ public class MassaDeTeste {
                              PacienteService pacienteService2) {
 
         service = service2;
+        fileStorageService = fileStorageService2;
         modelMapper = modelMapper2;
         usuarioRepository = usuarioRepository2;
         bairroRepository = bairroRepository2;
@@ -200,7 +202,7 @@ public class MassaDeTeste {
                 atendimento(atendimentoDTO).
                 confirmaRastreamento(true).
                 diagnosticoFinal("TESTESS FINAL").
-                procedimentos(criaListProcedimentosResultados(atendimentoDTO.getId())).build();
+                procedimentos(criaListProcedimentosResultados(atendimentoDTO.getPaciente().getCpf())).build();
 
         service.salvarResultados(dto);
     }
@@ -294,23 +296,23 @@ public class MassaDeTeste {
 
     }
 
-    private static List<ProcedimentosResultadosDTO> criaListProcedimentosResultados(String idAtendimento) {
+    private static List<ProcedimentosResultadosDTO> criaListProcedimentosResultados(String cpf) {
         List<ProcedimentosResultadosDTO> procedimentos = new ArrayList<>();
 
         ProcedimentosResultadosDTO p = new ProcedimentosResultadosDTO();
         p.setNome("Biopsia Incisional");
         p.setObservacao("XXXXX");
-        p.setNomeArquivo(getNomeAnexo(idAtendimento));
+        p.setNomeArquivo(getNomeAnexo(cpf));
 
         ProcedimentosResultadosDTO p1 = new ProcedimentosResultadosDTO();
         p1.setNome("Biopsia Exisional");
         p1.setObservacao("XXXXX");
-        p1.setNomeArquivo(getNomeAnexo(idAtendimento));
+        p1.setNomeArquivo(getNomeAnexo(cpf));
 
         ProcedimentosResultadosDTO p2 = new ProcedimentosResultadosDTO();
         p2.setNome("Citologia");
         p2.setObservacao("XXXXX");
-        p2.setNomeArquivo(getNomeAnexo(idAtendimento));
+        p2.setNomeArquivo(getNomeAnexo(cpf));
 
         procedimentos.add(p);
         procedimentos.add(p2);

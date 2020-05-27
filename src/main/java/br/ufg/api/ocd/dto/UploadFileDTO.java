@@ -7,8 +7,6 @@ import lombok.Data;
 import java.io.InputStream;
 
 @Data
-@Builder
-@AllArgsConstructor
 public class UploadFileDTO {
     private String name;
     private byte[] bytes;

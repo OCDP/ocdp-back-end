@@ -30,7 +30,9 @@ public class SecurityConfigBasic extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated()
                 .and()
-                .httpBasic();
+                .httpBasic()
+                .and()
+                .authorizeRequests().anyRequest().authenticated().and().cors();
     }
 
     @Override

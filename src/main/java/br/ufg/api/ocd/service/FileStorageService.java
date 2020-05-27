@@ -9,10 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.time.LocalDateTime;
 
 @Service
@@ -30,6 +26,7 @@ public class FileStorageService {
             UploadFile uploadFile = UploadFile.builder()
                     .id(nextSequenceService.getNextSequence("file"))
                     .name(fileName.replace(" ", "").replace("/", "-").trim())
+                    .cpf(cpf)
                     .bytes(multipartFile.getBytes())
                     .type(multipartFile.getContentType())
                     .size(multipartFile.getSize()).build();
@@ -43,31 +40,6 @@ public class FileStorageService {
     }
 
     public UploadFile carregarArquivoComoRecurso(@NonNull String fileName) {
-        final UploadFile uploadFile = uploadFileRepository.findByName(fileName);
-        if (uploadFile != null) {
-            uploadFile.setLength(retorneLength(uploadFile, fileName));
-        }
-        return uploadFile;
-    }
-
-    private long retorneLength(UploadFile uploadFile, String fileName) {
-        File file = null;
-        try {
-            file = new File("src/main/resources/targetFile.jpeg");
-            FileOutputStream fos = new FileOutputStream(file);
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            fos.write(uploadFile.getBytes());
-            fos.flush();
-            if (fos != null) {
-                fos.close();
-            }
-        } catch (FileNotFoundException ex) {
-            throw new FileStorageException("Não foi possível armazenar o arquivo " + fileName + ". Por favor, tente novamente!", ex);
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
-        return file.length();
+        return uploadFileRepository.findByName(fileName);
     }
 }

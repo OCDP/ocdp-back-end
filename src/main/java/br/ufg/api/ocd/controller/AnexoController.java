@@ -22,7 +22,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-public class FileController {
+@RequestMapping(value = "/api/anexo")
+public class AnexoController {
     @Autowired
     private ModelMapper modelMapper;
 

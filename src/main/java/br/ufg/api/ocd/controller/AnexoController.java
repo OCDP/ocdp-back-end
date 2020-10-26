@@ -1,6 +1,5 @@
 package br.ufg.api.ocd.controller;
 
-import br.ufg.api.ocd.dto.UploadFileDTO;
 import br.ufg.api.ocd.model.UploadFile;
 import br.ufg.api.ocd.service.FileStorageService;
 import com.google.common.io.ByteSource;
@@ -31,12 +30,12 @@ public class AnexoController {
     private FileStorageService fileStorageService;
 
     @PostMapping("/uploadFile")
-    public UploadFileDTO uploadFile(@RequestParam("file") MultipartFile arquivo, String cpf) {
-        return modelMapper.map(fileStorageService.armazenarArquivo(arquivo, cpf), UploadFileDTO.class);
+    public String uploadFile(@RequestParam("file") MultipartFile arquivo, String cpf) {
+        return fileStorageService.armazenarArquivo(arquivo, cpf);
     }
 
     @PostMapping("/uploadMultipleFiles")
-    public List<UploadFileDTO> uploadMultipleFiles(@RequestParam("files") MultipartFile[] arquivos, String cpf) {
+    public List<String> uploadMultipleFiles(@RequestParam("files") MultipartFile[] arquivos, String cpf) {
         return Arrays.asList(arquivos)
                 .stream()
                 .map(file -> uploadFile(file, cpf))

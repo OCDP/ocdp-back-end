@@ -1,7 +1,6 @@
 package br.ufg.api.ocd.controller;
 
 import br.ufg.api.ocd.dto.LesaoDTO;
-import br.ufg.api.ocd.dto.TipoLesaoDTO;
 import br.ufg.api.ocd.model.Lesao;
 import br.ufg.api.ocd.service.LesaoService;
 import org.modelmapper.ModelMapper;

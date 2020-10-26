@@ -9,7 +9,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Document(collection = "logAtendimentos")
 @Data
@@ -19,6 +18,7 @@ import java.util.Date;
 public class LogAtendimentos {
     @Id
     private String id;
+    private String idUsuario;
     private String idPaciente;
     private String idUltimoAtendimento;
     private TipoAtendimento tipoAtendimento;
@@ -32,9 +32,10 @@ public class LogAtendimentos {
         this.setDataAtendimento(atendimento.getDataAtendimento());
         this.setDataSugeridaAcompanhamento(atendimento.getDataSugeridaAcompanhamento());
         this.setDataSugeridaTratamento(atendimento.getDataSugeridaTratamento());
-        this.setIdLocalAtendimento(atendimento.getLocalAtendimento() != null ? atendimento.getLocalAtendimento().getId() : null);
-        this.setIdLocalEncaminhado(atendimento.getLocalEncaminhado() != null ? atendimento.getLocalEncaminhado().getId() : null);
-        this.setIdPaciente(atendimento.getPaciente() != null ? atendimento.getPaciente().getId() : null);
+        this.setIdLocalAtendimento(atendimento.getLocalAtendimentoId());
+        this.setIdLocalEncaminhado(atendimento.getLocalEncaminhadoId());
+        this.setIdUsuario(atendimento.getUsuarioId());
+        this.setIdPaciente(atendimento.getPacienteId());
         this.setIdUltimoAtendimento(atendimento.getId());
         this.setTipoAtendimento(atendimento.getTipoAtendimento());
     }

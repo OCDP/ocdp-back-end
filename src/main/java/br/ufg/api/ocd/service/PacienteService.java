@@ -1,10 +1,8 @@
 package br.ufg.api.ocd.service;
 
-import br.ufg.api.ocd.dto.PacienteDTO;
 import br.ufg.api.ocd.model.Paciente;
 import br.ufg.api.ocd.repository.PacienteRepository;
 import lombok.NonNull;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,15 +17,25 @@ public class PacienteService {
     @Autowired
     private  NextSequenceService nextSequenceService;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    public Paciente findByCpf(@NonNull String cpf) {
+        return repository.findByCpf(cpf);
+    }
 
-    public Paciente salvarPacienteDTO(PacienteDTO pacienteDTO){
-        Paciente paciente = repository.findByCpf(pacienteDTO.getCpf());
-        if(paciente == null){
-            paciente = salvar(modelMapper.map(pacienteDTO, Paciente.class));
+    public Paciente salvar(Paciente paciente) {
+        paciente.setId(nextSequenceService.getNextSequence("paciente"));
+        return repository.save(paciente);
+    }
+
+    public Paciente atualizar(Paciente paciente) throws Exception {
+        Paciente pacienteDB = repository.findById(paciente.getId()).get();
+        if(pacienteDB == null){
+            throw new Exception("Paciente não existe com esse id: "+paciente.getId());
         }
-        return paciente;
+        return repository.save(paciente);
+    }
+
+    public Paciente findById(@NonNull String id) {
+        return repository.findById(id).get();
     }
 
     public List<Paciente> geByNome(@NonNull String nome) {
@@ -36,11 +44,6 @@ public class PacienteService {
 
     public List<Paciente> findAll() {
         return repository.findAll();
-    }
-
-    public Paciente salvar(Paciente paciente) {
-        paciente.setId(nextSequenceService.getNextSequence("paciente"));
-        return repository.save(paciente);
     }
 
     public void deleteAll(){

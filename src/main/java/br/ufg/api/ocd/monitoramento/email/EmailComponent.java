@@ -1,12 +1,12 @@
 package br.ufg.api.ocd.monitoramento.email;
 
 import br.ufg.api.ocd.enums.TipoAtendimento;
-import br.ufg.api.ocd.model.Atendimento;
 import br.ufg.api.ocd.model.LogAtendimentos;
 import br.ufg.api.ocd.model.Paciente;
+import br.ufg.api.ocd.model.Usuario;
 import br.ufg.api.ocd.monitoramento.scheduled.SumarizacaoDados;
-import br.ufg.api.ocd.repository.AtendimentoRepository;
 import br.ufg.api.ocd.repository.PacienteRepository;
+import br.ufg.api.ocd.repository.UsuarioRepository;
 import br.ufg.api.ocd.service.EmailService;
 import br.ufg.api.ocd.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class EmailComponent {
     private PacienteRepository pacienteRepository;
 
     @Autowired
-    private AtendimentoRepository atendimentoRepository;
+    private UsuarioRepository usuarioRepository;
 
     public void sendEmailHtml(SumarizacaoDados sumarizacaoDados) throws MessagingException {
         Mail mail = criaMail(sumarizacaoDados);
@@ -63,13 +63,12 @@ public class EmailComponent {
         Set<DadosPacientes> listDadosPacientes = new HashSet<>();
         logs.forEach(log -> {
             Paciente paciente = pacienteRepository.findById(log.getIdPaciente()).get();
-            Atendimento atendimento = atendimentoRepository.findById(log.getIdUltimoAtendimento()).get();
             DadosPacientes dados = new DadosPacientes();
             dados.dataAtendimento= DataUtil.dateToString(log.getDataAtendimento());
             dados.nomePaciente = paciente.getNome();
             dados.endereco = paciente.getEnderecoCompleto();
-            dados.profissionalAtendeu = atendimento.getPaciente().getNome();
-            dados.dataUltimoAtendimento = DataUtil.dateToString(atendimento.getDataAtendimento());
+            dados.profissionalAtendeu = getUsuarioByLog(log).getNome();
+            dados.dataUltimoAtendimento = DataUtil.dateToString(log.getDataAtendimento());
             if (log.getDataSugeridaAcompanhamento() != null) {
                 dados.dataAtendimento = DataUtil.retornaApenasDataString(log.getDataSugeridaAcompanhamento());
                 dados.horaAtendimento = DataUtil.retornaApenasHoraString(log.getDataSugeridaAcompanhamento());
@@ -84,6 +83,11 @@ public class EmailComponent {
         });
 
         return listDadosPacientes.toArray(new DadosPacientes[listDadosPacientes.size()]);
+    }
+
+    private Usuario getUsuarioByLog(LogAtendimentos log){
+        Optional<Usuario> optional = usuarioRepository.findById(log.getIdUsuario());
+        return optional != null? optional.get() : null;
     }
 
 }

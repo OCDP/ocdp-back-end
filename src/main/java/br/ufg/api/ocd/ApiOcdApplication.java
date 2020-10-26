@@ -24,5 +24,4 @@ public class ApiOcdApplication extends SpringBootServletInitializer {
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(SpringApplication.class);
     }
-
 }

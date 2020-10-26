@@ -3,7 +3,6 @@ package br.ufg.api.ocd.service;
 import br.ufg.api.ocd.model.Usuario;
 import br.ufg.api.ocd.repository.UsuarioRepository;
 import lombok.NonNull;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +11,6 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository repository;
-
-    @Autowired
-    private ModelMapper modelMapper;
 
     @Autowired
     private  NextSequenceService nextSequenceService;

@@ -5,13 +5,11 @@ import br.ufg.api.ocd.dto.ProcedimentosResultadosDTO;
 import br.ufg.api.ocd.model.Atendimento;
 import br.ufg.api.ocd.model.ProcedimentosResultados;
 import br.ufg.api.ocd.repository.ProcedimentosResultadosRepository;
-import br.ufg.api.ocd.util.GzipUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.util.List;
 
 @Service

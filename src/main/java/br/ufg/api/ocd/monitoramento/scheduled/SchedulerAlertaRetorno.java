@@ -7,8 +7,6 @@ import br.ufg.api.ocd.monitoramento.sms.SmsComponent;
 import br.ufg.api.ocd.service.LocalAtendimentoService;
 import br.ufg.api.ocd.service.LogAtendimentosService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;

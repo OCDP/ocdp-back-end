@@ -1,19 +1,19 @@
 package br.ufg.api.ocd.util;
 
 import lombok.NonNull;
-import org.joda.time.DateTime;
-import org.joda.time.Days;
-import org.joda.time.Months;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.Date;
 
 public class DataUtil {
     private static DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+    private static DateTimeFormatter fmtImg = DateTimeFormatter.ofPattern("dd-MM-yyyyHH:mm:ss");
+
+    public static String dateToStringImg(@NonNull LocalDateTime data) {
+        return retornaString(fmtImg, data);
+    }
 
     public static String dateToString(@NonNull LocalDateTime data) {
         return retornaString(fmt, data);

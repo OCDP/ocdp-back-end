@@ -1,7 +1,5 @@
 package br.ufg.api.ocd.service;
 
-import br.ufg.api.ocd.dto.LesaoDTO;
-import br.ufg.api.ocd.dto.RegiaoBocaDTO;
 import br.ufg.api.ocd.dto.RegioesLesoesDTO;
 import br.ufg.api.ocd.model.Atendimento;
 import br.ufg.api.ocd.model.Lesao;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional

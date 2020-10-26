@@ -7,13 +7,13 @@ import br.ufg.api.ocd.model.LocalAtendimento;
 import br.ufg.api.ocd.model.Paciente;
 import br.ufg.api.ocd.model.Usuario;
 import br.ufg.api.ocd.repository.AtendimentoRepository;
+import br.ufg.api.ocd.repository.PacienteRepository;
 import br.ufg.api.ocd.strategy.BuscarAcompanhamento;
 import br.ufg.api.ocd.strategy.BuscarIntervencao;
 import br.ufg.api.ocd.strategy.BuscarResultados;
 import br.ufg.api.ocd.strategy.EstrategiaBusca;
 import br.ufg.api.ocd.util.DataUtil;
 import lombok.NonNull;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -48,18 +48,21 @@ public class AtendimentoService {
     private BuscarAcompanhamento buscarAcompanhamento;
 
     @Autowired
-    private PacienteService pacienteService;
+    private LocalAtendimentoService localAtendimentoService;
+
+    @Autowired
+    private UsuarioService usuarioService;
 
     @Autowired
     private LogAtendimentosService logService;
-
-    @Autowired
-    private ModelMapper modelMapper;
 
     private Map<TipoAtendimento, EstrategiaBusca> acoes;
 
     @Autowired
     private  NextSequenceService nextSequenceService;
+
+    @Autowired
+    private PacienteRepository pacienteRepository;
 
 
     public AtendimentoBuscarDTO getAtendimentosById(@NonNull String id) {
@@ -77,8 +80,14 @@ public class AtendimentoService {
 
     public List<HistoricoAtendimentoDTO> getHistoricoPacienteCpf(@NonNull String cpf) {
         Sort sort = new Sort(Sort.Direction.ASC, "dataAtendimento");
-        List<Atendimento> historicoPaciente = repository.findAllByPaciente_Cpf(cpf, sort);
-        return preparaDadosHistorico(historicoPaciente);
+
+        Paciente paciente = pacienteRepository.findByCpf(cpf);
+
+        if(paciente != null) {
+            List<Atendimento> historicoPaciente = repository.findAllByPacienteId(paciente.getId(), sort);
+            return preparaDadosHistorico(historicoPaciente);
+        }
+        return null;
     }
 
     private List<HistoricoAtendimentoDTO> preparaDadosHistorico(@NonNull List<Atendimento> historicoPaciente) {
@@ -94,6 +103,11 @@ public class AtendimentoService {
         LocalDateTime dataAnterior = null;
         int cont = 0;
         for (Atendimento atendimento : historicoPaciente) {
+            LocalAtendimento localAtendimento = null;
+            if(atendimento.getLocalAtendimentoId() != null)
+            localAtendimento = localAtendimentoService.findById(atendimento.getLocalAtendimentoId());
+
+            Usuario usuario = usuarioService.findById(atendimento.getUsuarioId());
             if(cont == 0){
                 dataAnterior = atendimento.getDataAtendimento();
             } else{
@@ -103,8 +117,8 @@ public class AtendimentoService {
             listaRetorno.add(HistoricoAtendimentoDTO.builder()
                     .dataAtendimento(DataUtil.dateToString(atendimento.getDataAtendimento()))
                     .idAtendimento(atendimento.getId())
-                    .localAtendimento(atendimento.getLocalAtendimento().getNome())
-                    .profissionalDeSaude(atendimento.getUsuario().getNome())
+                    .localAtendimento(localAtendimento != null? localAtendimento.getNome() : null)
+                    .profissionalDeSaude(usuario != null ? usuario.getNome() : null)
                     .tipoAtendiemtento(atendimento.getTipoAtendimento().name())
                     .diferencaMeses(DataUtil.diferencaEmMeses(dataAnterior, atendimento.getDataAtendimento()) + " meses após").build());
         }
@@ -137,11 +151,11 @@ public class AtendimentoService {
 
         return salvaAtendimento(Atendimento.builder()
                 .dataAtendimento(acompanhamentoDTO.getAtendimento().getDataAtendimento())
-                .paciente(modelMapper.map(acompanhamentoDTO.getAtendimento().getPaciente(), Paciente.class))
-                .localAtendimento(modelMapper.map(acompanhamentoDTO.getAtendimento().getLocalAtendimento(), LocalAtendimento.class))
-                .localEncaminhado(modelMapper.map(acompanhamentoDTO.getAtendimento().getLocalEncaminhado(), LocalAtendimento.class))
+                .pacienteId(acompanhamentoDTO.getAtendimento().getPacienteId())
+                .localAtendimentoId(acompanhamentoDTO.getAtendimento().getLocalAtendimentoId())
+                .localEncaminhadoId(acompanhamentoDTO.getAtendimento().getLocalEncaminhadoId())
                 .tipoAtendimento(acompanhamentoDTO.getAtendimento().getTipoAtendimento())
-                .usuario(modelMapper.map(acompanhamentoDTO.getAtendimento().getUsuario(), Usuario.class))
+                .usuarioId(acompanhamentoDTO.getAtendimento().getUsuarioId())
                 .dataSugeridaAcompanhamento(acompanhamentoDTO.getDataSugeridaAcompanhamento())
                 .dataSugeridaTratamento(acompanhamentoDTO.getDataSugeridaTratamento()).build());
     }
@@ -149,11 +163,11 @@ public class AtendimentoService {
     private Atendimento salvaIntervencaoDTO(IntervencaoDTO intervencaoDTO) {
         return salvaAtendimento(Atendimento.builder()
                  .dataAtendimento(intervencaoDTO.getAtendimento().getDataAtendimento())
-                 .paciente(modelMapper.map(intervencaoDTO.getAtendimento().getPaciente(), Paciente.class))
-                 .localAtendimento(modelMapper.map(intervencaoDTO.getAtendimento().getLocalAtendimento(), LocalAtendimento.class))
-                 .localEncaminhado(intervencaoDTO.getAtendimento().getLocalEncaminhado() == null ? null :modelMapper.map(intervencaoDTO.getAtendimento().getLocalEncaminhado(), LocalAtendimento.class))
+                 .pacienteId(intervencaoDTO.getAtendimento().getPacienteId())
+                 .localAtendimentoId(intervencaoDTO.getAtendimento().getLocalAtendimentoId())
+                 .localEncaminhadoId(intervencaoDTO.getAtendimento().getLocalEncaminhadoId())
                  .tipoAtendimento(intervencaoDTO.getAtendimento().getTipoAtendimento())
-                 .usuario(modelMapper.map(intervencaoDTO.getAtendimento().getUsuario(), Usuario.class))
+                 .usuarioId(intervencaoDTO.getAtendimento().getUsuarioId())
                  .hipoteseDiagnostico(intervencaoDTO.getHipoteseDiagnostico())
                  .confirmaRastreamento(intervencaoDTO.getConfirmaRastreamento())
                  .observacao(intervencaoDTO.getObservacao()).build());
@@ -162,11 +176,11 @@ public class AtendimentoService {
     private Atendimento salvaResultadosDTO(ResultadosDTO resultadosDTO) {
         return salvaAtendimento(Atendimento.builder()
                 .dataAtendimento(resultadosDTO.getAtendimento().getDataAtendimento())
-                .paciente(modelMapper.map(resultadosDTO.getAtendimento().getPaciente(), Paciente.class))
-                .localAtendimento(modelMapper.map(resultadosDTO.getAtendimento().getLocalAtendimento(), LocalAtendimento.class))
-                .localEncaminhado(resultadosDTO.getAtendimento().getLocalEncaminhado() == null ? null :modelMapper.map(resultadosDTO.getAtendimento().getLocalEncaminhado(), LocalAtendimento.class))
+                .pacienteId(resultadosDTO.getAtendimento().getPacienteId())
+                .localAtendimentoId(resultadosDTO.getAtendimento().getLocalAtendimentoId())
+                .localEncaminhadoId(resultadosDTO.getAtendimento().getLocalEncaminhadoId())
                 .tipoAtendimento(resultadosDTO.getAtendimento().getTipoAtendimento())
-                .usuario(modelMapper.map(resultadosDTO.getAtendimento().getUsuario(), Usuario.class))
+                .usuarioId(resultadosDTO.getAtendimento().getUsuarioId())
                 .confirmaRastreamento(resultadosDTO.getConfirmaRastreamento())
                 .diagnosticoFinal(resultadosDTO.getDiagnosticoFinal()).build());
     }

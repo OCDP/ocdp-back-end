@@ -8,18 +8,19 @@ import br.ufg.api.ocd.repository.*;
 import br.ufg.api.ocd.service.AtendimentoService;
 import br.ufg.api.ocd.service.FileStorageService;
 import br.ufg.api.ocd.service.PacienteService;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItem;
 import org.modelmapper.ModelMapper;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import java.io.*;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class MassaDeTeste {
 
@@ -120,7 +121,7 @@ public class MassaDeTeste {
 
         criaAtendimentoAcompanhamento(atendimentoDTOAC);
         criaAtendimentoIntervencao(atendimentoDTOIT);
-        criaAtendimentoResultados(atendimentoDTORT);
+        criaAtendimentoResultados(atendimentoDTORT, joao.getCpf());
     }
 
     private static void criaAtendiemtnoJoao2() {
@@ -130,7 +131,7 @@ public class MassaDeTeste {
 
         criaAtendimentoAcompanhamento(atendimentoDTOAC);
         criaAtendimentoIntervencao(atendimentoDTOIT);
-        criaAtendimentoResultados(atendimentoDTORT);
+        criaAtendimentoResultados(atendimentoDTORT, joao2.getCpf());
     }
 
     private static void criaAtendiemtnoBatista() {
@@ -140,7 +141,7 @@ public class MassaDeTeste {
 
         criaAtendimentoAcompanhamento(atendimentoDTOAC);
         criaAtendimentoIntervencao(atendimentoDTOIT);
-        criaAtendimentoResultados(atendimentoDTORT);
+        criaAtendimentoResultados(atendimentoDTORT, batista.getCpf());
     }
 
     private static void criaAtendiemtnoMane() {
@@ -150,7 +151,7 @@ public class MassaDeTeste {
 
         criaAtendimentoAcompanhamento(atendimentoDTOAC);
         criaAtendimentoIntervencao(atendimentoDTOIT);
-        criaAtendimentoResultados(atendimentoDTORT);
+        criaAtendimentoResultados(atendimentoDTORT, mane.getCpf());
     }
 
     private static void criaAtendiemtnoJose() {
@@ -166,11 +167,11 @@ public class MassaDeTeste {
 
         criaAtendimentoAcompanhamento(atendimentoDTOAC);
         criaAtendimentoIntervencao(atendimentoDTOIT);
-        criaAtendimentoResultados(atendimentoDTORT);
+        criaAtendimentoResultados(atendimentoDTORT, jose.getCpf());
         criaAtendimentoIntervencao(atendimentoDTOIT2);
-        criaAtendimentoResultados(atendimentoDTORT2);
+        criaAtendimentoResultados(atendimentoDTORT2, jose.getCpf());
         criaAtendimentoIntervencao(atendimentoDTOIT3);
-        criaAtendimentoResultados(atendimentoDTORT3);
+        criaAtendimentoResultados(atendimentoDTORT3, jose.getCpf());
         criaAtendimentoAcompanhamento(atendimentoDTOAC2);
         criaAtendimentoAcompanhamento(atendimentoDTOAC3);
     }
@@ -197,12 +198,12 @@ public class MassaDeTeste {
         service.salvarIntervencao(dto);
     }
 
-    private static void criaAtendimentoResultados(AtendimentoDTO atendimentoDTO) {
+    private static void criaAtendimentoResultados(AtendimentoDTO atendimentoDTO, String cpfPaciente) {
         ResultadosDTO dto = ResultadosDTO.builder().
                 atendimento(atendimentoDTO).
                 confirmaRastreamento(true).
                 diagnosticoFinal("TESTESS FINAL").
-                procedimentos(criaListProcedimentosResultados(atendimentoDTO.getPaciente().getCpf())).build();
+                procedimentos(criaListProcedimentosResultados(cpfPaciente)).build();
 
         service.salvarResultados(dto);
     }
@@ -217,10 +218,10 @@ public class MassaDeTeste {
 
         AtendimentoDTO dto = AtendimentoDTO.builder().
                 dataAtendimento(dataAtendimento).
-                localAtendimento(localAtendimento).
-                localEncaminhado(localEncaminhamento).
-                paciente(pacienteDTO).
-                usuario(modelMapper.map(usuario, UsuarioDTO.class)).
+                localAtendimentoId(localAtendimento.getId()).
+                localEncaminhadoId(localEncaminhamento.getId()).
+                pacienteId(pacienteDTO.getId()).
+                usuarioId(usuario.getId()).
                 tipoAtendimento(tipoAtendimento).build();
 
         return dto;
@@ -350,7 +351,6 @@ public class MassaDeTeste {
         } catch (IOException e) {
             e.printStackTrace();
         };
-        UploadFile uploadFile = fileStorageService.armazenarArquivo(file,idAtendimento);
-        return uploadFile.getName();
+        return fileStorageService.armazenarArquivo(file,idAtendimento);
     }
 }

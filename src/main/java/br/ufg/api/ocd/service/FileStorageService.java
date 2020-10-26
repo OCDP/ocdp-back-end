@@ -20,9 +20,9 @@ public class FileStorageService {
     @Autowired
     private UploadFileRepository uploadFileRepository;
 
-    public UploadFile armazenarArquivo(MultipartFile multipartFile, String cpf) {
+    public String armazenarArquivo(MultipartFile multipartFile, String cpf) {
         try {
-            String fileName = multipartFile.getName() + cpf + DataUtil.dateToString(LocalDateTime.now());
+            String fileName = multipartFile.getName() + cpf + DataUtil.dateToStringImg(LocalDateTime.now());
             UploadFile uploadFile = UploadFile.builder()
                     .id(nextSequenceService.getNextSequence("file"))
                     .name(fileName.replace(" ", "").replace("/", "-").trim())
@@ -31,9 +31,9 @@ public class FileStorageService {
                     .type(multipartFile.getContentType())
                     .size(multipartFile.getSize()).build();
 
-            UploadFile save = uploadFileRepository.save(uploadFile);
+           uploadFileRepository.save(uploadFile);
 
-            return save;
+            return fileName;
         } catch (Exception ex) {
             throw new FileStorageException("Não foi possível armazenar o arquivo " + multipartFile.getName() + ". Por favor, tente novamente!", ex);
         }

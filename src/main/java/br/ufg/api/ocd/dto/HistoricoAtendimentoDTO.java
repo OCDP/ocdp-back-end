@@ -3,10 +3,7 @@ package br.ufg.api.ocd.dto;
 import br.ufg.api.ocd.util.DataUtil;
 import lombok.Builder;
 import lombok.Data;
-import org.joda.time.DateTime;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 
 @Data

@@ -29,7 +29,7 @@ public class AcompanhamentoController {
 
 
     @RequestMapping(value = "/salvar", method = RequestMethod.POST)
-    public ResponseEntity<?> salvar(@Valid @RequestBody AcompanhamentoDTO acompanhamentoDTO, BindingResult errors) {
+    public ResponseEntity<?> salvarAcompanhamento(@Valid @RequestBody AcompanhamentoDTO acompanhamentoDTO, BindingResult errors) {
         if (errors.hasErrors()) {
             return new ResponseEntity<>(createErrorString(errors), HttpStatus.BAD_REQUEST);
         }

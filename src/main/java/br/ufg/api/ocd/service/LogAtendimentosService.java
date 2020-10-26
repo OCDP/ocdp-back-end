@@ -22,7 +22,7 @@ public class LogAtendimentosService {
     private NextSequenceService nextSequenceService;
 
     public void salvarLog(Atendimento atendimento) {
-        LogAtendimentos log = repository.findByIdPaciente(atendimento.getPaciente().getId());
+        LogAtendimentos log = repository.findByIdPaciente(atendimento.getPacienteId());
         if (log == null){
             log = preencheLog(atendimento);
             log.setId(nextSequenceService.getNextSequence("log"));
@@ -44,9 +44,9 @@ public class LogAtendimentosService {
                 .dataAtendimento(atendimento.getDataAtendimento())
                 .dataSugeridaAcompanhamento(atendimento.getDataSugeridaAcompanhamento())
                 .dataSugeridaTratamento(atendimento.getDataSugeridaTratamento())
-                .idLocalAtendimento(atendimento.getLocalAtendimento().getId())
-                .idLocalEncaminhado(atendimento.getLocalEncaminhado() != null ? atendimento.getLocalEncaminhado().getId(): null)
-                .idPaciente(atendimento.getPaciente().getId())
+                .idLocalAtendimento(atendimento.getLocalAtendimentoId())
+                .idLocalEncaminhado(atendimento.getLocalEncaminhadoId())
+                .idPaciente(atendimento.getPacienteId())
                 .idUltimoAtendimento(atendimento.getId())
                 .tipoAtendimento(atendimento.getTipoAtendimento())
                 .build();

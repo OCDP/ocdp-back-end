@@ -10,3 +10,4 @@ Repositório destinado à gerência de configuração do Back-end Mobile do Proj
 ## Equipe de desenvolvimento
 - Leandro Pedrosa
 - Daurio Filho
+- Marcelo Anderson

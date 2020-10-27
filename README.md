@@ -11,3 +11,4 @@ Repositório destinado à gerência de configuração do Back-end Mobile do Proj
 - Leandro Pedrosa
 - Daurio Filho
 - Marcelo Anderson
+- Igor Guimarães

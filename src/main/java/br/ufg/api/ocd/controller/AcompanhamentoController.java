@@ -8,8 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,5 +38,10 @@ public class AcompanhamentoController {
         atendimentoService.salvarAcompanhamento(acompanhamentoDTO);
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/uploadFoto")
+    public void uploadFile(@RequestParam("file") MultipartFile foto, String atendimentoId) throws IOException {
+        atendimentoService.uploadFoto(foto.getBytes(), atendimentoId);
     }
 }

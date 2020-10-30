@@ -2,6 +2,7 @@ package br.ufg.api.ocd.service;
 
 import br.ufg.api.ocd.dto.*;
 import br.ufg.api.ocd.enums.TipoAtendimento;
+import br.ufg.api.ocd.exception.AtendimentoNaoEncontradoException;
 import br.ufg.api.ocd.model.Atendimento;
 import br.ufg.api.ocd.model.LocalAtendimento;
 import br.ufg.api.ocd.model.Paciente;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -211,4 +213,14 @@ public class AtendimentoService {
     }
 
 
+    public void uploadFoto(byte[] foto, String atendimentoId) {
+        Optional<Atendimento> opt = repository.findById(atendimentoId);
+        if (opt.isPresent()) {
+            Atendimento atendimento = opt.get();
+            atendimento.setFoto(foto);
+            repository.save(atendimento);
+        } else {
+            throw new AtendimentoNaoEncontradoException();
+        }
+    }
 }

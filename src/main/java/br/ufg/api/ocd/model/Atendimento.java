@@ -35,4 +35,5 @@ public class Atendimento {
     private Boolean confirmaRastreamento;
     private String observacao;
     private String diagnosticoFinal;
+    private byte[] foto;
 }

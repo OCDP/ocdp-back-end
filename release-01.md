@@ -1,0 +1,6 @@
+- [ ] Salvar foto no acompanhamento (primeira consulta e intervenção)
+- [ ] Validar CPF e email
+- [ ] Filtrar locais de atendimento por distrito
+- [ ] Buscar endereço por CEP
+- [ ] String Base 64 - não está trazendo a imagem da região da boca na tela de resultados
+- [ ] Rever regras do monitoramiento

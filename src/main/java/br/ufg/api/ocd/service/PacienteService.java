@@ -3,6 +3,7 @@ package br.ufg.api.ocd.service;
 import br.ufg.api.ocd.model.Paciente;
 import br.ufg.api.ocd.repository.PacienteRepository;
 import br.ufg.api.ocd.util.ValidacoesCpfUtil;
+import br.ufg.api.ocd.util.ValidacoesEmailUtil;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,10 @@ public class PacienteService {
 
     private void validarPaciente(Paciente paciente) {
         if (!ValidacoesCpfUtil.isCpf(paciente.getCpf())) {
-            throw new IllegalArgumentException("CPF incorreto!");
+            throw new IllegalArgumentException("CPF incorreto -> " + paciente.getEmail());
+        }
+        if (!ValidacoesEmailUtil.isEmail(paciente.getEmail())) {
+            throw new IllegalArgumentException("Email incorreto -> " + paciente.getEmail());
         }
     }
 

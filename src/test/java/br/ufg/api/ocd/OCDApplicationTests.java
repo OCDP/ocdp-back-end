@@ -1,4 +1,4 @@
-package br.ufg.api.ocd.test;
+package br.ufg.api.ocd;
 
 import br.ufg.api.ocd.ApiOcdApplication;
 import org.junit.Test;

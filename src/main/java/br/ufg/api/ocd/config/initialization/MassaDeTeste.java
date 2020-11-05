@@ -267,8 +267,7 @@ public class MassaDeTeste {
         p.setNomeDaMae("Maria");
         p.setTelefoneResponsavel("62 9999-9999");
         p.setCpf(cpf);
-        p.setEnderecoCompleto("Teste teste testetes");
-        p.setBairro(bairroRepository.findById("1").get());
+        p.setEndereco(Endereco.builder().complemento("Teste teste testetes").build());
         Paciente salvo = pacienteService.salvar(p);
 
         return modelMapper.map(salvo, PacienteDTO.class);

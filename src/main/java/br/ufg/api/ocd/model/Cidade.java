@@ -18,10 +18,7 @@ import java.util.List;
 public class Cidade {
     @Id
     private String id;
-   // @Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
     private String nome;
-
-    //@JsonSerialize(using= DBRefSerializer.class)
     @DBRef(lazy = false)
     private List<Bairro> bairros;
 }

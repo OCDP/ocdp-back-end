@@ -7,15 +7,14 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "bairro")
+@Document(collection = "endereco")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Bairro {
+public class Endereco {
     @Id
     private String id;
-    private String nome;
-    private Cidade cidade;
-
+    private String complemento;
+    private Logradouro logradouro;
 }

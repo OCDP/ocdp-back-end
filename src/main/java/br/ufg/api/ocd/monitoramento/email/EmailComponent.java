@@ -66,7 +66,7 @@ public class EmailComponent {
             DadosPacientes dados = new DadosPacientes();
             dados.dataAtendimento= DataUtil.dateToString(log.getDataAtendimento());
             dados.nomePaciente = paciente.getNome();
-            dados.endereco = paciente.getEnderecoCompleto();
+            dados.endereco = paciente.getEndereco().getComplemento();
             dados.profissionalAtendeu = getUsuarioByLog(log).getNome();
             dados.dataUltimoAtendimento = DataUtil.dateToString(log.getDataAtendimento());
             if (log.getDataSugeridaAcompanhamento() != null) {

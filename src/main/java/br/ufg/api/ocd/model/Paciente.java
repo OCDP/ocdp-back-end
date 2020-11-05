@@ -19,7 +19,6 @@ public class Paciente {
     @Id
     private String id;
     private String nome;
-    private String enderecoCompleto;
     private String cpf;
     private LocalDateTime dataNascimento;
     private Sexo sexo;
@@ -27,7 +26,7 @@ public class Paciente {
     private String telefoneCelular;
     private String nomeDaMae;
     private String telefoneResponsavel;
-    private Bairro bairro;
+    private Endereco endereco;
     private LogAtendimentos log;
 
 }

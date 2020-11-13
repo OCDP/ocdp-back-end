@@ -14,14 +14,14 @@ public class DistritoService {
     private DistritoRepository repository;
 
     @Autowired
-    private  NextSequenceService nextSequenceService;
+
 
     public List<Distrito> getAll() {
         return repository.findAll();
     }
 
     public Distrito salvar(Distrito distrito) {
-        distrito.setId(nextSequenceService.getNextSequence("distrito"));
+
         return repository.save(distrito);
     }
 

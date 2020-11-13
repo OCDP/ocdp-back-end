@@ -1,11 +1,11 @@
 package br.ufg.api.ocd.repository;
 
 import br.ufg.api.ocd.model.Cidade;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CidadeRepository extends MongoRepository<Cidade, String> {
+public interface CidadeRepository extends JpaRepository<Cidade, String> {
 
     public Cidade findByNome(String nome);
 

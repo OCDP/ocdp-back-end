@@ -14,11 +14,7 @@ public class ParametrosSchedulerService {
     @Autowired
     private ParametrosSchedulerRepository repository;
 
-    @Autowired
-    private  NextSequenceService nextSequenceService;
-
     public ParametrosScheduler salvar(ParametrosScheduler parametrosScheduler){
-        parametrosScheduler.setId(nextSequenceService.getNextSequence("parametrosScheduler"));
         return repository.save(parametrosScheduler);
     }
 

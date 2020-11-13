@@ -13,14 +13,14 @@ public class UsuarioService {
     private UsuarioRepository repository;
 
     @Autowired
-    private  NextSequenceService nextSequenceService;
+
 
     public Usuario findByCpf(@NonNull String cpf) {
         return repository.findByCpf(cpf);
     }
 
     public Usuario salvar(Usuario usuario) {
-        usuario.setId(nextSequenceService.getNextSequence("usuario"));
+
         return repository.save(usuario);
     }
 

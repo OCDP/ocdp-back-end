@@ -1,7 +1,7 @@
 package br.ufg.api.ocd.test.controller;
 
-import br.ufg.api.ocd.dto.BairroDTO;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 

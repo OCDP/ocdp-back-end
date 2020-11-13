@@ -3,18 +3,17 @@ package br.ufg.api.ocd.service;
 import br.ufg.api.ocd.exception.AtendimentoNaoEncontradoException;
 import br.ufg.api.ocd.model.Atendimento;
 import br.ufg.api.ocd.repository.AtendimentoRepository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Optional;
 
-import static org.junit.Assert.*;
 
-@RunWith(MockitoJUnitRunner.class)
+
+
 public class AtendimentoServiceTest {
 
     @InjectMocks
@@ -37,14 +36,14 @@ public class AtendimentoServiceTest {
         Mockito.verify(repository).save(atendimento);
     }
 
-    @Test(expected = AtendimentoNaoEncontradoException.class)
+    @Test()
     public void validar_atendimento_nao_encontrado() {
         byte[] foto = null;
         String atendimentoId = "1";
 
         Mockito.when(repository.findById(atendimentoId)).thenReturn(Optional.ofNullable(null));
 
-        service.uploadFoto(foto, atendimentoId);
+        Assertions.assertThrows(AtendimentoNaoEncontradoException.class, () -> service.uploadFoto(foto, atendimentoId));
     }
 
 }

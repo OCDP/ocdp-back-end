@@ -14,12 +14,11 @@ public class BairroService {
     @Autowired
     private BairroRepository repository;
 
-    @Autowired
-    private NextSequenceService nextSequenceService;
+
 
 
     public Bairro salvar(Bairro bairro) {
-        bairro.setId(nextSequenceService.getNextSequence("bairro"));
+
         return repository.save(bairro);
     }
 

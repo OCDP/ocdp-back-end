@@ -3,17 +3,12 @@ package br.ufg.api.ocd.service;
 import br.ufg.api.ocd.OCDApplicationTests;
 import br.ufg.api.ocd.exception.LogradouroNaoEncontradoException;
 import br.ufg.api.ocd.model.Logradouro;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.*;
 
-import static org.junit.Assert.*;
 
-@RunWith(SpringRunner.class)
 public class LogradouroServiceTest extends OCDApplicationTests {
 
     @Autowired
@@ -46,9 +41,9 @@ public class LogradouroServiceTest extends OCDApplicationTests {
         assertEquals(actual.getCep(), cep);
     }
 
-    @Test(expected = LogradouroNaoEncontradoException.class)
-    public void validar_pesquisa_por_cep_inexistente() throws Exception {
+    @Test()
+    public void validar_pesquisa_por_cep_inexistente() {
         String cep = "74482332";
-        logradouroService.findByCep(cep);
+        assertThrows(LogradouroNaoEncontradoException.class, () -> logradouroService.findByCep(cep));
     }
 }

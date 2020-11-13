@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -61,9 +60,6 @@ public class AtendimentoService {
     private Map<TipoAtendimento, EstrategiaBusca> acoes;
 
     @Autowired
-    private  NextSequenceService nextSequenceService;
-
-    @Autowired
     private PacienteRepository pacienteRepository;
 
 
@@ -81,12 +77,12 @@ public class AtendimentoService {
     }
 
     public List<HistoricoAtendimentoDTO> getHistoricoPacienteCpf(@NonNull String cpf) {
-        Sort sort = new Sort(Sort.Direction.ASC, "dataAtendimento");
+//        Sort sort = new Sort(Sort.Direction.ASC, "dataAtendimento");
 
         Paciente paciente = pacienteRepository.findByCpf(cpf);
 
         if(paciente != null) {
-            List<Atendimento> historicoPaciente = repository.findAllByPacienteId(paciente.getId(), sort);
+            List<Atendimento> historicoPaciente = repository.findAllByPacienteId(paciente.getId());
             return preparaDadosHistorico(historicoPaciente);
         }
         return null;
@@ -206,7 +202,7 @@ public class AtendimentoService {
     }
 
     private Atendimento salvaAtendimento(Atendimento atendimento){
-        atendimento.setId(nextSequenceService.getNextSequence("atendimento"));
+
         Atendimento save = repository.save(atendimento);
         logService.salvarLog(save);
         return save;

@@ -23,8 +23,7 @@ public class RegioesLesoesService {
     @Autowired
     private ModelMapper modelMapper;
 
-    @Autowired
-    private NextSequenceService nextSequenceService;
+
 
     public List<RegioesLesoes> getAll() {
         return repository.findAll();
@@ -35,8 +34,8 @@ public class RegioesLesoesService {
             RegioesLesoes rl = RegioesLesoes.builder()
                     .atendimento(atendimento)
                     .lesao(modelMapper.map(local.getLesao(), Lesao.class))
-                    .regiaoBoca(modelMapper.map(local.getRegiaoBoca(), RegiaoBoca.class))
-                    .id(nextSequenceService.getNextSequence("regioesLesoes")).build();
+                    .regiaoBoca(modelMapper.map(local.getRegiaoBoca(), RegiaoBoca.class)).build();
+
             repository.save(rl);
         });
     }

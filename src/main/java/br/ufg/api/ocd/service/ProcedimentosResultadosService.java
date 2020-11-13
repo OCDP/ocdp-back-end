@@ -23,13 +23,13 @@ public class ProcedimentosResultadosService {
     private ModelMapper modelMapper;
 
     @Autowired
-    private  NextSequenceService nextSequenceService;
+
 
     public void salvaIntervencaoProcedimentos(Atendimento atendimento, List<ProcedimentosIntervencaoDTO> procedimentos) {
         procedimentos.forEach(procedimento -> {
             ProcedimentosResultados procedimentoR = modelMapper.map(procedimento, ProcedimentosResultados.class);
             procedimentoR.setAtendimento(atendimento);
-            procedimentoR.setId(nextSequenceService.getNextSequence("procedimento"));
+
             repository.save(procedimentoR);
         });
     }
@@ -40,7 +40,7 @@ public class ProcedimentosResultadosService {
             procedimentoR.setNome(procedimento.getNome());
             procedimentoR.setAtendimento(atendimento);
             procedimentoR.setNomeArquivo(procedimento.getNomeArquivo());
-            procedimentoR.setId(nextSequenceService.getNextSequence("procedimento"));
+
             repository.save(procedimentoR);
         });
     }

@@ -14,8 +14,7 @@ import java.time.LocalDateTime;
 @Service
 public class FileStorageService {
 
-    @Autowired
-    private NextSequenceService nextSequenceService;
+
 
     @Autowired
     private UploadFileRepository uploadFileRepository;
@@ -24,7 +23,7 @@ public class FileStorageService {
         try {
             String fileName = multipartFile.getName() + cpf + DataUtil.dateToStringImg(LocalDateTime.now());
             UploadFile uploadFile = UploadFile.builder()
-                    .id(nextSequenceService.getNextSequence("file"))
+
                     .name(fileName.replace(" ", "").replace("/", "-").trim())
                     .cpf(cpf)
                     .bytes(multipartFile.getBytes())

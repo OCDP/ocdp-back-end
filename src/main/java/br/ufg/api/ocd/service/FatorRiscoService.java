@@ -14,11 +14,10 @@ public class FatorRiscoService {
     @Autowired
     private FatorRiscoRepository repository;
 
-    @Autowired
-    private NextSequenceService nextSequenceService;
+
 
     public FatorRisco salvar(FatorRisco fatorRisco) {
-        fatorRisco.setId(nextSequenceService.getNextSequence("fatorRisco"));
+
         return repository.save(fatorRisco);
     }
 

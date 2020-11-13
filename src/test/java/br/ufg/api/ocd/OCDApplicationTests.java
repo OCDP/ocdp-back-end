@@ -1,17 +1,15 @@
 package br.ufg.api.ocd;
 
-import br.ufg.api.ocd.ApiOcdApplication;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@RunWith(SpringRunner.class)
+
 @SpringBootTest
 public class OCDApplicationTests {
 

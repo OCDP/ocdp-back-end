@@ -4,21 +4,17 @@ import br.ufg.api.ocd.controller.HistoricoPacienteController;
 import br.ufg.api.ocd.service.AtendimentoService;
 import br.ufg.api.ocd.service.PacienteService;
 import org.hamcrest.Matchers;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-@RunWith(SpringRunner.class)
-@WebMvcTest(value = HistoricoPacienteController.class, secure = false)
+@WebMvcTest(value = HistoricoPacienteController.class)
 public class HistoricoPacienteControllerTest {
 
     private static final String PATH_REST = "/api/historico";

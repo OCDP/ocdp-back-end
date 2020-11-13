@@ -14,11 +14,10 @@ public class CidadeService {
     @Autowired
     private CidadeRepository repository;
 
-    @Autowired
-    private NextSequenceService nextSequenceService;
+
 
     public Cidade salvar(Cidade cidade) {
-        cidade.setId(nextSequenceService.getNextSequence("cidade"));
+
         return repository.save(cidade);
     }
 

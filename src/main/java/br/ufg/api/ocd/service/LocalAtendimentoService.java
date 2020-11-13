@@ -14,11 +14,10 @@ public class LocalAtendimentoService {
     @Autowired
     private LocalAtendimentoRepository repository;
 
-    @Autowired
-    private NextSequenceService nextSequenceService;
+
 
     public LocalAtendimento salvar(LocalAtendimento localAtendimento) {
-        localAtendimento.setId(nextSequenceService.getNextSequence("localAtendimento"));
+
         return repository.save(localAtendimento);
     }
 

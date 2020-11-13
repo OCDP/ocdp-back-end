@@ -19,12 +19,11 @@ public class LogradouroService {
     @Autowired
     private LogradouroRepository repository;
 
-    @Autowired
-    private NextSequenceService nextSequenceService;
+
 
 
     public Logradouro salvar(Logradouro logradouro) {
-        logradouro.setId(nextSequenceService.getNextSequence("logradouro"));
+
         return repository.save(logradouro);
     }
 

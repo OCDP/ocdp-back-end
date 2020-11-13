@@ -15,11 +15,10 @@ public class TipoLesaoService {
     @Autowired
     private TipoLesaoRepository repository;
 
-    @Autowired
-    private NextSequenceService nextSequenceService;
+
 
     public TipoLesao salvar(TipoLesao tipoLesao) {
-        tipoLesao.setId(nextSequenceService.getNextSequence("tipoLesao"));
+
         return repository.save(tipoLesao);
     }
 

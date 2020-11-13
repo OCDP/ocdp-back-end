@@ -19,8 +19,7 @@ public class FatorRiscoAtendimentoService {
     @Autowired
     private FatorRiscoAtendimentoRepository repository;
 
-    @Autowired
-    private NextSequenceService nextSequenceService;
+
 
     @Autowired
     private ModelMapper modelMapper;
@@ -29,7 +28,7 @@ public class FatorRiscoAtendimentoService {
         fatoresDeRisco.forEach(fator -> {
             FatorRisco fatorRisco = modelMapper.map(fator, FatorRisco.class);
             FatorRiscoAcompanhamento fatorRiscoAcompanhamento = new FatorRiscoAcompanhamento(fatorRisco, atendimento);
-            fatorRiscoAcompanhamento.setId(nextSequenceService.getNextSequence("fatorRiscoAcompanhamento"));
+
             repository.save(fatorRiscoAcompanhamento);
         });
     }

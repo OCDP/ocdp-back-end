@@ -1,0 +1,29 @@
+spring:
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ocd-db
+    username: asdf
+    password: sadf
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ocdpsobrevida@gmail.com
+    password: SocdP@2020
+    properties.mail.smtp:
+      auth: true
+      connectiontimeout: 5000
+      timeout: 5000
+      writetimeout: 5000
+      starttls.enable: true
+
+  servlet.multipart:
+    max-file-size: -1
+    max-request-size: -1
+
+flyway:
+  database:
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    

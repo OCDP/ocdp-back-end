@@ -19,14 +19,13 @@ package br.ufg.api.ocd.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 //import org.springframework.security.core.GrantedAuthority;
 
 @Data
-@Document(collection = "role")
+
 public class Role {//implements GrantedAuthority {
 
     public Role(String name) {

@@ -4,21 +4,18 @@ import br.ufg.api.ocd.controller.DistritoController;
 import br.ufg.api.ocd.dto.CidadeDTO;
 import br.ufg.api.ocd.dto.DistritoDTO;
 import br.ufg.api.ocd.service.DistritoService;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
-@WebMvcTest(value = DistritoController.class, secure = false)
+@WebMvcTest(value = DistritoController.class)
 public class DistritoControllerTest extends SalvaEhAtualizaTest {
 
     private static final String PATH_REST = "/api/distrito";
@@ -34,7 +31,7 @@ public class DistritoControllerTest extends SalvaEhAtualizaTest {
     @MockBean
     private ModelMapper modelMapper;
 
-    @Before
+    @BeforeEach
     public void before() {
         this.commonPathChecker = new CommonPathChecker(mvc);
     }

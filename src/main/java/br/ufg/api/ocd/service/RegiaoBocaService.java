@@ -13,8 +13,7 @@ public class RegiaoBocaService {
     @Autowired
     private RegiaoBocaRepository repository;
 
-    @Autowired
-    private NextSequenceService nextSequenceService;
+
 
     public List<RegiaoBoca> getAll() {
         return repository.findAll();
@@ -25,7 +24,7 @@ public class RegiaoBocaService {
     }
 
     public RegiaoBoca salvar(RegiaoBoca regiaoBoca) {
-        regiaoBoca.setId(nextSequenceService.getNextSequence("regiaoBoca"));
+
         return repository.save(regiaoBoca);
     }
 

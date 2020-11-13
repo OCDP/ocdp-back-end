@@ -12,15 +12,14 @@ import java.util.List;
 public class LesaoService {
     @Autowired
     private LesaoRepository repository;
-    @Autowired
-    private NextSequenceService nextSequenceService;
+
 
     public List<Lesao> getAll() {
         return repository.findAll();
     }
 
     public Lesao salvar(Lesao lesao) {
-        lesao.setId(nextSequenceService.getNextSequence("lesao"));
+
         return repository.save(lesao);
     }
 

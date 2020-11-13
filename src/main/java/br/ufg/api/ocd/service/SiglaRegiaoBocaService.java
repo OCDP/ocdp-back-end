@@ -13,11 +13,10 @@ public class SiglaRegiaoBocaService {
     @Autowired
     private SiglaRegiaoBocaRepository repository;
 
-    @Autowired
-    private NextSequenceService nextSequenceService;
+
 
     public SiglaRegiaoBoca salvar(SiglaRegiaoBoca siglaRegiaoBoca) {
-        siglaRegiaoBoca.setId(nextSequenceService.getNextSequence("siglaRegiaoBoca"));
+
         return repository.save(siglaRegiaoBoca);
     }
 

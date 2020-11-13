@@ -14,11 +14,8 @@ public class VersaoBancoService {
     @Autowired
     private VersaoBancoRepository repository;
 
-    @Autowired
-    private  NextSequenceService nextSequenceService;
-
     public VersaoBanco salvar(VersaoBanco versaoBanco) {
-        versaoBanco.setId(nextSequenceService.getNextSequence("versaoBanco"));
+
         return repository.save(versaoBanco);
     }
 
@@ -27,7 +24,7 @@ public class VersaoBancoService {
         if(versaoBancoDB == null){
             throw new Exception("VersaoBanco não existe com esse id: "+versaoBanco.getId());
         }
-        versaoBanco.setId(nextSequenceService.getNextSequence("versaoBanco"));
+
         return repository.save(versaoBanco);
     }
 

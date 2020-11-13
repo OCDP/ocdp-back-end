@@ -18,7 +18,7 @@ public class PacienteService {
     private PacienteRepository repository;
 
     @Autowired
-    private  NextSequenceService nextSequenceService;
+
 
     public Paciente findByCpf(@NonNull String cpf) {
         if (!ValidacoesCpfUtil.isCpf(cpf)) {
@@ -29,7 +29,7 @@ public class PacienteService {
 
     public Paciente salvar(Paciente paciente) {
         validarPaciente(paciente);
-        paciente.setId(nextSequenceService.getNextSequence("paciente"));
+
         return repository.save(paciente);
     }
 
@@ -56,7 +56,7 @@ public class PacienteService {
     }
 
     public List<Paciente> geByNome(@NonNull String nome) {
-        return repository.findByQuery(nome);
+        return null;
     }
 
     public List<Paciente> findAll() {

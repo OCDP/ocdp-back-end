@@ -4,29 +4,23 @@ import br.ufg.api.ocd.controller.IntervencaoController;
 import br.ufg.api.ocd.dto.AtendimentoDTO;
 import br.ufg.api.ocd.dto.IntervencaoDTO;
 import br.ufg.api.ocd.dto.ProcedimentosIntervencaoDTO;
-import br.ufg.api.ocd.model.Atendimento;
 import br.ufg.api.ocd.service.AtendimentoService;
-import br.ufg.api.ocd.service.BairroService;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Arrays;
 import java.util.Collections;
 
-import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
-@WebMvcTest(value = IntervencaoController.class, secure = false)
+
+@WebMvcTest(value = IntervencaoController.class)
 public class IntervencaoControllerTest {
 
     private final String PATH_REST = "/api/intervencao";
@@ -42,7 +36,7 @@ public class IntervencaoControllerTest {
     @MockBean
     private ModelMapper modelMapper;
 
-    @Before
+    @BeforeEach
     public void before() {
 
         this.commonPathChecker = new CommonPathChecker(mvc);

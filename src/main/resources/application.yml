@@ -2,8 +2,8 @@ spring:
 
   datasource:
     url: jdbc:postgresql://localhost:5432/ocd-db
-    username: asdf
-    password: sadf
+    username: postgres
+    password: 123456
 
   mail:
     host: smtp.gmail.com

@@ -18,15 +18,16 @@
 package br.ufg.api.ocd.model;
 
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
+import javax.persistence.Id;
+
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-//import org.springframework.security.core.GrantedAuthority;
 
+@Entity
 @Data
-
-public class Role {//implements GrantedAuthority {
+public class Role {
 
     public Role(String name) {
         this.name = name;
@@ -38,10 +39,8 @@ public class Role {//implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
-   // @Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
     private String name;
 
-    //  @Override
     public String getAuthority() {
         return this.name;
     }

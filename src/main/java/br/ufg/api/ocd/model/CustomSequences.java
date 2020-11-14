@@ -1,9 +1,12 @@
 package br.ufg.api.ocd.model;
 
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
+import javax.persistence.Id;
 
+import javax.persistence.Entity;
+
+@Entity
 @Data
 public class CustomSequences {
     @Id

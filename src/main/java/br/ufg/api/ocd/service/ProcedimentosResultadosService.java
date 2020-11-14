@@ -22,9 +22,6 @@ public class ProcedimentosResultadosService {
     @Autowired
     private ModelMapper modelMapper;
 
-    @Autowired
-
-
     public void salvaIntervencaoProcedimentos(Atendimento atendimento, List<ProcedimentosIntervencaoDTO> procedimentos) {
         procedimentos.forEach(procedimento -> {
             ProcedimentosResultados procedimentoR = modelMapper.map(procedimento, ProcedimentosResultados.class);

@@ -14,9 +14,6 @@ public class TipoLocalAtendimentoService {
     @Autowired
     private TipoLocalAtendimentoRepository repository;
 
-    @Autowired
-
-
     public List<TipoLocalAtendimento> getAll() {
         return repository.findAll();
     }

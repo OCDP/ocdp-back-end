@@ -1,9 +1,12 @@
 package br.ufg.api.ocd.model;
 
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
+import javax.persistence.Id;
 
+import javax.persistence.Entity;
+
+@Entity
 @Data
 public class FatorRiscoAcompanhamento {
     @Id
@@ -15,8 +18,6 @@ public class FatorRiscoAcompanhamento {
         this.fatorRisco = fatorRisco;
         this.atendimento = atendimento;
     }
-
-
 
 
 }

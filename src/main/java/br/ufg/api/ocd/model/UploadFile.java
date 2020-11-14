@@ -2,8 +2,12 @@ package br.ufg.api.ocd.model;
 
 import lombok.Builder;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
+import javax.persistence.Id;
+
+import javax.persistence.Entity;
+
+@Entity
 @Data
 @Builder
 

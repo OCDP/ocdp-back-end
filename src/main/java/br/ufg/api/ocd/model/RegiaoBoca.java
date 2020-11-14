@@ -4,9 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 
+import javax.persistence.Id;
 
+import javax.persistence.Entity;
+
+@Entity
 @Data
 @Builder
 @AllArgsConstructor
@@ -14,7 +17,7 @@ import org.springframework.data.annotation.Id;
 public class RegiaoBoca {
     @Id
     private String id;
-   // @Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
+    // @Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
     private String nome;
     private SiglaRegiaoBoca siglaRegiaoBoca;
 }

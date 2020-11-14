@@ -13,9 +13,6 @@ public class DistritoService {
     @Autowired
     private DistritoRepository repository;
 
-    @Autowired
-
-
     public List<Distrito> getAll() {
         return repository.findAll();
     }

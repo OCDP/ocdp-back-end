@@ -17,9 +17,6 @@ public class PacienteService {
     @Autowired
     private PacienteRepository repository;
 
-    @Autowired
-
-
     public Paciente findByCpf(@NonNull String cpf) {
         if (!ValidacoesCpfUtil.isCpf(cpf)) {
             throw new IllegalArgumentException("CPF incorreto!");

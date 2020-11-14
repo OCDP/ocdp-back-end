@@ -19,11 +19,4 @@ public class OCDApplicationTests {
         assertNotNull(app);
     }
 
-    @Test
-    public void contextMongo() {
-        Logger mongoLogger = Logger.getLogger("org.mongodb.driver");
-        mongoLogger.setLevel(Level.SEVERE);
-
-    }
-
 }

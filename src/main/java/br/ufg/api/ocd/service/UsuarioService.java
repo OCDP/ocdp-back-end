@@ -12,9 +12,6 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository repository;
 
-    @Autowired
-
-
     public Usuario findByCpf(@NonNull String cpf) {
         return repository.findByCpf(cpf);
     }

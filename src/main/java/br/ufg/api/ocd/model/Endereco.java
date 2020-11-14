@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Id;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 @Entity
 @Data
@@ -18,5 +19,6 @@ public class Endereco {
     @Id
     private String id;
     private String complemento;
+    @OneToOne
     private Logradouro logradouro;
 }

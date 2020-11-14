@@ -25,6 +25,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
 import javax.persistence.Entity;
@@ -40,11 +42,12 @@ public class Usuario {
     private String cpf;
     private String nome;
     private String senha;
+    @Enumerated(EnumType.STRING)
     private StatusUsuario status;
     private String email;
     private String telefone;
+    @Enumerated(EnumType.STRING)
     private NivelAtencao nivelAtencao;
+    @Enumerated(EnumType.STRING)
     private TipoUsuario tipoUsuario;
-    // private Role role;
-
 }

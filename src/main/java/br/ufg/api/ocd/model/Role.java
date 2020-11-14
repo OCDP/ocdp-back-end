@@ -18,6 +18,7 @@
 package br.ufg.api.ocd.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Id;
 
@@ -27,21 +28,22 @@ import javax.persistence.GenerationType;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Role {
-
-    public Role(String name) {
-        this.name = name;
-    }
-
-    public Role() {
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String name;
 
+    public Role(String name) {
+
+        this.name = name;
+
+    }
+
     public String getAuthority() {
+
         return this.name;
+
     }
 }

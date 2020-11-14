@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Id;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Data
@@ -17,7 +18,10 @@ import javax.persistence.Entity;
 public class RegioesLesoes {
     @Id
     private String id;
+    @ManyToOne
     private Lesao lesao;
+    @ManyToOne
     private RegiaoBoca regiaoBoca;
+    @ManyToOne
     private Atendimento atendimento;
 }

@@ -4,6 +4,9 @@ spring:
     url: jdbc:postgresql://localhost:5432/ocd-db
     username: postgres
     password: 123456
+  jpa:
+    properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate.ddl-auto: none
 
   mail:
     host: smtp.gmail.com

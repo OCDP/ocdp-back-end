@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
@@ -21,6 +23,7 @@ public class Atendimento {
     private LocalDateTime dataAtendimento;
     private String usuarioId;
     private String pacienteId;
+    @Enumerated(EnumType.STRING)
     private TipoAtendimento tipoAtendimento;
     private String localAtendimentoId;
     private String localEncaminhadoId;

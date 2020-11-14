@@ -17,7 +17,6 @@ import javax.persistence.Entity;
 public class SiglaRegiaoBoca {
     @Id
     private String id;
-    //@Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
     private String nome;
     private String imagemBase64;
 }

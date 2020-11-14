@@ -18,7 +18,6 @@ import javax.persistence.Entity;
 public class ParametrosScheduler {
     @Id
     private String id;
-    //@Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
     private String chave;
     private String valor;
 }

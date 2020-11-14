@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Id;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import java.time.LocalDateTime;
 
 @Entity
@@ -27,7 +28,9 @@ public class Paciente {
     private String telefoneCelular;
     private String nomeDaMae;
     private String telefoneResponsavel;
+    @OneToOne
     private Endereco endereco;
+    @OneToOne
     private LogAtendimentos log;
 
 }

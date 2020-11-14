@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Id;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
@@ -19,6 +20,7 @@ public class Cidade {
     @Id
     private String id;
     private String nome;
+    @OneToMany(mappedBy = "cidade")
     private List<Bairro> bairros;
 }
 

@@ -5,9 +5,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Id;
-
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -17,6 +18,7 @@ import javax.persistence.ManyToOne;
 @NoArgsConstructor
 public class RegioesLesoes {
     @Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     @ManyToOne
     private Lesao lesao;

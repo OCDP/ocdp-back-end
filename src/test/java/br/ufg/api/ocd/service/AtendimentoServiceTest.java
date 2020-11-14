@@ -1,5 +1,6 @@
 package br.ufg.api.ocd.service;
 
+import br.ufg.api.ocd.DefaultApplicationTest;
 import br.ufg.api.ocd.exception.AtendimentoNaoEncontradoException;
 import br.ufg.api.ocd.model.Atendimento;
 import br.ufg.api.ocd.repository.AtendimentoRepository;
@@ -11,10 +12,7 @@ import org.mockito.Mockito;
 
 import java.util.Optional;
 
-
-
-
-public class AtendimentoServiceTest {
+public class AtendimentoServiceTest extends DefaultApplicationTest {
 
     @InjectMocks
     private AtendimentoService service;

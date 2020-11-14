@@ -1,5 +1,6 @@
 package br.ufg.api.ocd.service;
 
+import br.ufg.api.ocd.DefaultApplicationTest;
 import br.ufg.api.ocd.OCDApplicationTests;
 import br.ufg.api.ocd.exception.LogradouroNaoEncontradoException;
 import br.ufg.api.ocd.model.Logradouro;
@@ -9,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class LogradouroServiceTest extends OCDApplicationTests {
+public class LogradouroServiceTest extends DefaultApplicationTest {
 
     @Autowired
     private LogradouroService logradouroService;

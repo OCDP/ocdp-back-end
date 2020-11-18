@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class VersaoBanco {
     @Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String descricao;
     private LocalDateTime data;

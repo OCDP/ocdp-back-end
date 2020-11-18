@@ -19,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Cidade {
     @Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String nome;
     @OneToMany(mappedBy = "cidade")

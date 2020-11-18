@@ -1,9 +1,8 @@
-package br.ufg.api.ocd.test.controller;
+package br.ufg.api.ocd.controller;
 
-import br.ufg.api.ocd.controller.DistritoController;
 import br.ufg.api.ocd.dto.CidadeDTO;
-import br.ufg.api.ocd.dto.DistritoDTO;
-import br.ufg.api.ocd.service.DistritoService;
+import br.ufg.api.ocd.dto.FatorRiscoDTO;
+import br.ufg.api.ocd.service.FatorRiscoService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
@@ -14,11 +13,10 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+@WebMvcTest(value = FatorRiscoController.class)
+public class FatorRiscoControllerTest extends SalvaEhAtualizaTest {
 
-@WebMvcTest(value = DistritoController.class)
-public class DistritoControllerTest extends SalvaEhAtualizaTest {
-
-    private static final String PATH_REST = "/api/distrito";
+    private static final String PATH_REST = "/api/fatorRisco";
 
     @Autowired
     private MockMvc mvc;
@@ -26,7 +24,7 @@ public class DistritoControllerTest extends SalvaEhAtualizaTest {
     private CommonPathChecker commonPathChecker;
 
     @MockBean
-    private DistritoService service;
+    private FatorRiscoService service;
 
     @MockBean
     private ModelMapper modelMapper;
@@ -64,16 +62,10 @@ public class DistritoControllerTest extends SalvaEhAtualizaTest {
     }
 
     @Test
-    public void getById_OK() throws Exception {
-        String path = this.PATH_REST+"/byId/1";
-        DistritoDTO dto = new DistritoDTO();
+    public void getAll_OK() throws Exception {
+        String path = this.PATH_REST;
+        FatorRiscoDTO dto = new FatorRiscoDTO();
         mvc.perform(get(path)).andExpect(status().isOk());
-    }
-
-    @Test
-    public void getById_DeveRetornarRecursoNaoEncontrado() throws Exception {
-        String path = this.PATH_REST+"/byId/";
-        mvc.perform(get(path)).andExpect(status().isNotFound());
     }
 
 }

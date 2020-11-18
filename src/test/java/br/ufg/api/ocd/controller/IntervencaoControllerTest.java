@@ -1,6 +1,5 @@
-package br.ufg.api.ocd.test.controller;
+package br.ufg.api.ocd.controller;
 
-import br.ufg.api.ocd.controller.IntervencaoController;
 import br.ufg.api.ocd.dto.AtendimentoDTO;
 import br.ufg.api.ocd.dto.IntervencaoDTO;
 import br.ufg.api.ocd.dto.ProcedimentosIntervencaoDTO;

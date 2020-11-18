@@ -14,7 +14,8 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
-public class MongoUserDetailsService implements UserDetailsService {
+public class OcdUserDetailsService implements UserDetailsService {
+    
     @Autowired
     private UsuarioRepository repository;
 

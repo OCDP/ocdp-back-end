@@ -1,6 +1,5 @@
-package br.ufg.api.ocd.test.controller;
+package br.ufg.api.ocd.controller;
 
-import br.ufg.api.ocd.controller.HistoricoPacienteController;
 import br.ufg.api.ocd.service.AtendimentoService;
 import br.ufg.api.ocd.service.PacienteService;
 import org.hamcrest.Matchers;

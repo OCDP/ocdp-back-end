@@ -1,4 +1,4 @@
-package br.ufg.api.ocd.test.controller;
+package br.ufg.api.ocd.controller;
 
 
 import org.junit.jupiter.api.Test;

@@ -12,27 +12,25 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-//@Configuration
-//@EnableWebSecurity
+@Configuration
+@EnableWebSecurity
 public class SecurityConfigBasic extends WebSecurityConfigurerAdapter {
 
 
     @Autowired
-    private MongoUserDetailsService userDetailsService;
+    private OcdUserDetailsService userDetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().
-                disable()
-                .authorizeRequests()
-                .antMatchers(HttpMethod.OPTIONS, "/**")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .httpBasic()
-                .and()
-                .authorizeRequests().anyRequest().authenticated().and().cors();
+        http.csrf()
+            .disable()
+            .authorizeRequests()
+            .antMatchers(HttpMethod.OPTIONS, "/**")
+            .permitAll()
+            .anyRequest()
+            .authenticated()
+            .and()
+            .httpBasic();
     }
 
     @Override

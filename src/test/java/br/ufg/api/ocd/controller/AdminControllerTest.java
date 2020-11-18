@@ -1,6 +1,5 @@
-package br.ufg.api.ocd.test.controller;
+package br.ufg.api.ocd.controller;
 
-import br.ufg.api.ocd.controller.AdminController;
 import br.ufg.api.ocd.dto.VersaoBancoDTO;
 import br.ufg.api.ocd.service.ParametrosSchedulerService;
 import br.ufg.api.ocd.service.VersaoBancoService;

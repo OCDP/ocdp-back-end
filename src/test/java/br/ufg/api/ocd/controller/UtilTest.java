@@ -1,4 +1,4 @@
-package br.ufg.api.ocd.test.controller;
+package br.ufg.api.ocd.controller;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;

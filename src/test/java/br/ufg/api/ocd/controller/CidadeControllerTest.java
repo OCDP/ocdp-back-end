@@ -1,9 +1,7 @@
-package br.ufg.api.ocd.test.controller;
+package br.ufg.api.ocd.controller;
 
-import br.ufg.api.ocd.controller.FatorRiscoController;
 import br.ufg.api.ocd.dto.CidadeDTO;
-import br.ufg.api.ocd.dto.FatorRiscoDTO;
-import br.ufg.api.ocd.service.FatorRiscoService;
+import br.ufg.api.ocd.service.CidadeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
@@ -14,10 +12,10 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-@WebMvcTest(value = FatorRiscoController.class)
-public class FatorRiscoControllerTest extends SalvaEhAtualizaTest {
+@WebMvcTest(value = CidadeController.class)
+public class CidadeControllerTest extends SalvaEhAtualizaTest {
 
-    private static final String PATH_REST = "/api/fatorRisco";
+    private static final String PATH_REST = "/api/cidade";
 
     @Autowired
     private MockMvc mvc;
@@ -25,14 +23,16 @@ public class FatorRiscoControllerTest extends SalvaEhAtualizaTest {
     private CommonPathChecker commonPathChecker;
 
     @MockBean
-    private FatorRiscoService service;
+    private CidadeService service;
 
     @MockBean
     private ModelMapper modelMapper;
 
     @BeforeEach
     public void before() {
+
         this.commonPathChecker = new CommonPathChecker(mvc);
+
     }
 
     @Override
@@ -63,10 +63,16 @@ public class FatorRiscoControllerTest extends SalvaEhAtualizaTest {
     }
 
     @Test
-    public void getAll_OK() throws Exception {
-        String path = this.PATH_REST;
-        FatorRiscoDTO dto = new FatorRiscoDTO();
+    public void getById_OK() throws Exception {
+        String path = this.PATH_REST+"/byId/1";
+        CidadeDTO dto = new CidadeDTO();
         mvc.perform(get(path)).andExpect(status().isOk());
+    }
+
+    @Test
+    public void getById_DeveRetornarRecursoNaoEncontrado() throws Exception {
+        String path = this.PATH_REST+"/byId/";
+        mvc.perform(get(path)).andExpect(status().isNotFound());
     }
 
 }

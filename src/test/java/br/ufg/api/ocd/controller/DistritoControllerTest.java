@@ -1,8 +1,8 @@
-package br.ufg.api.ocd.test.controller;
+package br.ufg.api.ocd.controller;
 
-import br.ufg.api.ocd.controller.LesaoController;
-import br.ufg.api.ocd.dto.LesaoDTO;
-import br.ufg.api.ocd.service.LesaoService;
+import br.ufg.api.ocd.dto.CidadeDTO;
+import br.ufg.api.ocd.dto.DistritoDTO;
+import br.ufg.api.ocd.service.DistritoService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
@@ -14,11 +14,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@WebMvcTest(value = DistritoController.class)
+public class DistritoControllerTest extends SalvaEhAtualizaTest {
 
-@WebMvcTest(value = LesaoController.class)
-public class LesaoControllerTest extends SalvaEhAtualizaTest{
-
-    private static final String PATH_REST = "/api/lesao";
+    private static final String PATH_REST = "/api/distrito";
 
     @Autowired
     private MockMvc mvc;
@@ -26,7 +25,7 @@ public class LesaoControllerTest extends SalvaEhAtualizaTest{
     private CommonPathChecker commonPathChecker;
 
     @MockBean
-    private LesaoService service;
+    private DistritoService service;
 
     @MockBean
     private ModelMapper modelMapper;
@@ -48,14 +47,14 @@ public class LesaoControllerTest extends SalvaEhAtualizaTest{
 
     @Override
     public Object getValidContent() {
-        LesaoDTO dto = new LesaoDTO();
-        dto.setNome("nome lesão");
+        CidadeDTO dto = new CidadeDTO();
+        dto.setNome("Nome Cidade");
         return dto;
     }
 
     @Override
     public Object getInvalidContent() {
-        return new LesaoDTO();
+        return new CidadeDTO();
     }
 
     @Override
@@ -65,23 +64,15 @@ public class LesaoControllerTest extends SalvaEhAtualizaTest{
 
     @Test
     public void getById_OK() throws Exception {
-        mvc.perform(
-                get(this.PATH_REST+"/byId/1")
-        ).andExpect(status().isOk());
+        String path = this.PATH_REST+"/byId/1";
+        DistritoDTO dto = new DistritoDTO();
+        mvc.perform(get(path)).andExpect(status().isOk());
     }
 
     @Test
-    public void getByTipoLesao_OK() throws Exception {
-        mvc.perform(
-                get(this.PATH_REST+"/byTipo/Maligna")
-        ).andExpect(status().isOk());
-    }
-
-    @Test
-    public void getLesaos_OK() throws Exception {
-        mvc.perform(
-                get(this.PATH_REST)
-        ).andExpect(status().isOk());
+    public void getById_DeveRetornarRecursoNaoEncontrado() throws Exception {
+        String path = this.PATH_REST+"/byId/";
+        mvc.perform(get(path)).andExpect(status().isNotFound());
     }
 
 }

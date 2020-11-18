@@ -18,7 +18,7 @@ import javax.persistence.ManyToOne;
 @NoArgsConstructor
 public class LocalAtendimento {
     @Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String nome;
     @ManyToOne

@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class LogAtendimentos {
     @Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String idUsuario;
     private String idPaciente;

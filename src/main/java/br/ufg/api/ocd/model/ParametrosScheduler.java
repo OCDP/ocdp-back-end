@@ -17,7 +17,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 public class ParametrosScheduler {
     @Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String chave;
     private String valor;

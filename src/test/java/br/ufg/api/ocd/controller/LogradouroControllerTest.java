@@ -1,5 +1,6 @@
 package br.ufg.api.ocd.controller;
 
+import br.ufg.api.ocd.controller.LogradouroController;
 import br.ufg.api.ocd.dto.LogradouroDTO;
 import br.ufg.api.ocd.model.Logradouro;
 import br.ufg.api.ocd.service.LogradouroService;

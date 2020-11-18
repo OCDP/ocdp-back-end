@@ -39,7 +39,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 public class Usuario {
     @Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String cpf;
     private String nome;

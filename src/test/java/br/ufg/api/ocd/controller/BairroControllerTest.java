@@ -1,6 +1,5 @@
-package br.ufg.api.ocd.test.controller;
+package br.ufg.api.ocd.controller;
 
-import br.ufg.api.ocd.controller.BairroController;
 import br.ufg.api.ocd.dto.BairroDTO;
 import br.ufg.api.ocd.service.BairroService;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,6 +1,5 @@
 package br.ufg.api.ocd.controller;
 
-import br.ufg.api.ocd.controller.LogradouroController;
 import br.ufg.api.ocd.dto.LogradouroDTO;
 import br.ufg.api.ocd.model.Logradouro;
 import br.ufg.api.ocd.service.LogradouroService;
@@ -9,8 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.is;
@@ -27,10 +26,26 @@ public class LogradouroControllerTest {
     @Autowired
     private MockMvc mvc;
 
+    @MockBean
+    private LogradouroService service;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @Test
     public void valida_salvar_logradouro() throws Exception {
 
-        mvc.perform(post(PATH_REST).content(new ObjectMapper().writeValueAsString(LogradouroDTO.builder().build())))
+        final var logradouro = LogradouroDTO.builder()
+                .id("1")
+                .cep("74482444")
+                .nome("Teste")
+                .build();
+
+        Mockito.when(service.salvar(Mockito.any())).thenReturn(Logradouro.builder().build());
+
+        mvc.perform(post(PATH_REST)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(logradouro)))
                 .andExpect(status().isOk());
     }
 
@@ -40,9 +55,12 @@ public class LogradouroControllerTest {
         String cep = "74483300";
         Logradouro entity = Logradouro.builder().id(id).cep(cep).build();
 
+        Mockito.when(service.findByCep(cep)).thenReturn(entity);
+
         mvc.perform(get(PATH_REST).param("cep", cep))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(id)))
                 .andExpect(jsonPath("$.cep", is(cep)));
     }
+
 }

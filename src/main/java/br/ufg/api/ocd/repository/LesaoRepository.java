@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface LesaoRepository extends JpaRepository<Lesao, String> {
+public interface LesaoRepository extends JpaRepository<Lesao, Long> {
 
     public List<Lesao> findByTipoLesao_Nome(String nome);
 

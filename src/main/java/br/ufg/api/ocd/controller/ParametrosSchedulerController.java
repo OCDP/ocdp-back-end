@@ -40,7 +40,7 @@ public class ParametrosSchedulerController {
     }
 
     @GetMapping(value = "/byId/{id}")
-    public ParametrosSchedulerDTO getById(@PathVariable String id) {
+    public ParametrosSchedulerDTO getById(@PathVariable Long id) {
         return modelMapper.map(service.findById(id), ParametrosSchedulerDTO.class);
     }
 

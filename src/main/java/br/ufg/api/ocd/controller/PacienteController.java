@@ -49,7 +49,7 @@ public class PacienteController {
     }
 
     @GetMapping(value = "/byId/{id}")
-    public PacienteDTO getById(@PathVariable String id) {
+    public PacienteDTO getById(@PathVariable Long id) {
         return modelMapper.map(service.findById(id), PacienteDTO.class);
     }
 

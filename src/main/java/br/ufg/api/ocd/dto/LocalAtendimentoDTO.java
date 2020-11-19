@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class LocalAtendimentoDTO {
-    private String id;
+    private Long id;
     @NotEmpty(message = "Forneça o nome do local de atendimento")
     private String nome;
     @NotNull(message = "Forneça do dados do distrito")

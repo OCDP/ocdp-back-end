@@ -29,7 +29,7 @@ public class CidadeService {
         return repository.save(cidade);
     }
 
-    public Cidade findById(@NonNull String id) {
+    public Cidade findById(@NonNull Long id) {
         return repository.findById(id).get();
     }
 
@@ -45,7 +45,7 @@ public class CidadeService {
         repository.deleteAll();
     }
 
-    public void deleteById(String id){
+    public void deleteById(Long id){
         repository.deleteById(id);
     }
 }

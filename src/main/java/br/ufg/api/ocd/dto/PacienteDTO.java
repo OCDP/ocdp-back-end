@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class PacienteDTO {
-    private String id;
+    private Long id;
 
     @NotEmpty(message = "Forneça o nome do paciente")
     private String nome;

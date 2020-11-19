@@ -17,14 +17,14 @@ import java.time.LocalDateTime;
 public class Atendimento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
     private LocalDateTime dataAtendimento;
-    private String usuarioId;
-    private String pacienteId;
+    private Long usuarioId;
+    private Long pacienteId;
     @Enumerated(EnumType.STRING)
     private TipoAtendimento tipoAtendimento;
-    private String localAtendimentoId;
-    private String localEncaminhadoId;
+    private Long localAtendimentoId;
+    private Long localEncaminhadoId;
     private LocalDateTime dataSugeridaAcompanhamento;
     private LocalDateTime dataSugeridaTratamento;
     private String hipoteseDiagnostico;

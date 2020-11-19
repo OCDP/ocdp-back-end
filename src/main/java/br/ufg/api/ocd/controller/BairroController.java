@@ -49,7 +49,7 @@ public class BairroController {
     }
 
     @GetMapping(value = "/byId/{id}")
-    public BairroDTO getById(@PathVariable String id) {
+    public BairroDTO getById(@PathVariable Long id) {
         return modelMapper.map(service.findById(id), BairroDTO.class);
     }
 

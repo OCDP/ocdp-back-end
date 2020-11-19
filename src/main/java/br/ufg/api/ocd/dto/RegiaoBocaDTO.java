@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Data
 public class RegiaoBocaDTO {
-    private String id;
+    private Long id;
     @NotEmpty(message = "Forneça o nome da região da boca")
     private String nome;
     private SiglaRegiaoBocaDTO siglaRegiaoBoca;

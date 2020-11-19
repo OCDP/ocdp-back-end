@@ -48,7 +48,7 @@ public class LesaoController {
     }
 
     @GetMapping(value = "/byId/{id}")
-    public LesaoDTO getById(@PathVariable String id) {
+    public LesaoDTO getById(@PathVariable Long id) {
         return modelMapper.map(service.findById(id), LesaoDTO.class);
     }
 

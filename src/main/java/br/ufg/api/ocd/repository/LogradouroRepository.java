@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface LogradouroRepository extends JpaRepository<Logradouro, String> {
+public interface LogradouroRepository extends JpaRepository<Logradouro, Long> {
 
     Logradouro findFirstByCep(String cep);
 

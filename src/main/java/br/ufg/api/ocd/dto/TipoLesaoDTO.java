@@ -13,7 +13,7 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 public class TipoLesaoDTO {
 
-    private String id;
+    private Long id;
     @NotEmpty(message = "Forneça o nome do tipo lesão")
     private String nome;
 }

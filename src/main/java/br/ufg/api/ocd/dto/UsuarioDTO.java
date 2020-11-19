@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class UsuarioDTO {
-    private String id;
+    private Long id;
     @NotEmpty(message = "Forneça o cpf do usuário")
     private String cpf;
     @NotEmpty(message = "Forneça o nome do usuário")

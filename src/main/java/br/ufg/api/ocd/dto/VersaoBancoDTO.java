@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class VersaoBancoDTO {
-    private String id;
+    private Long id;
     private String descricao;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)

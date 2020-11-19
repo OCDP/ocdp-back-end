@@ -63,7 +63,7 @@ public class AtendimentoService {
     private PacienteRepository pacienteRepository;
 
 
-    public AtendimentoBuscarDTO getAtendimentosById(@NonNull String id) {
+    public AtendimentoBuscarDTO getAtendimentosById(@NonNull Long id) {
 
         Atendimento atendimento = repository.findById(id).get();
         if (atendimento != null) {
@@ -209,7 +209,7 @@ public class AtendimentoService {
     }
 
 
-    public void uploadFoto(byte[] foto, String atendimentoId) {
+    public void uploadFoto(byte[] foto, Long atendimentoId) {
         Optional<Atendimento> opt = repository.findById(atendimentoId);
         if (opt.isPresent()) {
             Atendimento atendimento = opt.get();

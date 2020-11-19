@@ -48,7 +48,7 @@ public class PacienteService {
         return repository.save(paciente);
     }
 
-    public Paciente findById(@NonNull String id) {
+    public Paciente findById(@NonNull Long id) {
         return repository.findById(id).get();
     }
 

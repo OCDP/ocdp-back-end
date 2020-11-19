@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 @Data
 public class ParametrosSchedulerDTO {
 
-    private String id;
+    private Long id;
     @NotEmpty(message = "Forneça a chave do parametro")
     private String chave;
     @NotEmpty(message = "Forneça o valor do parametro")

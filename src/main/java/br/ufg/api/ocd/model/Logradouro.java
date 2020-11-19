@@ -19,7 +19,7 @@ import javax.persistence.ManyToOne;
 public class Logradouro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
     private String cep;
     private String nome;
     @ManyToOne

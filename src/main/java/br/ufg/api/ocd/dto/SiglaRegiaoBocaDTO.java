@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class SiglaRegiaoBocaDTO {
-    private String id;
+    private Long id;
     private String nome;
     private String imagemBase64;
 }

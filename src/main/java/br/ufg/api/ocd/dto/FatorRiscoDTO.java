@@ -12,7 +12,7 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FatorRiscoDTO {
-    private String id;
+    private Long id;
     @NotEmpty(message = "Forneça o nome do fator de risco")
     private String nome;
 }

@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 public class VersaoBanco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
     private String descricao;
     private LocalDateTime data;
 }

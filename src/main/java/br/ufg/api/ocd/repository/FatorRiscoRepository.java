@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FatorRiscoRepository extends JpaRepository<FatorRisco, String> {
+public interface FatorRiscoRepository extends JpaRepository<FatorRisco, Long> {
     public FatorRisco findByNome(String nome);
 }

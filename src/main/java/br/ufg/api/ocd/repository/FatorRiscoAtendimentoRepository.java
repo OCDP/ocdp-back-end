@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface FatorRiscoAtendimentoRepository extends JpaRepository<FatorRiscoAcompanhamento, String> {
-    public List<FatorRiscoAcompanhamento> findAllByAtendimento_Id(String id);
+public interface FatorRiscoAtendimentoRepository extends JpaRepository<FatorRiscoAcompanhamento, Long> {
+    public List<FatorRiscoAcompanhamento> findAllByAtendimento_Id(Long id);
 }

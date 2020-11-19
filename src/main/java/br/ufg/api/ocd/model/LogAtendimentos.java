@@ -20,16 +20,16 @@ import java.time.LocalDateTime;
 public class LogAtendimentos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
-    private String idUsuario;
-    private String idPaciente;
-    private String idUltimoAtendimento;
+    private Long id;
+    private Long idUsuario;
+    private Long idPaciente;
+    private Long idUltimoAtendimento;
     private TipoAtendimento tipoAtendimento;
     private LocalDateTime dataAtendimento;
     private LocalDateTime dataSugeridaAcompanhamento;
     private LocalDateTime dataSugeridaTratamento;
-    private String idLocalAtendimento;
-    private String idLocalEncaminhado;
+    private Long idLocalAtendimento;
+    private Long idLocalEncaminhado;
 
     public void atualiza(Atendimento atendimento) {
         this.setDataAtendimento(atendimento.getDataAtendimento());

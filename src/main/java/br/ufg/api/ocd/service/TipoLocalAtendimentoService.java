@@ -31,7 +31,7 @@ public class TipoLocalAtendimentoService {
         return repository.save(tipo);
     }
 
-    public TipoLocalAtendimento findById(@NonNull String id) {
+    public TipoLocalAtendimento findById(@NonNull Long id) {
         return repository.findById(id).get();
     }
 

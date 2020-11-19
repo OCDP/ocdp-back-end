@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LogradouroDTO {
-    private String id;
+    private Long id;
     private String cep;
     private String nome;
     private BairroDTO bairro;

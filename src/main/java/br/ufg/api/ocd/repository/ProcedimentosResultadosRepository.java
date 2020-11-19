@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface ProcedimentosResultadosRepository extends JpaRepository<ProcedimentosResultados, String> {
+public interface ProcedimentosResultadosRepository extends JpaRepository<ProcedimentosResultados, Long> {
 
-    public List<ProcedimentosResultados> findByAtendimento_Id(String id);
+    public List<ProcedimentosResultados> findByAtendimento_Id(Long id);
 
 }

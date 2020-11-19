@@ -19,7 +19,7 @@ import javax.persistence.ManyToOne;
 public class Lesao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
     private String nome;
     @ManyToOne
     private TipoLesao tipoLesao;

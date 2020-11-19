@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface BairroRepository extends JpaRepository<Bairro, String> {
+public interface BairroRepository extends JpaRepository<Bairro, Long> {
 
     public List<Bairro> findByNome(String nome);
 

@@ -19,7 +19,7 @@ import javax.persistence.ManyToOne;
 public class Bairro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
     private String nome;
     @ManyToOne
     private Cidade cidade;

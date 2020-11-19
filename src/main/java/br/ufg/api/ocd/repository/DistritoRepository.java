@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface DistritoRepository extends JpaRepository<Distrito, String> {
+public interface DistritoRepository extends JpaRepository<Distrito, Long> {
     public List<Distrito> findByNome(String nome);
 }

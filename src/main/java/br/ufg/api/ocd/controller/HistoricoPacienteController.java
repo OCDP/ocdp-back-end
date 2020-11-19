@@ -35,7 +35,7 @@ public class HistoricoPacienteController {
     }
 
     @GetMapping(value = "/atendimento/{id}")
-    public AtendimentoBuscarDTO getAtendimentosById(@PathVariable("id") String id) {
+    public AtendimentoBuscarDTO getAtendimentosById(@PathVariable("id") Long id) {
         return atendimentoService.getAtendimentosById(id);
     }
 

@@ -15,7 +15,7 @@ import javax.persistence.Id;
 public class UploadFile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
     private String name;
     private byte[] bytes;
     private String type;

@@ -23,7 +23,7 @@ public class AtendimentoServiceTest extends DefaultApplicationTest {
     @Test
     public void valid_success_requist() {
         byte[] foto = null;
-        String atendimentoId = "1";
+        Long atendimentoId = 1L;
         Atendimento atendimento = Atendimento.builder().id(atendimentoId).build();
         Optional<Atendimento> opt = Optional.of(atendimento);
 
@@ -37,7 +37,7 @@ public class AtendimentoServiceTest extends DefaultApplicationTest {
     @Test()
     public void validar_atendimento_nao_encontrado() {
         byte[] foto = null;
-        String atendimentoId = "1";
+        Long atendimentoId = 1L;
 
         Mockito.when(repository.findById(atendimentoId)).thenReturn(Optional.ofNullable(null));
 

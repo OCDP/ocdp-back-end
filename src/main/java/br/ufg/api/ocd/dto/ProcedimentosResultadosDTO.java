@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProcedimentosResultadosDTO {
-    private String id;
+    private Long id;
 
     @NotNull(message = "Forneça os procedimentos da intervenção")
     private String nomeArquivo;

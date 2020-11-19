@@ -31,7 +31,7 @@ public class LesaoService {
         return repository.save(lesao);
     }
 
-    public Lesao findById(@NonNull String id) {
+    public Lesao findById(@NonNull Long id) {
         return repository.findById(id).get();
     }
 

@@ -48,7 +48,7 @@ public class TipoLesaoController {
     }
 
     @GetMapping(value = "/byId/{id}")
-    public TipoLesaoDTO getById(@PathVariable String id) {
+    public TipoLesaoDTO getById(@PathVariable Long id) {
         return modelMapper.map(service.findById(id), TipoLesaoDTO.class);
     }
 

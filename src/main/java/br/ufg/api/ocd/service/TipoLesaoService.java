@@ -30,7 +30,7 @@ public class TipoLesaoService {
         return repository.save(tipoLesao);
     }
 
-    public TipoLesao findById(@NonNull String id) {
+    public TipoLesao findById(@NonNull Long id) {
         return repository.findById(id).get();
     }
 

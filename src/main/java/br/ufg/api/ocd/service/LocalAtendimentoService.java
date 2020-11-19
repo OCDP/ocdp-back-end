@@ -29,7 +29,7 @@ public class LocalAtendimentoService {
         return repository.save(localAtendimento);
     }
 
-    public LocalAtendimento findById(@NonNull String id) {
+    public LocalAtendimento findById(@NonNull Long id) {
         return repository.findById(id).get();
     }
 

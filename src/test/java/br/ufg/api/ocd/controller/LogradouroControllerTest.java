@@ -36,7 +36,7 @@ public class LogradouroControllerTest {
     public void valida_salvar_logradouro() throws Exception {
 
         final var logradouro = LogradouroDTO.builder()
-                .id("1")
+                .id(1L)
                 .cep("74482444")
                 .nome("Teste")
                 .build();
@@ -51,7 +51,7 @@ public class LogradouroControllerTest {
 
     @Test
     public void valida_buscar_logradouro_por_cep() throws Exception {
-        String id = "1";
+        Long id = 1L;
         String cep = "74483300";
         Logradouro entity = Logradouro.builder().id(id).cep(cep).build();
 
@@ -59,7 +59,7 @@ public class LogradouroControllerTest {
 
         mvc.perform(get(PATH_REST).param("cep", cep))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(id)))
+                .andExpect(jsonPath("$.id", is(id.intValue())))
                 .andExpect(jsonPath("$.cep", is(cep)));
     }
 

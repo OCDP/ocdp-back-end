@@ -53,7 +53,7 @@ public class UsuarioController {
     }
 
     @GetMapping(value = "/byId/{id}")
-    public UsuarioDTO getById(@PathVariable String id) {
+    public UsuarioDTO getById(@PathVariable Long id) {
         return modelMapper.map(service.findById(id), UsuarioDTO.class);
     }
 

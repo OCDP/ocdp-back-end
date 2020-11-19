@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface LogAtendimentosRepository extends JpaRepository<LogAtendimentos, String> {
-    public List<LogAtendimentos> findAllByIdLocalEncaminhado(String idLocal);
-    public LogAtendimentos findByIdPaciente(String IdPaciente);
+public interface LogAtendimentosRepository extends JpaRepository<LogAtendimentos, Long> {
+    public List<LogAtendimentos> findAllByIdLocalEncaminhado(Long idLocal);
+    public LogAtendimentos findByIdPaciente(Long IdPaciente);
 }

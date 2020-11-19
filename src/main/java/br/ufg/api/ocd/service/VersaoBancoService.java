@@ -28,7 +28,7 @@ public class VersaoBancoService {
         return repository.save(versaoBanco);
     }
 
-    public VersaoBanco findById(@NonNull String id) {
+    public VersaoBanco findById(@NonNull Long id) {
         return repository.findById(id).get();
     }
 

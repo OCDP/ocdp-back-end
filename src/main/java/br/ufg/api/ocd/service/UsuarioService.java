@@ -29,7 +29,7 @@ public class UsuarioService {
         return repository.save(usuario);
     }
 
-    public Usuario findById(@NonNull String id) {
+    public Usuario findById(@NonNull Long id) {
         return repository.findById(id).get();
     }
 

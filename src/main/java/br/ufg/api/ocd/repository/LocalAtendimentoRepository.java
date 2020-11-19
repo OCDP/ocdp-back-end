@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface LocalAtendimentoRepository extends JpaRepository<LocalAtendimento, String> {
+public interface LocalAtendimentoRepository extends JpaRepository<LocalAtendimento, Long> {
     public List<LocalAtendimento> findByNome(String nome);
 
     public List<LocalAtendimento> findByDistrito_Nome(String nome);

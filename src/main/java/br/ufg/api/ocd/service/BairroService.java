@@ -30,7 +30,7 @@ public class BairroService {
         return repository.save(bairro);
     }
 
-    public Bairro findById(@NonNull String id) {
+    public Bairro findById(@NonNull Long id) {
         return repository.findById(id).get();
     }
 

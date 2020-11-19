@@ -26,7 +26,7 @@ public class ParametrosSchedulerService {
         return repository.save(parametrosScheduler);
     }
 
-    public ParametrosScheduler findById(@NonNull String id) {
+    public ParametrosScheduler findById(@NonNull Long id) {
         return repository.findById(id).get();
     }
 

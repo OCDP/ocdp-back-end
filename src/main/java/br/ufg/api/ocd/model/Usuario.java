@@ -40,7 +40,7 @@ import javax.persistence.Id;
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
     private String cpf;
     private String nome;
     private String senha;

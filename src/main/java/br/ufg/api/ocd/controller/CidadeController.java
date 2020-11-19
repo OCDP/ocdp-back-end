@@ -49,7 +49,7 @@ public class CidadeController {
     }
 
     @GetMapping(value = "/byId/{id}")
-    public CidadeDTO getById(@PathVariable String id) {
+    public CidadeDTO getById(@PathVariable Long id) {
         return modelMapper.map(service.findById(id), CidadeDTO.class);
     }
 

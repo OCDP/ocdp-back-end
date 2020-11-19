@@ -50,7 +50,7 @@ public class TipoLocalAtendimentoController {
     }
 
     @GetMapping(value = "/byId/{id}")
-    public TipoLocalAtendimentoDTO getById(@PathVariable String id) {
+    public TipoLocalAtendimentoDTO getById(@PathVariable Long id) {
         return modelMapper.map(service.findById(id), TipoLocalAtendimentoDTO.class);
     }
 

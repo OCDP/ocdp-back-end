@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AtendimentoRepository extends JpaRepository<Atendimento, String> {
+public interface AtendimentoRepository extends JpaRepository<Atendimento, Long> {
 
-    public List<Atendimento> findAllByPacienteId(String nome);
-    public List<Atendimento> findAllByLocalAtendimentoId(String id);
+    public List<Atendimento> findAllByPacienteId(Long pacienteId);
+    public List<Atendimento> findAllByLocalAtendimentoId(Long id);
 }

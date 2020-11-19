@@ -29,7 +29,7 @@ public class FatorRiscoService {
         return repository.save(fatorRisco);
     }
 
-    public FatorRisco findById(@NonNull String id) {
+    public FatorRisco findById(@NonNull Long id) {
         return repository.findById(id).get();
     }
 

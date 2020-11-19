@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 public class HistoricoAtendimentoDTO implements Comparable<HistoricoAtendimentoDTO> {
-    private String idAtendimento;
+    private Long idAtendimento;
     private String tipoAtendiemtento;
     private String diferencaMeses;
     private String localAtendimento;

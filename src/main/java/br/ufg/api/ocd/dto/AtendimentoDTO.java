@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AtendimentoDTO {
-    private String id;
+    private Long id;
 
     @NotNull(message = "Forneça a data do antendimento")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss", iso = DateTimeFormat.ISO.DATE_TIME)
@@ -24,16 +24,16 @@ public class AtendimentoDTO {
     private LocalDateTime dataAtendimento;
 
     @NotNull(message = "Forneça o usuário do antendimento")
-    private String usuarioId;
+    private Long usuarioId;
 
     @NotNull(message = "Forneça o paciente do antendimento")
-    private String pacienteId;
+    private Long pacienteId;
 
     @NotNull(message = "Forneça o tipo de antendimento")
     private TipoAtendimento tipoAtendimento;
 
     @NotNull(message = "Forneça o local de antendimento do atendiemnto")
-    private String localAtendimentoId;
+    private Long localAtendimentoId;
 
-    private String localEncaminhadoId;
+    private Long localEncaminhadoId;
 }

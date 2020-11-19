@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface UploadFileRepository extends JpaRepository<UploadFile, String> {
+public interface UploadFileRepository extends JpaRepository<UploadFile, Long> {
 
     public UploadFile findByName(String nome);
 

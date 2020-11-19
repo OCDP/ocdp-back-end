@@ -28,7 +28,7 @@ public class RegiaoBocaService {
         return repository.save(regiaoBoca);
     }
 
-    public RegiaoBoca findById(@NonNull String id) {
+    public RegiaoBoca findById(@NonNull Long id) {
         return repository.findById(id).get();
     }
 

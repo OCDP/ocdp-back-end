@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface RegiaoBocaRepository extends JpaRepository<RegiaoBoca, String> {
+public interface RegiaoBocaRepository extends JpaRepository<RegiaoBoca, Long> {
 
     public List<RegiaoBoca> findRegiaoBocaBySiglaRegiaoBoca_Nome(String sigla);
 

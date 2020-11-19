@@ -41,7 +41,7 @@ public class AcompanhamentoController {
     }
 
     @PostMapping("/uploadFoto")
-    public void uploadFile(@RequestParam("file") MultipartFile foto, String atendimentoId) throws IOException {
+    public void uploadFile(@RequestParam("file") MultipartFile foto, Long atendimentoId) throws IOException {
         atendimentoService.uploadFoto(foto.getBytes(), atendimentoId);
     }
 }

@@ -22,7 +22,7 @@ public class DistritoService {
         return repository.save(distrito);
     }
 
-    public Distrito findById(@NonNull String id) {
+    public Distrito findById(@NonNull Long id) {
         return repository.findById(id).get();
     }
 

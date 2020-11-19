@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 @Data
 public class CidadeDTO {
 
-    private String id;
+    private Long id;
     @NotEmpty(message = "Forneça o nome do procedimento")
     private String nome;
 }

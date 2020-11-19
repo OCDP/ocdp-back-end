@@ -19,7 +19,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
 @WebMvcTest(value = LogradouroController.class)
 public class LogradouroControllerTest {
 
@@ -28,12 +27,8 @@ public class LogradouroControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    @MockBean
-    private LogradouroService service;
-
     @Test
     public void valida_salvar_logradouro() throws Exception {
-        Mockito.when(service.salvar(Mockito.any())).thenReturn(Logradouro.builder().build());
 
         mvc.perform(post(PATH_REST).content(new ObjectMapper().writeValueAsString(LogradouroDTO.builder().build())))
                 .andExpect(status().isOk());
@@ -44,8 +39,6 @@ public class LogradouroControllerTest {
         String id = "1";
         String cep = "74483300";
         Logradouro entity = Logradouro.builder().id(id).cep(cep).build();
-
-        Mockito.when(service.findByCep(cep)).thenReturn(entity);
 
         mvc.perform(get(PATH_REST).param("cep", cep))
                 .andExpect(status().isOk())

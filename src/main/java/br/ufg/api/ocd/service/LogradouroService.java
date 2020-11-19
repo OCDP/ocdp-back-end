@@ -19,9 +19,6 @@ public class LogradouroService {
     @Autowired
     private LogradouroRepository repository;
 
-
-
-
     public Logradouro salvar(Logradouro logradouro) {
 
         return repository.save(logradouro);
